@@ -1,0 +1,13 @@
+syntax="proto3";
+
+message RequestHello {
+    string name = 1;
+}
+
+message ResultHello {
+    string result = 1;
+}
+
+service Hello {
+    rpc HelloPython (RequestHello) returns (ResultHello);
+}
