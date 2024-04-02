@@ -1,14 +1,14 @@
 import unittest
 import numpy as np
 import pandas as pd
-from CLIP.CLIP import CLIP
+from CLIP import CLIP
 from sklearn.metrics import accuracy_score
 
 
 class test_clip(unittest.TestCase):
 
     model = CLIP()
-    data = pd.read_csv('CLIP/Tests/photos_v3.csv.xz')
+    data = pd.read_csv('Tests/photos_v3.csv.xz')
 
     def test_classificator(self):
         # 20 секунд
