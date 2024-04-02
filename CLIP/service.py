@@ -13,7 +13,7 @@ data = pd.read_csv('Tests/photos_v3.csv.xz')
 def service():
     args = request.args
     if 'image' in args:
-        description, index = model.get_by_prompt(list(data['img'].unique()), data['img'])
+        description, index = model.get_by_image(data['name'], args['image'])
         return app.response_class(
             response=str(index),
             status=200,
