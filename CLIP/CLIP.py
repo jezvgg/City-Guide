@@ -58,8 +58,20 @@ class CLIP:
         print("Find for", time.time()-start)
         return images[image_index], image_index
 
+    def get_by_description(self, images: list, description: str):
+        images = self.__decode_images(images)
 
-
+        start = time.time()
+        with torch.no_grad():
+            description_latents = self.__predictor.get_text_latents([description]).cpu().detach().numpy()[0].reshape(1, -1)
+            image_latents = self.__predictor.get_image_latents(images).cpu().detach().numpy()
+            result = []
+            for prompt in description_latents:
+                description_latent = prompt.reshape(-1, 1)
+                result.append(cosine_similarity(image_latents, description_latent)[0][0])
+        description_index = result.index(max(result))
+        print("Find for", time.time() - start)
+        return images[description_index], description_index
 
     @property
     def predictor(self):

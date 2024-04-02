@@ -32,4 +32,20 @@ class test_clip(unittest.TestCase):
             img, index = self.model.get_by_prompt(data['img'], prompt)
             if index in answer: pt+=1
         print("\n\nResult:", len(prompts)/100 * pt, '%')
+
+    def test_getting_by_description(self):
+        data = self.data.copy()
+        descriptions = list(data['category'].unique())
+        correct_predictions = 0
+
+        for description in descriptions:
+            correct_index = np.where(data['category'] == description)[0]
+            img, index = self.model.get_by_description(data['img'], description)
+
+            if index in correct_index:
+                correct_predictions += 1
+
+        accuracy = (correct_predictions / len(descriptions)) * 100
+        print("\n\nAccuracy:", accuracy, '%')
+
             
