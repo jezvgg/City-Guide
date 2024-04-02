@@ -9,7 +9,7 @@ model = CLIP()
 data = pd.read_csv('Tests/photos_v3.csv.xz')
 
 
-@app.route('/service')
+@app.route('/')
 def service():
     args = request.args
     if 'image' in args:
