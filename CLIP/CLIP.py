@@ -58,6 +58,7 @@ class CLIP:
         print("Find for", time.time()-start)
         return images[image_index], image_index
 
+
     def get_by_image(self, descriptions: list, user_image: str):
         user_image = self.__decode_image(user_image)
 
@@ -71,9 +72,11 @@ class CLIP:
         print("Found in", time.time() - start, "seconds")
         return description, max_score_index
 
+
     @property
     def predictor(self):
         return self.__predictor
+
 
     @predictor.setter
     def predictor(self, templates: list):
