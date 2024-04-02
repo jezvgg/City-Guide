@@ -58,18 +58,18 @@ class CLIP:
         print("Find for", time.time()-start)
         return images[image_index], image_index
 
-    def get_by_image(self, user_image: list, descriptions: list):
-        user_image = self.__decode_images(user_image)
+    def get_by_image(self, descriptions: list, user_image: str):
+        user_image = self.__decode_image(user_image)
 
         start = time.time()
         with torch.no_grad():
             user_image_latent = self.__predictor.get_image_latents([user_image]).cpu().detach().numpy()[0].reshape(1, -1)
-            latent_descriptions = [self.__predictor.get_text_latents([descr]).cpu().detach().numpy()[0].reshape(1, -1) for descr in descriptions]
+            latent_descriptions = self.__predictor.get_text_latents(descriptions).cpu().detach().numpy()
             similarity_scores = [cosine_similarity(user_image_latent, latent_desc)[0][0] for latent_desc in latent_descriptions]
             max_score_index = similarity_scores.index(max(similarity_scores))
             description = descriptions[max_score_index]
         print("Found in", time.time() - start, "seconds")
-        return description
+        return description, max_score_index
 
     @property
     def predictor(self):
