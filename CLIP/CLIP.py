@@ -2,6 +2,7 @@ import ruclip
 import torch
 from PIL import Image
 from io import BytesIO
+import numpy as np
 import base64
 import time
 from sklearn.metrics.pairwise import cosine_similarity
@@ -19,13 +20,13 @@ class CLIP:
 
 
     def __decode_image(self, bs4):
-        img = Image.open(BytesIO(base64.b64decode(bs4)))
+        img = Image.open(BytesIO(base64.b64decode(bs4[2:-1])))
         return img
 
 
     def __decode_images(self, images: list):
         start = time.time()
-        result = [self.__decode_image(bs4url[2:-1]) for bs4url in images]
+        result = [self.__decode_image(bs4url) for bs4url in images]
         print("images decoded for", time.time()-start)
         return result
 
@@ -45,18 +46,15 @@ class CLIP:
         images = self.__decode_images(images)
 
         start = time.time()
-        # Заменить список на массив из numpy
         with torch.no_grad():
-            prompt_latent = self.__predictor.get_text_latents([prompt]).cpu().detach().numpy()[0].reshape(1, -1)
+            prompt_latent = self.__predictor.get_text_latents([prompt]).cpu().detach().numpy()
             image_latents = self.__predictor.get_image_latents(images).cpu().detach().numpy()
-            result = []
-            for latent in image_latents: 
-                # Возможно эффективнее будет сразу в косинусуво сходство засунуть 2 списка и взять диагональ
-                image_latent = latent.reshape(1, -1)
-                result.append(cosine_similarity(prompt_latent, image_latent)[0][0])
-        image_index = result.index(max(result))
-        print("Find for", time.time()-start)
-        return images[image_index], image_index
+        print("Vectorized for:", time.time() - start)
+        start = time.time()
+        result = cosine_similarity(prompt_latent, image_latents)[0]
+        print("Cosinus for", time.time() - start)
+        index = np.argmax(result)
+        return images[index], index
 
 
     def get_by_image(self, descriptions: list, user_image: str):
@@ -64,13 +62,14 @@ class CLIP:
 
         start = time.time()
         with torch.no_grad():
-            user_image_latent = self.__predictor.get_image_latents([user_image]).cpu().detach().numpy()[0].reshape(1, -1)
+            user_image_latent = self.__predictor.get_image_latents([user_image]).cpu().detach().numpy()
             latent_descriptions = self.__predictor.get_text_latents(descriptions).cpu().detach().numpy()
-            similarity_scores = [cosine_similarity(user_image_latent, latent_desc)[0][0] for latent_desc in latent_descriptions]
-            max_score_index = similarity_scores.index(max(similarity_scores))
-            description = descriptions[max_score_index]
-        print("Found in", time.time() - start, "seconds")
-        return description, max_score_index
+        print("Vectorized for:", time.time() - start)
+        start = time.time()
+        similarity_scores = cosine_similarity(user_image_latent, latent_descriptions)[0]
+        print("Cosins in", time.time() - start, "seconds")
+        index = np.argmax(similarity_scores)
+        return descriptions[index], index
 
 
     @property
