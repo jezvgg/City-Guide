@@ -13,9 +13,14 @@ data = pd.read_csv('Tests/photos_v3.csv.xz')
 def service():
     args = request.args
     if 'image' in args:
-        # Вставить реализацию с картинкой
-        pass
-    elif 'prompt' in args: 
+        description, max_score_index = model.get_by_prompt(list(data['img'].unique()), data['img'])
+        return app.response_class(
+            response=str(description),
+            status=200,
+            mimetype="text"
+        )
+
+    elif 'prompt' in args:
         img, index = model.get_by_prompt(data['img'], args['prompt'])
         return app.response_class(
             response=str(index),
