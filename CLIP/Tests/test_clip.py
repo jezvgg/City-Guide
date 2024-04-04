@@ -25,7 +25,7 @@ class test_clip(unittest.TestCase):
 
     def test_getting_by_image(self):
         data = self.data.copy()
-        images = list(data['img'].unique())
+        images = list(data.drop_duplicates(subset=['name'])['img'])
         correct_predictions = 0
 
         for image in images:
