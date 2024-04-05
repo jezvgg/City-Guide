@@ -18,12 +18,12 @@ class CLIP:
     cousine_similitaries = []
 
 
-    def __init__(self, templates = ['{}', 'это {}', 'на фото {}'], model_name = "ruclip-vit-base-patch32-384"):
+    def __init__(self, data_path, templates = ['{}', 'это {}', 'на фото {}'], model_name = "ruclip-vit-base-patch32-384"):
         self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         self.__model, self.__processor = ruclip.load(model_name, device=self.device)
         self.__predictor = ruclip.Predictor(self.__model, self.__processor, device=self.device, bs=8, templates=templates)
 
-        data = pd.read_csv('Tests/photos_v3.csv.xz')
+        data = pd.read_csv(data_path)
         images = self.__decode_images(data['img'])
         with torch.no_grad():
             self.images_latents = self.__predictor.get_image_latents(images).cpu().detach().numpy()
@@ -52,9 +52,9 @@ class CLIP:
         print("Vectorized for:", time.time() - start)
         start = time.time()
         similarity_scores = cosine_similarity(prompt_latent, self.images_latents)[0]
-        result = np.sqrt((self.cousine_similitaries - similarity_scores) ** 2)
+        # result = np.sqrt((self.cousine_similitaries - similarity_scores) ** 2)
         print("Cosinus for", time.time() - start)
-        index = np.argmin(result)
+        index = np.argmax(similarity_scores)
         return index
 
 
@@ -67,9 +67,9 @@ class CLIP:
         print("Vectorized for:", time.time() - start)
         start = time.time()
         similarity_scores = cosine_similarity(user_image_latent, self.text_latents)[0]
-        result = np.sqrt((self.cousine_similitaries - similarity_scores) ** 2)
+        # result = np.sqrt((self.cousine_similitaries - similarity_scores) ** 2)
         print("Cosins in", time.time() - start, "seconds")
-        index = np.argmin(result)
+        index = np.argmax(similarity_scores)
         return index
 
 

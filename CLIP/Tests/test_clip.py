@@ -7,35 +7,41 @@ from sklearn.metrics import accuracy_score
 
 class test_clip(unittest.TestCase):
 
-    model = CLIP()
-    data = pd.read_csv('Tests/photos_v3.csv.xz')
-
 
     def test_getting_by_prompt(self):
-        # 15 секунд на каждый промпт
-        data = self.data.copy()
-        prompts = list(data['name'].unique())
-        pt = 0
-        for prompt in prompts:
-            answer = np.where(data['name'] == prompt)[0]
-            index = self.model.get_by_prompt(prompt)
-            if index in answer: pt+=1
+        model = CLIP('photos_v3.csv.xz')
 
-        accuracy = (pt / len(prompts)) * 100
+        # 0.025 секунд на каждый промпт
+        # 8%
+        prompts = pd.read_csv('Tests/prompts.csv')
+        data = pd.read_csv('photos_v3.csv.xz')
+        correct = 0
+        for prompt, name in zip(prompts['prompts'], prompts['name']):
+            index = model.get_by_prompt(prompt)
+
+            print(prompt, data.iloc[index]['name'], name, sep=' | ')
+            if data.iloc[index]['name'] == name: 
+                correct+=1
+
+        accuracy = (correct / len(prompts)) * 100
         print("\n\nResult:", accuracy, '%')
 
 
     def test_getting_by_image(self):
-        data = self.data.copy()
-        images = list(data.drop_duplicates(subset=['name'])['img'])
+        model = CLIP('Tests/val_img_data.csv')
+
+        # 2%
+
+        data = pd.read_csv('Tests/val_img_data.csv')
+        images = pd.read_csv('Tests/test_img_data.csv')
+
         correct_predictions = 0
 
-        for image in images:
-            description = data[data['img'] == image]['name'].iloc[0]
-            correct_index = np.where(data['name'] == description)[0]
-            index = self.model.get_by_image(image)
+        for image, name in zip(images['img'], images['name']):
 
-            if index in correct_index:
+            index = model.get_by_image(image)
+
+            if data.iloc[index]['name'] == name:
                 correct_predictions += 1
 
         accuracy = (correct_predictions / len(images)) * 100
