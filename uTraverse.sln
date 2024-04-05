@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "uTraverse.AspireHost", "uTraverse.AspireHost\uTraverse.AspireHost.csproj", "{690AC209-B3DE-461A-A455-DE3D329CF74B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "uTraverse.AspireServiceDefaults", "uTraverse.AspireServiceDefaults\uTraverse.AspireServiceDefaults.csproj", "{43E64DEB-32CA-42AC-8222-CDDB5028E216}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{690AC209-B3DE-461A-A455-DE3D329CF74B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{690AC209-B3DE-461A-A455-DE3D329CF74B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{690AC209-B3DE-461A-A455-DE3D329CF74B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{690AC209-B3DE-461A-A455-DE3D329CF74B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43E64DEB-32CA-42AC-8222-CDDB5028E216}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43E64DEB-32CA-42AC-8222-CDDB5028E216}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43E64DEB-32CA-42AC-8222-CDDB5028E216}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43E64DEB-32CA-42AC-8222-CDDB5028E216}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
