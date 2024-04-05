@@ -50,7 +50,6 @@ class CLIP:
         print("Vectorized for:", time.time() - start)
         start = time.time()
         similarity_scores = cosine_similarity(prompt_latent, self.images_latents)[0] + cosine_similarity(prompt_latent, self.images_latents)[0]
-        # result = np.sqrt((self.cousine_similitaries - similarity_scores) ** 2)
         print("Cosinus for", time.time() - start)
         index = np.argmax(similarity_scores)
         return index
@@ -65,7 +64,6 @@ class CLIP:
         print("Vectorized for:", time.time() - start)
         start = time.time()
         similarity_scores = cosine_similarity(user_image_latent, self.images_latents)[0] + cosine_similarity(user_image_latent, self.images_latents)[0]
-        # result = np.sqrt((self.cousine_similitaries - similarity_scores) ** 2)
         print("Cosins in", time.time() - start, "seconds")
         index = np.argmax(similarity_scores)
         return index
