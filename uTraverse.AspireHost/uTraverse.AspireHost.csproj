@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\uTraverse.AiAPI\uTraverse.AiAPI.csproj" />
     <ProjectReference Include="..\uTraverse.PlacesAPI\uTraverse.PlacesAPI.csproj" />
   </ItemGroup>
 
