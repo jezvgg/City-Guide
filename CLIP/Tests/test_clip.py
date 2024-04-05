@@ -20,7 +20,9 @@ class test_clip(unittest.TestCase):
             answer = np.where(data['name'] == prompt)[0]
             index = self.model.get_by_prompt(prompt)
             if index in answer: pt+=1
-        print("\n\nResult:", len(prompts)/100 * pt, '%')
+
+        accuracy = (pt / len(prompts)) * 100
+        print("\n\nResult:", accuracy, '%')
 
 
     def test_getting_by_image(self):
