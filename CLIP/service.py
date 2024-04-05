@@ -5,15 +5,14 @@ import pandas as pd
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
-model = CLIP()
-data = pd.read_csv('Tests/photos_v3.csv.xz')
+model = CLIP('photos_v3.csv.xz')
 
 
 @app.route('/')
 def service():
     args = request.args
     if 'image' in args:
-        description, index = model.get_by_image(data['name'], args['image'])
+        index = model.get_by_image(args['image'])
         return app.response_class(
             response=str(index),
             status=200,
@@ -21,7 +20,7 @@ def service():
         )
 
     elif 'prompt' in args:
-        img, index = model.get_by_prompt(data['img'], args['prompt'])
+        img, index = model.get_by_prompt(args['prompt'])
         return app.response_class(
             response=str(index),
             status=200,
