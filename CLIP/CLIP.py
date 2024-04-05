@@ -39,7 +39,6 @@ class CLIP:
         print("images decoded for", time.time()-start)
         return result
 
-
     def get_by_prompt(self, prompt: str):
 
         start = time.time()
@@ -47,7 +46,7 @@ class CLIP:
             prompt_latent = self.__predictor.get_text_latents([prompt]).cpu().detach().numpy()
         print("Vectorized for:", time.time() - start)
         start = time.time()
-        result = cosine_similarity(prompt_latent, self.images_latents)[0]
+        result = cosine_similarity(prompt_latent, self.images_latents)[0] + cosine_similarity(prompt_latent, self.text_latents)[0]
         print("Cosinus for", time.time() - start)
         index = np.argmax(result)
         return index
@@ -61,7 +60,7 @@ class CLIP:
             user_image_latent = self.__predictor.get_image_latents([image]).cpu().detach().numpy()
         print("Vectorized for:", time.time() - start)
         start = time.time()
-        similarity_scores = cosine_similarity(user_image_latent, self.text_latents)[0]
+        similarity_scores = cosine_similarity(user_image_latent, self.text_latents)[0] + cosine_similarity(user_image_latent, self.images_latents)[0]
         print("Cosins in", time.time() - start, "seconds")
         index = np.argmax(similarity_scores)
         return index
