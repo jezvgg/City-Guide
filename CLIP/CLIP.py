@@ -6,7 +6,7 @@ import numpy as np
 import base64
 import time
 import pandas as pd
-from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.metrics.pairwise import cosine_similarity, euclidean_distances
 
 
 class CLIP:
@@ -15,6 +15,8 @@ class CLIP:
     __predictor = None
     text_latents = []
     images_latents = []
+    cousine_similitaries = []
+
 
     def __init__(self, templates = ['{}', 'это {}', 'на фото {}'], model_name = "ruclip-vit-base-patch32-384"):
         self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -26,6 +28,8 @@ class CLIP:
         with torch.no_grad():
             self.images_latents = self.__predictor.get_image_latents(images).cpu().detach().numpy()
             self.text_latents = self.__predictor.get_text_latents(data['name']).cpu().detach().numpy()
+
+        self.cousine_similitaries = np.diagonal(cosine_similarity(self.images_latents, self.text_latents))
 
 
     def __decode_image(self, bs4):
@@ -39,6 +43,7 @@ class CLIP:
         print("images decoded for", time.time()-start)
         return result
 
+
     def get_by_prompt(self, prompt: str):
 
         start = time.time()
@@ -46,9 +51,10 @@ class CLIP:
             prompt_latent = self.__predictor.get_text_latents([prompt]).cpu().detach().numpy()
         print("Vectorized for:", time.time() - start)
         start = time.time()
-        result = cosine_similarity(prompt_latent, self.images_latents)[0] + cosine_similarity(prompt_latent, self.text_latents)[0]
+        similarity_scores = cosine_similarity(prompt_latent, self.images_latents)[0]
+        result = np.sqrt((self.cousine_similitaries - similarity_scores) ** 2)
         print("Cosinus for", time.time() - start)
-        index = np.argmax(result)
+        index = np.argmin(result)
         return index
 
 
@@ -60,9 +66,10 @@ class CLIP:
             user_image_latent = self.__predictor.get_image_latents([image]).cpu().detach().numpy()
         print("Vectorized for:", time.time() - start)
         start = time.time()
-        similarity_scores = cosine_similarity(user_image_latent, self.text_latents)[0] + cosine_similarity(user_image_latent, self.images_latents)[0]
+        similarity_scores = cosine_similarity(user_image_latent, self.text_latents)[0]
+        result = np.sqrt((self.cousine_similitaries - similarity_scores) ** 2)
         print("Cosins in", time.time() - start, "seconds")
-        index = np.argmax(similarity_scores)
+        index = np.argmin(result)
         return index
 
 
