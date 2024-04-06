@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "uTraverse.PlacesAPI", "uTra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "uTraverse.AiAPI", "uTraverse.AiAPI\uTraverse.AiAPI.csproj", "{6DA37A2D-4029-4482-9985-F93B275290F3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "uTraverse.Benchmarks", "uTraverse.Benchmarks\uTraverse.Benchmarks.csproj", "{32E2FB19-3D88-4BA4-8E5A-98C787B1537D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,8 +35,15 @@ Global
 		{6DA37A2D-4029-4482-9985-F93B275290F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DA37A2D-4029-4482-9985-F93B275290F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DA37A2D-4029-4482-9985-F93B275290F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32E2FB19-3D88-4BA4-8E5A-98C787B1537D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32E2FB19-3D88-4BA4-8E5A-98C787B1537D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32E2FB19-3D88-4BA4-8E5A-98C787B1537D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32E2FB19-3D88-4BA4-8E5A-98C787B1537D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9F9B3E74-BE0E-4746-B9FA-3847EECAC582}
 	EndGlobalSection
 EndGlobal
