@@ -8,7 +8,8 @@ var placesDb = builder.AddPostgres("utraverse-placesdb");
 var placeMatcher = builder.AddContainer("utraverse-placematcher", "utraverse/placematcher");
 
 // Add the Places API project reference
-var placesApi = builder.AddProject<Projects.uTraverse_PlacesAPI>("utraverse-placesapi");
+var placesApi = builder.AddProject<Projects.uTraverse_PlacesAPI>("utraverse-placesapi")
+    .WithReference(placesDb);
 
 // Add the AI API project reference
 var aiApi = builder.AddProject<Projects.uTraverse_AiAPI>("utraverse-aiapi");
