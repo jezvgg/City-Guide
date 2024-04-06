@@ -1,21 +1,14 @@
-// Create the API builder (with NativeAOT support)
 using uTraverse.AiAPI.Exceptions;
 using uTraverse.AiAPI.Services;
-using uTraverse.AiAPI.Utility;
 
-var builder = WebApplication.CreateSlimBuilder(args);
+// Create the API builder
+var builder = WebApplication.CreateBuilder(args);
 
 // Add default services (logging, configuration, etc.)
 builder.AddServiceDefaults();
 
-// Add support for JSON (de)serialization
-builder.Services.ConfigureHttpJsonOptions(options =>
-{
-    options.SerializerOptions.TypeInfoResolverChain.Insert(0, AppJsonSerializerContext.Default);
-});
-
-//builder.Services.AddHttpClient<AIService>(client => client.BaseAddress = new Uri("http://localhost:5076"));  // For test use only
-builder.Services.AddHttpClient<AIService>(client => client.BaseAddress = new Uri("http://utraverse-placematcher"));
+builder.Services.AddHttpClient<AIService>(client => client.BaseAddress = new Uri("http://localhost:5076"));  // For test use only
+//builder.Services.AddHttpClient<AIService>(client => client.BaseAddress = new Uri("http://utraverse-placematcher"));
 
 var app = builder.Build();
 

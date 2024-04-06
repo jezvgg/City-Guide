@@ -1,5 +1,5 @@
-// Create the API builder (with NativeAOT support)
-var builder = WebApplication.CreateSlimBuilder(args);
+// Create the API builder
+var builder = WebApplication.CreateBuilder(args);
 
 // Add default services (logging, configuration, etc.)
 builder.AddServiceDefaults();

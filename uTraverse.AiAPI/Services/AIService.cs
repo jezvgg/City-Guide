@@ -1,5 +1,4 @@
 ﻿using uTraverse.AiAPI.Exceptions;
-using uTraverse.AiAPI.Utility;
 
 namespace uTraverse.AiAPI.Services;
 
@@ -25,7 +24,7 @@ public class AIService (ILogger<AIService> logger, HttpClient httpClient)
         _logger.LogDebug("Retrieving place IDs from the prompt: {prompt}", prompt);
 
         // Retrieve the IDs for the prompt (TODO: replace with a better endpoint URL)
-        var res = await _httpClient.GetFromJsonAsync<Guid[]>($"/?prompt={prompt}", AppJsonSerializerContext.Default.GuidArray);
+        var res = await _httpClient.GetFromJsonAsync<Guid[]>($"/?prompt={prompt}");
 
         // Throw an exception if received null
         if (res is null)

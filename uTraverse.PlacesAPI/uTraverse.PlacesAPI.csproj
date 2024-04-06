@@ -5,9 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <InvariantGlobalization>true</InvariantGlobalization>
-    <PublishAot>true</PublishAot>
     <PublishProfile>DefaultContainer</PublishProfile>
-    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <EnableSdkContainerDebugging>True</EnableSdkContainerDebugging>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
