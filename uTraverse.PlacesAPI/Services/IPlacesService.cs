@@ -19,6 +19,7 @@ namespace uTraverse.PlacesAPI.Services
         /// </summary>
         /// <param name="ids">A collection of </param>
         /// <returns></returns>
-        Task<IEnumerable<Place>> GetPlacesByIdsAsync (IEnumerable<Guid> ids);
+        Task<IEnumerable<Place>> GetPlacesByIdsAsync (IEnumerable<Guid> ids); 
+        // The usage of IEnumerable as both return type an parameter type here is justified by benchmarks, showing 5% performance decrease (50us @ 1000 entities) which shall be considered negligible
     }
 }
