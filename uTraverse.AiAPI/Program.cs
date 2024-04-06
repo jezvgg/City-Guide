@@ -1,5 +1,6 @@
 using uTraverse.AiAPI.Exceptions;
 using uTraverse.AiAPI.Services;
+using uTraverse.AspireServiceDefaults;
 
 // Create the API builder
 var builder = WebApplication.CreateBuilder(args);
@@ -7,18 +8,18 @@ var builder = WebApplication.CreateBuilder(args);
 // Add default services (logging, configuration, etc.)
 builder.AddServiceDefaults();
 
-builder.Services.AddHttpClient<IAIService, AIService>(client => client.BaseAddress = new Uri("http://localhost:5076"));  // For test use only
+builder.Services.AddHttpClient<IAiService, AiService>(client => client.BaseAddress = new Uri("http://localhost:5076"));  // For test use only
 //builder.Services.AddHttpClient<AIService>(client => client.BaseAddress = new Uri("http://utraverse-placematcher"));
 
 var app = builder.Build();
 
-// Map healthchecks and other Aspire stuff
+// Map health-checks and other Aspire stuff
 app.MapDefaultEndpoints();
 
 // Map the /places API section
 var places = app.MapGroup("/places");
 
-places.MapGet("/match/text", async (string prompt, IAIService ai) =>
+places.MapGet("/match/text", async (string prompt, IAiService ai) =>
 {
     app.Logger.LogDebug("Endpoint call on / with prompt: {prompt}", prompt);
 

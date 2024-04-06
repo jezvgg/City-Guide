@@ -7,10 +7,9 @@ namespace uTraverse.AiAPI.Services;
 /// </summary>
 /// <param name="logger">A logger instance for internal usage</param>
 /// <param name="httpClient">An HttpClient instance for communication with the AI microservice (should have BaseAddress set to the AI microservice URL)</param>
-public class AIService(ILogger<AIService> logger, HttpClient httpClient) : IAIService
+public class AiService(ILogger<AiService> logger, HttpClient httpClient) : IAiService
 {
     private readonly ILogger _logger = logger;
-    private readonly HttpClient _httpClient = httpClient;
 
     public async Task<IEnumerable<Guid>> GetPlaceIdsAsync(string prompt)
     {
@@ -19,7 +18,7 @@ public class AIService(ILogger<AIService> logger, HttpClient httpClient) : IAISe
         _logger.LogDebug("Retrieving place IDs from the prompt: {prompt}", prompt);
 
         // Retrieve the IDs for the prompt (TODO: replace with a better endpoint URL)
-        var res = await _httpClient.GetFromJsonAsync<IEnumerable<Guid>>($"/?prompt={prompt}");
+        var res = await httpClient.GetFromJsonAsync<IEnumerable<Guid>>($"/?prompt={prompt}");
 
         // Throw an exception if received null
         if (res is null)

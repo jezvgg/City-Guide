@@ -3,9 +3,9 @@ using uTraverse.PlacesAPI.Models;
 
 namespace uTraverse.PlacesAPI.Data;
 
-public class PlacesDbContext : DbContext
+public sealed class PlacesDbContext : DbContext
 {
-    public DbSet<Place> Places { get; set; }
+    public required DbSet<Place> Places { get; init; }
 
     public PlacesDbContext(DbContextOptions options) : base(options)
     {

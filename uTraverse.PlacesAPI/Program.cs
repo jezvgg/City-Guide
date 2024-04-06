@@ -1,3 +1,4 @@
+using uTraverse.AspireServiceDefaults;
 using uTraverse.PlacesAPI.Data;
 using uTraverse.PlacesAPI.Exceptions;
 using uTraverse.PlacesAPI.Services;
@@ -8,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add default services (logging, configuration, etc.)
 builder.AddServiceDefaults();
 
-// Add PostgreSQL Places DB context
+// Add PostgresSQL Places DB context
 builder.AddNpgsqlDbContext<PlacesDbContext>("utraverse-placesdb");
 
 // Add a service to interact with the Places DB
@@ -16,7 +17,7 @@ builder.Services.AddScoped<IPlacesService, PlacesService>();
 
 var app = builder.Build();
 
-// Map healthchecks and other Aspire stuff
+// Map health-checks and other Aspire stuff
 app.MapDefaultEndpoints();
 
 // Map /places section of the API
@@ -28,9 +29,9 @@ places.MapGet("/", async (Guid[] ids, IPlacesService placesService) =>
 
     try
     {
-        var places = await placesService.GetPlacesByIdsAsync(ids);
+        var retrievedPlaces = await placesService.GetPlacesByIdsAsync(ids);
 
-        return Results.Ok(places);
+        return Results.Ok(retrievedPlaces);
     }
     catch (PlaceNotFoundException)
     {

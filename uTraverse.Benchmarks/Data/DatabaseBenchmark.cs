@@ -10,23 +10,21 @@ namespace uTraverse.Benchmarks.Data;
 /* Conclusion:
  * JOIN operations perform a bit slower than IN operations;
  * 
- * Arrays perform ever so slighthly slower than IEnumerable as method parameters.
- * 0.05 ms difference for 1000 items and ~5% difference in performance shall be considered insignificant, thereby usage of IEnumerable as a method parameter is justfied
+ * Arrays perform ever so slightly slower than IEnumerable as method parameters.
+ * 0.05 ms difference for 1000 items and ~5% difference in performance shall be considered insignificant, thereby usage of IEnumerable as a method parameter is justified
  */
 
 public class DatabaseBenchmark
 {
-    public PlacesDbContext db;
-    public List<Place> Places;
-    public List<Guid> MasterIdList;
-    public List<Guid> IdList;
-    public Guid[] IdArray;
-    public IEnumerable<Guid> IdEnumerable;
+    private PlacesDbContext _db;
+    private List<Place> _places;
+    private List<Guid> _masterIdList;
+    private Guid[] _idArray;
+    private IEnumerable<Guid> _idEnumerable;
 
-    public const int ItemCount = 1000;
+    private const int ItemCount = 1000;
 
-    [Params(10, 100, 1000)]
-    public int GetCount;
+    [Params(10, 100, 1000)] public int _getCount = 10;
 
     [GlobalSetup]
     public void Setup()
@@ -39,36 +37,36 @@ public class DatabaseBenchmark
 
         var app = builder.Build();
 
-        db = app.Services.GetRequiredService<PlacesDbContext>();
+        _db = app.Services.GetRequiredService<PlacesDbContext>();
 
-        MasterIdList = [];
-        Places = [];
+        _masterIdList = [];
+        _places = [];
 
-        for (int i = 0; i < ItemCount; i++)
+        for (var i = 0; i < ItemCount; i++)
         {
             var place = new Place() { Address = "", Name = "" };
-            Places.Add(place);
-            MasterIdList.Add(place.Id);
-            db.Places.Add(place);
+            _places.Add(place);
+            _masterIdList.Add(place.Id);
+            _db.Places.Add(place);
         }
 
-        db.SaveChanges();
+        _db.SaveChanges();
     }
 
     [GlobalCleanup]
     public void Cleanup()
     {
-        db.RemoveRange(Places);
-        db.SaveChanges();
-        db.Dispose();
+        _db.RemoveRange(_places);
+        _db.SaveChanges();
+        _db.Dispose();
     }
 
     [IterationSetup]
     public void IterationSetup()
     {
-        List<Guid> left = [.. MasterIdList];
+        List<Guid> left = [.. _masterIdList];
         List<Guid> aggreg = [];
-        for (int i = 0; i < GetCount; i++)
+        for (int i = 0; i < _getCount; i++)
         {
             var id = Random.Shared.Next(left.Count);
             var guid = left[id];
@@ -76,27 +74,26 @@ public class DatabaseBenchmark
             aggreg.Add(guid);
         }
 
-        IdList = aggreg;
-        IdArray = [.. aggreg];
-        IdEnumerable = [.. aggreg];
+        _idArray = [.. aggreg];
+        _idEnumerable = [.. aggreg];
     }
 
     [Benchmark(Baseline = true)]
     public List<Place> GetPlacesContainsArray()
     {
-        return [.. db.Places.Where(x => IdArray.Contains(x.Id))];
+        return [.. _db.Places.Where(x => _idArray.Contains(x.Id))];
     }
 
     [Benchmark]
     public List<Place> GetPlacesContainsEnumerable()
     {
-        return [.. db.Places.Where(x => IdEnumerable.Contains(x.Id))];
+        return [.. _db.Places.Where(x => _idEnumerable.Contains(x.Id))];
     }
 
     [Benchmark]
     public List<Place> GetPlacesJoinArray()
     {
-        return [.. db.Places.Join(IdArray, e => e.Id, id => id, (e, id) => e)];
+        return [.. _db.Places.Join(_idArray, e => e.Id, id => id, (e, id) => e)];
     }
 
 }

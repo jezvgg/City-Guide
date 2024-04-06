@@ -1,9 +1,11 @@
-﻿namespace uTraverse.AiAPI.Services;
+﻿using uTraverse.AiAPI.Exceptions;
+
+namespace uTraverse.AiAPI.Services;
 
 /// <summary>
 /// Manages communication with the AI microservice
 /// </summary>
-public interface IAIService
+public interface IAiService
 {
     /// <summary>
     /// Retrieves an array of place IDs matching the given prompt

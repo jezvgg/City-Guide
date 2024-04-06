@@ -13,7 +13,6 @@ namespace uTraverse.PlacesAPI.Services;
 public class PlacesService(ILogger<PlacesService> logger, PlacesDbContext db) : IPlacesService
 {
     private readonly ILogger _logger = logger;
-    private readonly PlacesDbContext _db = db;
 
     public async Task<Place> GetPlaceByIdAsync(Guid id)
     {
@@ -21,7 +20,7 @@ public class PlacesService(ILogger<PlacesService> logger, PlacesDbContext db) : 
 
         _logger.LogDebug("Retrieving place with ID: {id}", id);
 
-        var place = await _db.Places.FirstOrDefaultAsync(x => x.Id == id);
+        var place = await db.Places.FirstOrDefaultAsync(x => x.Id == id);
 
         // Throw an exception if the place is not found
         if (place is null)
@@ -40,23 +39,27 @@ public class PlacesService(ILogger<PlacesService> logger, PlacesDbContext db) : 
         // TODO: Add distributed caching
 
         // Convert to HashSet for better performance
-        var hids = ids.ToHashSet();
+        var idsHash = ids.ToHashSet();
 
-        // Return empty if no IDs were passed
-        if (hids.Count == 0) return [];
-
-        // Special case for only one place
-        else if (hids.Count == 1)
+        // Short-circuit if length is < 2
+        switch (idsHash.Count)
         {
-            var place = await GetPlaceByIdAsync(hids.First());
+            // Return empty if no IDs were passed
+            case 0:
+                return [];
+            // Return the only element
+            case 1:
+            {
+                var place = await GetPlaceByIdAsync(idsHash.First());
 
-            return [place];
+                return [place];
+            }
         }
 
-        _logger.LogDebug("Retrieving places with IDs: {ids}", hids);
+        _logger.LogDebug("Retrieving places with IDs: {ids}", idsHash);
 
         // Get all places whose ID are in the list
-        var places = _db.Places.Where(e => hids.Contains(e.Id));
+        var places = db.Places.Where(e => idsHash.Contains(e.Id));
 
         // Throw exception if no places were found
         if (places is null)
