@@ -15,7 +15,10 @@ var app = builder.Build();
 // Map healthchecks and other Aspire stuff
 app.MapDefaultEndpoints();
 
-app.MapGet("/places/ai.prompt", async (string prompt, AIService ai) =>
+// Map the /places API section
+var places = app.MapGroup("/places");
+
+places.MapGet("/match/text", async (string prompt, AIService ai) =>
 {
     app.Logger.LogDebug("Endpoint call on / with prompt: {prompt}", prompt);
 
