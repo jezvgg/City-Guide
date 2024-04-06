@@ -35,7 +35,7 @@ public class PlacesService (ILogger<PlacesService> logger, PlacesDbContext db) :
         return place;
     }
 
-    public async Task<List<Place>> GetPlacesByIdsAsync (IEnumerable<Guid> ids)
+    public async Task<IEnumerable<Place>> GetPlacesByIdsAsync (IEnumerable<Guid> ids)
     {
         // TODO: Add distributed caching
 
@@ -56,7 +56,7 @@ public class PlacesService (ILogger<PlacesService> logger, PlacesDbContext db) :
         _logger.LogDebug("Retrieving places with IDs: {ids}", hids);
 
         // Get all places whose ID are in the list
-        var places = await _db.Places.Where(e => hids.Contains(e.Id)).ToListAsync();
+        var places = _db.Places.Where(e => hids.Contains(e.Id));
 
         // Throw exception if no places were found
         if (places is null)
@@ -65,7 +65,7 @@ public class PlacesService (ILogger<PlacesService> logger, PlacesDbContext db) :
             throw new PlaceNotFoundException($"No places with such IDs were found");
         }
 
-        _logger.LogDebug("Retrieved {count} places", places.Count);
+        _logger.LogDebug("Retrieval succeeded");
 
         return places;
     }

@@ -12,14 +12,14 @@ public class AIService(ILogger<AIService> logger, HttpClient httpClient) : IAISe
     private readonly ILogger _logger = logger;
     private readonly HttpClient _httpClient = httpClient;
 
-    public async Task<Guid[]> GetPlaceIdsAsync(string prompt)
+    public async Task<IEnumerable<Guid>> GetPlaceIdsAsync(string prompt)
     {
         // TODO: Add distributed caching to offload the AI and speed up execution
 
         _logger.LogDebug("Retrieving place IDs from the prompt: {prompt}", prompt);
 
         // Retrieve the IDs for the prompt (TODO: replace with a better endpoint URL)
-        var res = await _httpClient.GetFromJsonAsync<Guid[]>($"/?prompt={prompt}");
+        var res = await _httpClient.GetFromJsonAsync<IEnumerable<Guid>>($"/?prompt={prompt}");
 
         // Throw an exception if received null
         if (res is null)
@@ -28,7 +28,7 @@ public class AIService(ILogger<AIService> logger, HttpClient httpClient) : IAISe
             throw new ApiResponseNullException("AI API returned a null response");
         }
 
-        _logger.LogDebug("AI API request was successful. Retrieved {count} items", res.Length);
+        _logger.LogDebug("AI API request was successful");
 
         return res;
     }

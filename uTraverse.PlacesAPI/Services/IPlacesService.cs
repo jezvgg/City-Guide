@@ -19,6 +19,6 @@ namespace uTraverse.PlacesAPI.Services
         /// </summary>
         /// <param name="ids">A collection of </param>
         /// <returns></returns>
-        Task<List<Place>> GetPlacesByIdsAsync (IEnumerable<Guid> ids);
+        Task<IEnumerable<Place>> GetPlacesByIdsAsync (IEnumerable<Guid> ids);
     }
 }
