@@ -1,6 +1,9 @@
 // Create the application builder
 var builder = DistributedApplication.CreateBuilder(args);
 
+// Add PostgreSQL DB container
+var placesDb = builder.AddPostgres("utraverse-placesdb");
+
 // Add the place matcher AI container
 var placeMatcher = builder.AddContainer("utraverse-placematcher", "utraverse/placematcher");
 
