@@ -24,7 +24,7 @@ public class JsonBenchmarks
         List<Place> places = [];
         for (int i = 0; i < ItemNumber; i++)
         {
-            places.Add(new() { Address="", Name="" });
+            places.Add(new() { Address = "", Name = "" });
         }
 
         PlaceList = [.. places];
@@ -33,19 +33,19 @@ public class JsonBenchmarks
     }
 
     [Benchmark]
-    public string SerializeArrayAsync ()
+    public string SerializeArrayAsync()
     {
         return JsonSerializer.Serialize(PlaceArray);
     }
 
     [Benchmark]
-    public string SerializeListAsync ()
+    public string SerializeListAsync()
     {
         return JsonSerializer.Serialize(PlaceList);
     }
 
     [Benchmark]
-    public string SerializeIEnumerableAsync ()
+    public string SerializeIEnumerableAsync()
     {
         return JsonSerializer.Serialize(PlaceIEnumerable);
     }

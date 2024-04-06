@@ -81,8 +81,8 @@ public class DatabaseBenchmark
         IdEnumerable = [.. aggreg];
     }
 
-    [Benchmark(Baseline=true)]
-    public List<Place> GetPlacesContainsArray ()
+    [Benchmark(Baseline = true)]
+    public List<Place> GetPlacesContainsArray()
     {
         return [.. db.Places.Where(x => IdArray.Contains(x.Id))];
     }

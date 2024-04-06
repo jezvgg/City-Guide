@@ -10,18 +10,18 @@ namespace uTraverse.PlacesAPI.Services;
 /// </summary>
 /// <param name="logger">Logger for internal usage</param>
 /// <param name="db">DbContext for querying</param>
-public class PlacesService (ILogger<PlacesService> logger, PlacesDbContext db) : IPlacesService
+public class PlacesService(ILogger<PlacesService> logger, PlacesDbContext db) : IPlacesService
 {
     private readonly ILogger _logger = logger;
     private readonly PlacesDbContext _db = db;
 
-    public async Task<Place> GetPlaceByIdAsync (Guid id)
+    public async Task<Place> GetPlaceByIdAsync(Guid id)
     {
         // TODO: Add distributed caching
 
         _logger.LogDebug("Retrieving place with ID: {id}", id);
 
-        var place = await _db.Places.FirstOrDefaultAsync(x =>  x.Id == id);
+        var place = await _db.Places.FirstOrDefaultAsync(x => x.Id == id);
 
         // Throw an exception if the place is not found
         if (place is null)
@@ -35,7 +35,7 @@ public class PlacesService (ILogger<PlacesService> logger, PlacesDbContext db) :
         return place;
     }
 
-    public async Task<IEnumerable<Place>> GetPlacesByIdsAsync (IEnumerable<Guid> ids)
+    public async Task<IEnumerable<Place>> GetPlacesByIdsAsync(IEnumerable<Guid> ids)
     {
         // TODO: Add distributed caching
 
@@ -44,7 +44,7 @@ public class PlacesService (ILogger<PlacesService> logger, PlacesDbContext db) :
 
         // Return empty if no IDs were passed
         if (hids.Count == 0) return [];
-        
+
         // Special case for only one place
         else if (hids.Count == 1)
         {
