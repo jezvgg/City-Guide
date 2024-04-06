@@ -7,12 +7,12 @@ namespace uTraverse.AiAPI.Services;
 /// </summary>
 /// <param name="logger">A logger instance for internal usage</param>
 /// <param name="httpClient">An HttpClient instance for communication with the AI microservice (should have BaseAddress set to the AI microservice URL)</param>
-public class AIService (ILogger<AIService> logger, HttpClient httpClient) : IAIService
+public class AIService(ILogger<AIService> logger, HttpClient httpClient) : IAIService
 {
     private readonly ILogger _logger = logger;
     private readonly HttpClient _httpClient = httpClient;
 
-    public async Task<Guid[]> GetPlaceIdsAsync (string prompt)
+    public async Task<Guid[]> GetPlaceIdsAsync(string prompt)
     {
         // TODO: Add distributed caching to offload the AI and speed up execution
 
