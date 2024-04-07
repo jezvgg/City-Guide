@@ -1,8 +1,6 @@
 import unittest
-import numpy as np
 import pandas as pd
 from CLIP import CLIP
-from sklearn.metrics import accuracy_score
 
 
 class test_clip(unittest.TestCase):
