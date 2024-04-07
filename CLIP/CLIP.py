@@ -29,6 +29,8 @@ class CLIP:
             self.images_latents = self.__predictor.get_image_latents(images).cpu().detach().numpy()
             self.text_latents = self.__predictor.get_text_latents(data['name']).cpu().detach().numpy()
 
+        self.latents = np.concatenate((self.images_latents, self.text_latents), axis=1)
+
 
     def __decode_image(self, bs4):
         img = Image.open(BytesIO(base64.b64decode(bs4[2:-1])))
@@ -49,7 +51,8 @@ class CLIP:
             prompt_latent = self.__predictor.get_text_latents([prompt]).cpu().detach().numpy()
         print("Vectorized for:", time.time() - start)
         start = time.time()
-        similarity_scores = cosine_similarity(prompt_latent, self.images_latents)[0] + cosine_similarity(prompt_latent, self.text_latents)[0]
+        user_latents = np.concatenate((prompt_latent, prompt_latent), axis=1)
+        similarity_scores = cosine_similarity(user_latents, self.latents)[0]
         print("Cosinus for", time.time() - start)
         index = np.argmax(similarity_scores)
         return index
@@ -63,7 +66,8 @@ class CLIP:
             user_image_latent = self.__predictor.get_image_latents([image]).cpu().detach().numpy()
         print("Vectorized for:", time.time() - start)
         start = time.time()
-        similarity_scores = cosine_similarity(user_image_latent, self.images_latents)[0] + cosine_similarity(user_image_latent, self.text_latents)[0]
+        user_latents = np.concatenate((user_image_latent, user_image_latent), axis=1)
+        similarity_scores = cosine_similarity(user_latents, self.latents)[0]
         print("Cosins in", time.time() - start, "seconds")
         index = np.argmax(similarity_scores)
         return index
