@@ -19,7 +19,6 @@ class test_clip(unittest.TestCase):
         for prompt, name in zip(prompts['prompts'], prompts['name']):
             index = model.get_by_prompt(prompt)
 
-            print(prompt, data.iloc[index]['name'], name, sep=' | ')
             if data.iloc[index]['name'] == name: 
                 correct+=1
 
