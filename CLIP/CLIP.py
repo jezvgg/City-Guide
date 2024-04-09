@@ -6,7 +6,8 @@ import numpy as np
 import base64
 import time
 import pandas as pd
-from sklearn.metrics.pairwise import cosine_similarity, euclidean_distances
+from sklearn.metrics.pairwise import cosine_similarity
+import faiss
 
 
 class CLIP:
@@ -30,6 +31,11 @@ class CLIP:
             self.text_latents = self.__predictor.get_text_latents(data['name']).cpu().detach().numpy()
 
         self.latents = np.concatenate((self.images_latents, self.text_latents), axis=1)
+        self.dimensions = self.latents[0].size
+
+        self.index = faiss.IndexFlatL2(self.dimensions)
+        faiss.normalize_L2(self.latents)
+        self.index.add(self.latents)
 
 
     def __decode_image(self, bs4):
@@ -52,10 +58,10 @@ class CLIP:
         print("Vectorized for:", time.time() - start)
         start = time.time()
         user_latents = np.concatenate((prompt_latent, prompt_latent), axis=1)
-        similarity_scores = cosine_similarity(user_latents, self.latents)[0]
+        faiss.normalize_L2(user_latents)
+        D, I = self.index.search(user_latents, 1)
         print("Cosinus for", time.time() - start)
-        index = np.argmax(similarity_scores)
-        return index
+        return I[0][0]
 
 
     def get_by_image(self, user_image: str):
@@ -67,10 +73,10 @@ class CLIP:
         print("Vectorized for:", time.time() - start)
         start = time.time()
         user_latents = np.concatenate((user_image_latent, user_image_latent), axis=1)
-        similarity_scores = cosine_similarity(user_latents, self.latents)[0]
+        faiss.normalize_L2(user_latents)
+        D, I = self.index.search(user_latents, 1)
         print("Cosins in", time.time() - start, "seconds")
-        index = np.argmax(similarity_scores)
-        return index
+        return I[0][0]
 
 
     @property
