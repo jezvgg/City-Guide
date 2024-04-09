@@ -6,7 +6,6 @@ import numpy as np
 import base64
 import time
 import pandas as pd
-from sklearn.metrics.pairwise import cosine_similarity
 import faiss
 
 
@@ -17,25 +16,15 @@ class CLIP:
     text_latents = []
     images_latents = []
     cousine_similitaries = []
+    index = None
 
 
-    def __init__(self, data_path, templates = ['{}', 'это {}', 'на фото {}'], model_name = "ruclip-vit-base-patch32-384"):
+    def __init__(self, index_path, templates = ['{}', 'это {}', 'на фото {}'], model_name = "ruclip-vit-base-patch32-384"):
         self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         self.__model, self.__processor = ruclip.load(model_name, device=self.device)
         self.__predictor = ruclip.Predictor(self.__model, self.__processor, device=self.device, bs=8, templates=templates)
 
-        data = pd.read_csv(data_path)
-        images = self.__decode_images(data['img'])
-        with torch.no_grad():
-            self.images_latents = self.__predictor.get_image_latents(images).cpu().detach().numpy()
-            self.text_latents = self.__predictor.get_text_latents(data['name']).cpu().detach().numpy()
-
-        self.latents = np.concatenate((self.images_latents, self.text_latents), axis=1)
-        self.dimensions = self.latents[0].size
-
-        self.index = faiss.IndexFlatL2(self.dimensions)
-        faiss.normalize_L2(self.latents)
-        self.index.add(self.latents)
+        self.set_index(index_path)
 
 
     def __decode_image(self, bs4):
@@ -77,6 +66,10 @@ class CLIP:
         D, I = self.index.search(user_latents, 1)
         print("Cosins in", time.time() - start, "seconds")
         return I[0][0]
+
+
+    def set_index(self, index_path: str):
+        self.index = faiss.read_index(index_path)
 
 
     @property

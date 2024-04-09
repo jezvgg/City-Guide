@@ -7,10 +7,10 @@ class test_clip(unittest.TestCase):
 
 
     def test_getting_by_prompt(self):
-        model = CLIP('photos_v3.csv.xz')
+        model = CLIP('irkutsk.index')
 
-        # 0.025 секунд на каждый промпт
-        # 8%
+        # 0.011 секунд на каждый промпт
+        # 98%
         prompts = pd.read_csv('Tests/prompts.csv')
         data = pd.read_csv('photos_v3.csv.xz')
         correct = 0
@@ -25,9 +25,9 @@ class test_clip(unittest.TestCase):
 
 
     def test_getting_by_image(self):
-        model = CLIP('Tests/val_img_data.csv')
+        model = CLIP('Tests/val.index')
 
-        # 2%
+        # 70%
 
         data = pd.read_csv('Tests/val_img_data.csv')
         images = pd.read_csv('Tests/test_img_data.csv')
