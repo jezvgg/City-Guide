@@ -23,7 +23,7 @@ app.MapDefaultEndpoints();
 // Map /places section of the API
 var places = app.MapGroup("/places");
 
-places.MapGet("/", async (Guid[] ids, IPlacesService placesService) =>
+places.MapGet("/get/batch", async (Guid[] ids, IPlacesService placesService) =>
 {
     app.Logger.LogDebug("Hit /places/batch/ids endpoint for IDs: {ids}", ids);
 
