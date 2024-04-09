@@ -1,6 +1,5 @@
 from CLIP import CLIP
 from flask import Flask, request
-import pandas as pd
 
 
 app = Flask(__name__)
@@ -13,15 +12,10 @@ def service():
     args = request.args
     if 'image' in args:
         index = model.get_by_image(args['image'])
-        return app.response_class(
-            response=str(index),
-            status=200,
-            mimetype="text"
-        )
-
     elif 'prompt' in args:
-        img, index = model.get_by_prompt(args['prompt'])
-        return app.response_class(
+        index = model.get_by_prompt(args['prompt'])
+
+    return app.response_class(
             response=str(index),
             status=200,
             mimetype="text"
