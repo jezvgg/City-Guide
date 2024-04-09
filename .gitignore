@@ -482,3 +482,6 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+__pycache__
+.vscode
+photos_v3.csv.xz
