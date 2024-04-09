@@ -17,9 +17,9 @@ var app = builder.Build();
 app.MapDefaultEndpoints();
 
 // Map the /places API section
-var places = app.MapGroup("/places");
+var places = app.MapGroup("/ai/places");
 
-places.MapGet("/match/text", async (string prompt, IAiService ai) =>
+places.MapGet("/text", async (string prompt, IAiService ai) =>
 {
     app.Logger.LogDebug("Endpoint call on / with prompt: {prompt}", prompt);
 
