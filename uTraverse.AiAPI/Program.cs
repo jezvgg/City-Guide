@@ -19,7 +19,7 @@ app.MapDefaultEndpoints();
 // Map the /places API section
 var places = app.MapGroup("/ai/places");
 
-places.MapGet("/text", async (string prompt, IAiService ai) =>
+places.MapPost("/text", async (string prompt, IAiService ai) =>
 {
     app.Logger.LogDebug("Endpoint call on / with prompt: {prompt}", prompt);
 
