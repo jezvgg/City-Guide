@@ -31,4 +31,23 @@ public class AiService(ILogger<AiService> logger, HttpClient httpClient) : IAiSe
 
         return res;
     }
+
+    public async Task<IEnumerable<Guid>> GetPlaceIdsAsync(IFormFile imgPrompt)
+    {
+        // TODO: Add distributed caching to offload the AI and speed up execution
+
+        // Retrieve the IDs for the prompt (TODO: replace with a better endpoint URL)
+        var res = await httpClient.GetFromJsonAsync<IEnumerable<Guid>>($"/?prompt={imgPrompt}");
+
+        // Throw an exception if received null
+        if (res is null)
+        {
+            _logger.LogWarning("AI API returned a null response");
+            throw new ApiResponseNullException("AI API returned a null response");
+        }
+
+        _logger.LogDebug("AI API request was successful");
+
+        return res;
+    }
 }
