@@ -7,16 +7,36 @@ app.config['JSON_AS_ASCII'] = False
 model = CLIP('irkutsk.index')
 
 
-@app.route('/')
-def service():
-    args = request.args
-    if 'image' in args:
-        index = model.get_by_image(args['image'])
-    elif 'prompt' in args:
-        index = model.get_by_prompt(args['prompt'])
+towns = {'nino':'niznii_novgorod.index',
+         'yaros':'yaroslavl.index',
+         'vlad':'vladimir.index',
+         'ekb':'ekaterinburg.index'}
+
+
+@app.route('/get_by_prompt/<city>', methods=['GET','POST'])
+def service_prompt(city):
+    args = request.form
+    model.set_index(towns[city])
+
+    indexes = model.get_by_prompt(str(args['prompt']))
 
     return app.response_class(
-            response=str(index),
+            response=f'{indexes}',
+            status=200,
+            mimetype="text"
+        )
+
+
+@app.route('/get_by_image/<city>', methods=['GET','POST'])
+def service_image(city):
+    args = request.data
+    model.set_index(towns[city])
+
+    image = CLIP.__decode_binary(args)
+    indexes = model.get_by_prompt(image)
+
+    return app.response_class(
+            response=indexes,
             status=200,
             mimetype="text"
         )

@@ -76,7 +76,7 @@ class test_clip(unittest.TestCase):
     def test_getting_by_image(self):
         model = CLIP('Tests/val.index')
 
-        for benhmark in self.image_test:
+        for benhmark in self.images_test:
             model.set_index(benhmark['index'])
             data = pd.read_csv(benhmark['data'])
             test_data = pd.read_csv(benhmark['test_data'])
@@ -85,6 +85,7 @@ class test_clip(unittest.TestCase):
             times = []
             for image, name in zip(test_data['img'], test_data['name']):
                 start = time()
+                image = CLIP.__decode_image(image)
                 indexes = model.get_by_image(image)
 
                 print(data.iloc[indexes[0]]['name'], '|', name, '|', image)

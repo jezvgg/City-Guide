@@ -26,14 +26,22 @@ class CLIP:
         self.set_index(index_path)
 
 
-    def __decode_image(self, bs4):
+    @staticmethod
+    def __decode_image(bs4):
         img = Image.open(BytesIO(base64.b64decode(bs4[2:-1])))
         return img
 
 
-    def __decode_images(self, images: list):
+    @staticmethod
+    def __decode_binary(bin):
+        img = Image.open(BytesIO(bin))
+        return img
+
+
+    @staticmethod
+    def __decode_images(images: list):
         start = time.time()
-        result = [self.__decode_image(bs4url) for bs4url in images]
+        result = [CLIP.__decode_image(bs4url) for bs4url in images]
         print("images decoded for", time.time()-start)
         return result
 
@@ -48,9 +56,8 @@ class CLIP:
         return I[0]
 
 
-    def get_by_image(self, user_image: str):
-        image = self.__decode_image(user_image)
-
+    def get_by_image(self, user_image: Image):
+        
         with torch.no_grad():
             user_image_latent = self.__predictor.get_image_latents([image]).cpu().detach().numpy()
         user_latents = np.concatenate((user_image_latent, user_image_latent), axis=1)
