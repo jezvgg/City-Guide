@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     // Show start animations
     var items = document.querySelectorAll(".startanim");
     items.forEach(elem => {
-        elem.classList.add("end");
+        elem.classList.add("startanim-end");
     });
 
     await sleep(1000);
@@ -60,7 +60,21 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 
 
-function proceedToPage2() {
-    $("#page1").hide();
+async function proceedToPage2() {
+
+    var page1 = $("#page1");
+    var page2 = $("#page2");
+
+    // Show the second page before animating
     $("#page2").show();
+
+    // Move first page to the left
+    page1.addClass("pageanim-end");
+    // Move second page from the right
+    page2.removeClass("pageanim-before");
+
+    await sleep(1000);
+
+    // Hide the first page out of frame
+    $("#page1").hide();
 }

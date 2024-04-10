@@ -12,10 +12,11 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="scripts.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 </head>
 
 <body>
-    <div id="page1">
+    <div class="page" id="page1">
         <div class="app-title-container">
             <h1>Планируй свое путешествие с <span class="gradient-text gradient-underline">искусственным
                     интеллектом</span>.
@@ -45,10 +46,27 @@
         </div>
     </div>
 
-    <div id="page2" style="display: none">
-        <textarea name="prompt" id="prompt" cols="100" rows="10">
+    <div class="pageanim-before page" id="page2" style="display: none">
+        <div class="split-container tres">
+            <div>
+                <label for="prompt">
+                    <h3>Что ищем?</h3>
+                </label>
+                <input class="prompt-box" name="prompt" id="prompt"
+                    placeholder="Я хочу увидеть церковь, памятник Пушкину и музей древнего зодчества..." />
+                <a href="#" class="button"><span class="fa-search" style="font-family: fontAwesome" /></a>
+            </div>
+            <div style="height: 70vh; width: 1px; background-color: #333;">
 
-        </textarea>
+            </div>
+            <div>
+                <label for="img-prompt">
+                    <h3>Или загрузите картинку</h3>
+                    <input type="file" name="img-prompt" id="img-prompt">
+                    <a href="#" class="button"><span class="fa-search" style="font-family: fontAwesome" /></a>
+                </label>
+            </div>
+        </div>
     </div>
 
     <div class="logobar startanim">
