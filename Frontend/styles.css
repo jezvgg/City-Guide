@@ -130,18 +130,22 @@ span.gradient-text {
     -webkit-text-fill-color: transparent;
 }
 
-input {
-    background-color: #444;
-    padding: 1rem 2rem 1rem 2rem;
-    color: white;
-    border-radius: 1rem;
-    border: 1px solid dimgray;
+select {
+    background-color: #333;
+    color: #ccc;
+    font-family: 'Inter', sans-serif;
     font-size: 1rem;
+    padding: 1rem 2rem 1rem 2rem;
+    border-radius: 1rem;
+    border: 1px solid gray;
 }
 
-input::placeholder {
-    color: lightgray;
-    font-family: 'Inter', sans-serif;
+select::selection {
+    border-radius: 1rem 1rem 0 0;
+}
+
+option:hover {
+    background-color: #555;
 }
 
 @media (max-width:428px) {
