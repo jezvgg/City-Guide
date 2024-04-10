@@ -1,0 +1,154 @@
+body {
+    background-color: black;
+    font-family: 'Inter', sans-serif;
+    color: white;
+    padding: 1em;
+    margin-top: 5rem;
+    text-align: center;
+}
+
+html {
+    font-optical-sizing: auto;
+    padding: 0;
+    margin: 0;
+    font-weight: 400;
+    font-smooth: always;
+    font-style: normal;
+    font-variation-settings:
+        "slnt" 0;
+    max-width: 100vw;
+    overflow: hidden;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+
+a.navbar {
+    font-weight: 600;
+    font-size: 4rem;
+}
+
+svg.navbar {
+    width: 6rem;
+}
+
+svg.navbar.end {
+    width: 3.4rem;
+}
+
+a.navbar.end {
+    font-size: 2rem;
+}
+
+svg {
+    vertical-align: middle;
+    margin-top: -2rem;
+    margin-right: 0.7rem;
+}
+
+svg.navbar.end {
+    margin-top: -0.7rem;
+}
+
+div.logobar {
+    position: absolute;
+    z-index: 99;
+    left: 50%;
+    top: 50%;
+    -ms-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-wrap: nowrap;
+}
+
+div.logobar.end {
+    -webkit-transform: translateY(0%);
+    -ms-transform: translateY(0%);
+    transform: translateY(0%);
+    top: 2rem;
+    left: 2rem;
+}
+
+div.logobar#alternative {
+    overflow: hidden;
+}
+
+.gradient-underline {
+    position: relative;
+
+    &::after {
+        content: '';
+        fill: #fff;
+        color: #fff;
+        position: absolute;
+        bottom: -2rem;
+        left: -0.5rem;
+        width: 100%;
+        right: -0.5rem;
+        height: 2rem;
+        background-image: url('/underline.svg');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+}
+
+h3 {
+    margin-top: 3rem;
+    font-weight: 400;
+}
+
+a.logobar#alternative {
+    transition: all 0.3s ease;
+}
+
+.startanim {
+    transition: all 1s ease;
+}
+
+div.blur-cover {
+    position: absolute;
+    left: 0%;
+    top: 0%;
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    backdrop-filter: blur(1rem);
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+div.blur-cover.end {
+    backdrop-filter: blur(0px);
+}
+
+span.gradient-text {
+    background: -webkit-linear-gradient(-45deg, aqua, magenta);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+input {
+    background-color: #444;
+    padding: 1rem 2rem 1rem 2rem;
+    color: white;
+    border-radius: 1rem;
+    border: 1px solid dimgray;
+    font-size: 1rem;
+}
+
+input::placeholder {
+    color: lightgray;
+    font-family: 'Inter', sans-serif;
+}
+
+@media (max-width:428px) {
+    div.logobar.end {
+        left: 50%;
+        transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        -webkit-transform: translateX(-50%);
+    }
+}
