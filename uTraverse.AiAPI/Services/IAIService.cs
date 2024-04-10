@@ -14,4 +14,5 @@ public interface IAiService
     /// <returns>An array of place IDs that match the prompt</returns>
     /// <exception cref="ApiResponseNullException">The AI API returned null response</exception>
     Task<IEnumerable<Guid>> GetPlaceIdsAsync(string prompt);  // The usage of IEnumerable as a return type here is justified by benchmarks, showing negligible performance **benefits** from using IEnumerable
+    Task<IEnumerable<Guid>> GetPlaceIdsAsync(IFormFile imgPrompt);
 }

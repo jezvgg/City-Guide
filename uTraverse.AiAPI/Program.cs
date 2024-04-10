@@ -37,4 +37,20 @@ places.MapPost("/text", async (string prompt, IAiService ai) =>
     }
 });
 
+places.MapPost("/img", async (IFormFile imgPrompt, IAiService ai) =>
+{
+    try
+    {
+        // Retrieve place IDs from the AI microservice for the given prompt
+        var res = await ai.GetPlaceIdsAsync(imgPrompt);
+
+        return Results.Ok(res);
+    }
+    catch (ApiResponseNullException)
+    {
+        // The AI microservice has returned null
+        return Results.NotFound();
+    }
+});
+
 app.Run();
