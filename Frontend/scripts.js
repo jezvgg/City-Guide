@@ -79,9 +79,11 @@ async function proceedToPage(num) {
 
 function sendImage() {
     let photo = document.getElementById("img-prompt").files[0];
+    let city = document.getElementById("city").value;
     let formData = new FormData();
 
     formData.append("image", photo);
+    formData.append("city", city);
 
     $.ajax({
         url: "http://127.0.0.1:5235/ai/places/img",
@@ -99,10 +101,11 @@ function sendImage() {
 
 function sendText() {
     let text = document.getElementById("prompt").value;
-
+    let city = document.getElementById("city").value;
     let formData = new FormData();
 
     formData.append("prompt", text);
+    formData.append("city", city);
 
     $.ajax({
         url: "http://127.0.0.1:5235/ai/places/text",

@@ -30,7 +30,7 @@ html {
     --color-primary: #FA7268;
     --color-complementary: #C62368;
     --color-bg: #001220;
-    --color-bg-dim: #0d2436;
+    --color-bg-dim: #121f2a;
     --color-border: #374550;
 }
 
@@ -45,8 +45,24 @@ div.split-container.tres {
     grid-template-columns: 1fr 6px 1fr;
 }
 
+div.map-container {
+
+    background-color: var(--color-bg-dim);
+    width: 70vw;
+    height: 70vh;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    background: var(--color-bg-dim);
+    border-radius: 1rem;
+    border: 1px solid #374550;
+}
+
 div.app-title-container {
     margin-top: 5rem;
+}
+
+div.app-title-container.lower {
+    margin-top: 0;
 }
 
 a {
@@ -241,6 +257,27 @@ input::placeholder {
 
 input.prompt-box {
     width: 70%;
+}
+
+.places-holder {
+    text-align: start;
+    padding: 1rem;
+}
+
+.place-name {
+    font-size: 1.25rem;
+    margin: 0.2rem 0 0 0;
+}
+
+.place-description {
+    font-size: 0.85rem;
+    margin: 0.2rem 0 0 0;
+}
+
+.place-address {
+    font-size: 0.85rem;
+    margin: 0.2rem 0 0 0;
+    color: #AAA;
 }
 
 @media (max-width:428px) {
