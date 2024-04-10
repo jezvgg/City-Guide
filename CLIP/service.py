@@ -4,7 +4,7 @@ from flask import Flask, request
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
-model = CLIP('photos_v3.csv.xz')
+model = CLIP('irkutsk.index')
 
 
 @app.route('/')
