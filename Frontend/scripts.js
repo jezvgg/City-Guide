@@ -66,15 +66,57 @@ async function proceedToPage2() {
     var page2 = $("#page2");
 
     // Show the second page before animating
-    $("#page2").show();
+    //$("#page2").show();
 
     // Move first page to the left
     page1.addClass("pageanim-end");
     // Move second page from the right
-    page2.removeClass("pageanim-before");
+    //page2.removeClass("pageanim-before");
+    page2.css("tranisition", "all 1s ease");
+    page2.css("transform", "none");
+    page2.css("opacity", "100%");
 
     await sleep(1000);
 
     // Hide the first page out of frame
     $("#page1").hide();
+}
+
+function sendImage() {
+    alert("beg");
+    let photo = document.getElementById("img-prompt").files[0];
+    let formData = new FormData();
+
+    formData.append("image", photo);
+
+    $.ajax({
+        url: "http://127.0.0.1:5235/ai/places/img",
+        data: formData,
+        processData: false,
+        contentType: false,
+        type: "POST",
+        success: function (data, textStatus, jqXHR) {
+            // process
+        }
+    });
+}
+
+function sendText() {
+    alert("beg");
+    let text = document.getElementById("prompt").value;
+
+    let formData = new FormData();
+
+    formData.append("prompt", text);
+
+    $.ajax({
+        url: "http://127.0.0.1:5235/ai/places/text",
+        data: formData,
+        processData: false,
+        contentType: false,
+        type: "POST",
+        success: function (data, textStatus, jqXHR) {
+            // process
+        }
+    });
 }

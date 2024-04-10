@@ -46,24 +46,29 @@
         </div>
     </div>
 
-    <div class="pageanim-before page" id="page2" style="display: none">
+    <div class="pageanim-before page" id="page2" style="">
+        <div class="app-title-container">
+            <h1>Что будем искать?</h1>
+        </div>
         <div class="split-container tres">
             <div>
                 <label for="prompt">
-                    <h3>Что ищем?</h3>
+                    <h3>Текстовый запрос</h3>
                 </label>
                 <input class="prompt-box" name="prompt" id="prompt"
-                    placeholder="Я хочу увидеть церковь, памятник Пушкину и музей древнего зодчества..." />
-                <a href="#" class="button"><span class="fa-search" style="font-family: fontAwesome" /></a>
+                    placeholder="Я хочу увидеть церковь, памятник Пушкину..." />
+                <a href="#" class="button" onclick="sendText()"><span class="fa-search"
+                        style="font-family: fontAwesome" /></a>
             </div>
-            <div style="height: 70vh; width: 1px; background-color: #333;">
+            <div style="height: 30vh; width: 1px; background-color: #333;">
 
             </div>
             <div>
                 <label for="img-prompt">
-                    <h3>Или загрузите картинку</h3>
+                    <h3>По картинке</h3>
                     <input type="file" name="img-prompt" id="img-prompt">
-                    <a href="#" class="button"><span class="fa-search" style="font-family: fontAwesome" /></a>
+                    <a href="#" class="button" onclick="sendImage()"><span class="fa-search"
+                            style="font-family: fontAwesome" /></a>
                 </label>
             </div>
         </div>

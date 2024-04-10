@@ -54,18 +54,18 @@ a {
     text-decoration: none;
 }
 
-div.page {
-    transition: all 1s ease;
-    transform: none;
-    width: 100vw;
-    height: 100vh;
-}
-
 div.page.pageanim-before {
-    transform: translate(100wv);
+    transform: translateX(100wv);
     opacity: 0%;
     transition: all 1s ease;
-    background-color: red;
+}
+
+div.page {
+    transition: all 1s ease;
+    transform: translateX(0);
+    opacity: 100%;
+    width: 100vw;
+    height: 100vh;
 }
 
 div.page.pageanim-end {
