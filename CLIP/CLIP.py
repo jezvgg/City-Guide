@@ -51,15 +51,11 @@ class CLIP:
     def get_by_image(self, user_image: str):
         image = self.__decode_image(user_image)
 
-        start = time.time()
         with torch.no_grad():
             user_image_latent = self.__predictor.get_image_latents([image]).cpu().detach().numpy()
-        print("Vectorized for:", time.time() - start)
-        start = time.time()
         user_latents = np.concatenate((user_image_latent, user_image_latent), axis=1)
         faiss.normalize_L2(user_latents)
         D, I = self.index.search(user_latents, 100)
-        print("Cosins in", time.time() - start, "seconds")
         return I[0]
 
 
