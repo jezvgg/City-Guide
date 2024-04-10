@@ -18,13 +18,22 @@ public class AiService(ILogger<AiService> logger, HttpClient httpClient) : IAiSe
         _logger.LogDebug("Retrieving place IDs from the prompt: {prompt}", prompt);
 
         // Retrieve the IDs for the prompt (TODO: replace with a better endpoint URL)
-        var res = await httpClient.GetFromJsonAsync<IEnumerable<Guid>>($"/?prompt={prompt}");
+        var response = await httpClient.PostAsync("/text/",new StringContent(prompt));
+
+        // Throw an exception if received null
+        if (response is null)
+        {
+            _logger.LogWarning("AI API returned a null response");
+            throw new ApiResponseNullException("AI API returned a null response");
+        }
+
+        var res = await response.Content.ReadFromJsonAsync<IEnumerable<Guid>>();
 
         // Throw an exception if received null
         if (res is null)
         {
-            _logger.LogWarning("AI API returned a null response");
-            throw new ApiResponseNullException("AI API returned a null response");
+            _logger.LogWarning("Deserialize response is null");
+            throw new ApiResponseNullException("Deserialize response is null");
         }
 
         _logger.LogDebug("AI API request was successful");
@@ -36,14 +45,26 @@ public class AiService(ILogger<AiService> logger, HttpClient httpClient) : IAiSe
     {
         // TODO: Add distributed caching to offload the AI and speed up execution
 
+        var stream = imgPrompt.OpenReadStream();
+
         // Retrieve the IDs for the prompt (TODO: replace with a better endpoint URL)
-        var res = await httpClient.GetFromJsonAsync<IEnumerable<Guid>>($"/?prompt={imgPrompt}");
+        var response = await httpClient.PostAsync("/img/", new StreamContent(stream));
+            //GetFromJsonAsync<IEnumerable<Guid>>($"/?prompt={imgPrompt}");
+
+        // Throw an exception if received null
+        if (response is null)
+        {
+            _logger.LogWarning("AI API returned a null response");
+            throw new ApiResponseNullException("AI API returned a null response");
+        }
+
+        var res = await response.Content.ReadFromJsonAsync<IEnumerable<Guid>>();
 
         // Throw an exception if received null
         if (res is null)
         {
-            _logger.LogWarning("AI API returned a null response");
-            throw new ApiResponseNullException("AI API returned a null response");
+            _logger.LogWarning("Deserialize response is null");
+            throw new ApiResponseNullException("Deserialize response is null");
         }
 
         _logger.LogDebug("AI API request was successful");
