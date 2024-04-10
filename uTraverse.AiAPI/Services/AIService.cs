@@ -18,7 +18,7 @@ public class AiService(ILogger<AiService> logger, HttpClient httpClient) : IAiSe
         _logger.LogDebug("Retrieving place IDs from the prompt: {prompt}", prompt);
 
         // Retrieve the IDs for the prompt (TODO: replace with a better endpoint URL)
-        var response = await httpClient.PostAsync("/text/",new StringContent(prompt));
+        var response = await httpClient.PostAsync("/text/", new StringContent(prompt));
 
         // Throw an exception if received null
         if (response is null)
@@ -49,7 +49,7 @@ public class AiService(ILogger<AiService> logger, HttpClient httpClient) : IAiSe
 
         // Retrieve the IDs for the prompt (TODO: replace with a better endpoint URL)
         var response = await httpClient.PostAsync("/img/", new StreamContent(stream));
-            //GetFromJsonAsync<IEnumerable<Guid>>($"/?prompt={imgPrompt}");
+        //GetFromJsonAsync<IEnumerable<Guid>>($"/?prompt={imgPrompt}");
 
         // Throw an exception if received null
         if (response is null)
