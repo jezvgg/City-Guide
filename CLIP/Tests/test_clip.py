@@ -74,7 +74,7 @@ class test_clip(unittest.TestCase):
 
 
     def test_getting_by_image(self):
-        model = CLIP('Tests/val.index')
+        model = CLIP('irkutsk.index')
 
         for benhmark in self.images_test:
             model.set_index(benhmark['index'])
