@@ -12,7 +12,7 @@ namespace uTraverse.PlacesAPI.Services
         /// </summary>
         /// <param name="id">The ID of the place</param>
         /// <returns>Place instance containing the details of the place with given ID</returns>
-        Task<Place> GetPlaceByIdAsync(Guid id);
+        Task<Place> GetPlaceByIdCacheAsync(Guid id);
 
         /// <summary>
         /// Get details for places with given IDs

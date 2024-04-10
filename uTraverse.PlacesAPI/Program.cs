@@ -12,6 +12,9 @@ builder.AddServiceDefaults();
 // Add PostgresSQL Places DB context
 builder.AddNpgsqlDbContext<PlacesDbContext>("utraverse-placesdb");
 
+//Add Redis Places cache
+builder.AddRedisDistributedCache("utraverse-placescache");
+
 // Add a service to interact with the Places DB
 builder.Services.AddScoped<IPlacesService, PlacesService>();
 
