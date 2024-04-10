@@ -4,8 +4,8 @@
   </style>
   <defs>
         <linearGradient id="MyGradient">
-          <stop offset="5%" stop-color="aqua" />
-          <stop offset="95%" stop-color="magenta" />
+          <stop offset="5%" stop-color="#FA7268" />
+          <stop offset="95%" stop-color="#C62368" />
         </linearGradient>
       </defs>
   
