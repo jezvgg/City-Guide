@@ -44,8 +44,7 @@ class CLIP:
             prompt_latent = self.__predictor.get_text_latents([prompt]).cpu().detach().numpy()
         user_latents = np.concatenate((prompt_latent, prompt_latent), axis=1)
         faiss.normalize_L2(user_latents)
-        D, I = self.index.search(user_latents, 100)
-        print(D[0])
+        D, I = self.index.search(user_latents, 1)
         return I[0]
 
 

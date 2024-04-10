@@ -22,13 +22,13 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 __model, __processor = ruclip.load("ruclip-vit-base-patch32-384", device=device)
 __predictor = ruclip.Predictor(__model, __processor, device=device, bs=8, templates=['{}', 'это {}', 'на фото {}'])
 
-data = pd.read_csv('/home/jezvgg/Projects/project/CLIP/Yaroslavl_images_clean.csv')
-images = __decode_images(data['img'])
+data = pd.read_csv('Vladimir_images_clean2.csv')
+images = __decode_images(data['image'])
 with torch.no_grad():
     images_latents = __predictor.get_image_latents(images).cpu().detach().numpy()
     text_latents = __predictor.get_text_latents(data['name']).cpu().detach().numpy()
 
-print(data['name'])
+print(data['name'].unique())
 latents = np.concatenate((images_latents, text_latents), axis=1)
 dimensions = latents[0].size
 
@@ -36,4 +36,4 @@ index = faiss.IndexFlatL2(dimensions)
 faiss.normalize_L2(latents)
 index.add(latents)
 
-faiss.write_index(index, 'yaroslavl.index')
+faiss.write_index(index, 'vladimir.index')

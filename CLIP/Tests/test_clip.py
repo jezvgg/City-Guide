@@ -18,7 +18,15 @@ class test_clip(unittest.TestCase):
                     {'benchmark_name':'Владимир',
                     'index':'vladimir.index',
                     'prompts':'Tests/prompt_Vlad.csv',
-                    'data':'Vladimir_images_clean.csv'}]
+                    'data':'Vladimir_images_clean.csv'},
+                    {'benchmark_name':'Екатеренбург',
+                    'index':'ekaterinburg.index',
+                    'prompts':'Tests/prompts_EKB.csv',
+                    'data':'EKB_images_clear (1).csv'},
+                    {'benchmark_name':'Ярославль',
+                    'index':'yaroslavl.index',
+                    'prompts':'Tests/prompts_yrl.csv',
+                    'data':'Yaroslavl_images_clean.csv'}]
 
 
     def test_getting_by_prompt(self):
