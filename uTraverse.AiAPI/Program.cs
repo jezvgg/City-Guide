@@ -19,7 +19,7 @@ app.MapDefaultEndpoints();
 // Map the /places API section
 var places = app.MapGroup("/ai/places");
 
-places.MapGet("/text", async (string prompt, IAiService ai) =>
+places.MapPost("/text", async (string prompt, IAiService ai) =>
 {
     app.Logger.LogDebug("Endpoint call on / with prompt: {prompt}", prompt);
 
@@ -27,6 +27,22 @@ places.MapGet("/text", async (string prompt, IAiService ai) =>
     {
         // Retrieve place IDs from the AI microservice for the given prompt
         var res = await ai.GetPlaceIdsAsync(prompt);
+
+        return Results.Ok(res);
+    }
+    catch (ApiResponseNullException)
+    {
+        // The AI microservice has returned null
+        return Results.NotFound();
+    }
+});
+
+places.MapPost("/img", async (IFormFile imgPrompt, IAiService ai) =>
+{
+    try
+    {
+        // Retrieve place IDs from the AI microservice for the given prompt
+        var res = await ai.GetPlaceIdsAsync(imgPrompt);
 
         return Results.Ok(res);
     }
