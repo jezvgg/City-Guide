@@ -59,11 +59,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 });
 
 
-
-async function proceedToPage2() {
-
-    var page1 = $("#page1");
-    var page2 = $("#page2");
+async function proceedToPage(num) {
+    var page1 = $(`#page${num - 1}`);
+    var page2 = $(`#page${num}`);
 
     // Show the second page before animating
     //$("#page2").show();
@@ -71,19 +69,15 @@ async function proceedToPage2() {
     // Move first page to the left
     page1.addClass("pageanim-end");
     // Move second page from the right
-    //page2.removeClass("pageanim-before");
-    page2.css("tranisition", "all 1s ease");
-    page2.css("transform", "none");
-    page2.css("opacity", "100%");
+    page2.removeClass("pageanim-before");
 
     await sleep(1000);
 
     // Hide the first page out of frame
-    $("#page1").hide();
+    page1.hide();
 }
 
 function sendImage() {
-    alert("beg");
     let photo = document.getElementById("img-prompt").files[0];
     let formData = new FormData();
 
@@ -99,10 +93,11 @@ function sendImage() {
             // process
         }
     });
+
+    proceedToPage(3);
 }
 
 function sendText() {
-    alert("beg");
     let text = document.getElementById("prompt").value;
 
     let formData = new FormData();
@@ -119,4 +114,6 @@ function sendText() {
             // process
         }
     });
+
+    proceedToPage(3);
 }
