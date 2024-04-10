@@ -5,7 +5,6 @@ from io import BytesIO
 import numpy as np
 import base64
 import time
-import pandas as pd
 import faiss
 
 
@@ -41,16 +40,13 @@ class CLIP:
 
     def get_by_prompt(self, prompt: str):
 
-        start = time.time()
         with torch.no_grad():
             prompt_latent = self.__predictor.get_text_latents([prompt]).cpu().detach().numpy()
-        print("Vectorized for:", time.time() - start)
-        start = time.time()
         user_latents = np.concatenate((prompt_latent, prompt_latent), axis=1)
         faiss.normalize_L2(user_latents)
-        D, I = self.index.search(user_latents, 1)
-        print("Cosinus for", time.time() - start)
-        return I[0][0]
+        D, I = self.index.search(user_latents, 100)
+        print(D[0])
+        return I[0]
 
 
     def get_by_image(self, user_image: str):
@@ -63,9 +59,9 @@ class CLIP:
         start = time.time()
         user_latents = np.concatenate((user_image_latent, user_image_latent), axis=1)
         faiss.normalize_L2(user_latents)
-        D, I = self.index.search(user_latents, 1)
+        D, I = self.index.search(user_latents, 100)
         print("Cosins in", time.time() - start, "seconds")
-        return I[0][0]
+        return I[0]
 
 
     def set_index(self, index_path: str):

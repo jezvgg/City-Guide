@@ -9,7 +9,7 @@ import faiss
 
 
 def __decode_image(bs4):
-    img = Image.open(BytesIO(base64.b64decode(bs4[2:-1])))
+    img = Image.open(BytesIO(base64.b64decode(bs4)))
     return img
 
 
@@ -22,12 +22,13 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 __model, __processor = ruclip.load("ruclip-vit-base-patch32-384", device=device)
 __predictor = ruclip.Predictor(__model, __processor, device=device, bs=8, templates=['{}', 'это {}', 'на фото {}'])
 
-data = pd.read_csv('/home/jezvgg/Projects/project/CLIP/Tests/val_img_data.csv')
+data = pd.read_csv('/home/jezvgg/Projects/project/CLIP/Yaroslavl_images_clean.csv')
 images = __decode_images(data['img'])
 with torch.no_grad():
     images_latents = __predictor.get_image_latents(images).cpu().detach().numpy()
     text_latents = __predictor.get_text_latents(data['name']).cpu().detach().numpy()
 
+print(data['name'])
 latents = np.concatenate((images_latents, text_latents), axis=1)
 dimensions = latents[0].size
 
@@ -35,4 +36,4 @@ index = faiss.IndexFlatL2(dimensions)
 faiss.normalize_L2(latents)
 index.add(latents)
 
-faiss.write_index(index, 'Tests/val.index')
+faiss.write_index(index, 'yaroslavl.index')

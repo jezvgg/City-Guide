@@ -1,27 +1,48 @@
 import unittest
 import pandas as pd
 from CLIP import CLIP
+from time import time
 
 
 class test_clip(unittest.TestCase):
 
 
+    prompt_test = [{'benchmark_name':'Иркутск',
+                    'index':'irkutsk.index',
+                    'prompts':'Tests/prompts.csv',
+                    'data':'photos_v3.csv.xz'},
+                    {'benchmark_name':'Нижний Новгород',
+                    'index':'niznii_novgorod.index',
+                    'prompts':'Tests/prompts_NN.csv',
+                    'data':'NN_images_clean.csv'},
+                    {'benchmark_name':'Владимир',
+                    'index':'vladimir.index',
+                    'prompts':'Tests/prompt_Vlad.csv',
+                    'data':'Vladimir_images_clean.csv'}]
+
+
     def test_getting_by_prompt(self):
         model = CLIP('irkutsk.index')
+        for benhmark in self.prompt_test:
+            model.set_index(benhmark['index'])
+            prompts = pd.read_csv(benhmark['prompts'])
+            data = pd.read_csv(benhmark['data'])
 
-        # 0.011 секунд на каждый промпт
-        # 98%
-        prompts = pd.read_csv('Tests/prompts.csv')
-        data = pd.read_csv('photos_v3.csv.xz')
-        correct = 0
-        for prompt, name in zip(prompts['prompts'], prompts['name']):
-            index = model.get_by_prompt(prompt)
+            correct = 0
+            times = []
+            for prompt, name in zip(prompts['prompts'], prompts['name']):
+                start = time()
+                indexes = model.get_by_prompt(prompt)
 
-            if data.iloc[index]['name'] == name: 
-                correct+=1
+                print(data.iloc[indexes[0]]['name'], '|', name, '|', prompt)
+                if data.iloc[indexes[0]]['name'] == name: 
+                    correct+=1
+                times.append(time()-start)
 
-        accuracy = (correct / len(prompts)) * 100
-        print("\n\nResult:", accuracy, '%')
+            print('\n',benhmark['benchmark_name'])
+            print('Mean time:', sum(times) / len(times))
+            accuracy = (correct / len(prompts)) * 100
+            print("Result:", accuracy, '%')
 
 
     def test_getting_by_image(self):
