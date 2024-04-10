@@ -1,77 +1,98 @@
-import ruclip
-import torch
-from PIL import Image
-from io import BytesIO
-import numpy as np
-import base64
-import time
-import faiss
+import unittest
+import pandas as pd
+from CLIP import CLIP
+from time import time
 
 
-class CLIP:
-    __model = None
-    __processor = None
-    __predictor = None
-    text_latents = []
-    images_latents = []
-    cousine_similitaries = []
-    index = None
+class test_clip(unittest.TestCase):
 
 
-    def __init__(self, index_path, templates = ['{}', 'это {}', 'на фото {}'], model_name = "ruclip-vit-base-patch32-384"):
-        self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-        self.__model, self.__processor = ruclip.load(model_name, device=self.device)
-        self.__predictor = ruclip.Predictor(self.__model, self.__processor, device=self.device, bs=8, templates=templates)
+    prompt_test = [{'benchmark_name':'Иркутск',
+                    'index':'irkutsk.index',
+                    'prompts':'Tests/prompts.csv',
+                    'data':'photos_v3.csv.xz'},
+                    {'benchmark_name':'Нижний Новгород',
+                    'index':'niznii_novgorod.index',
+                    'prompts':'Tests/prompts_NN.csv',
+                    'data':'NN_images_clean.csv'},
+                    {'benchmark_name':'Владимир',
+                    'index':'vladimir.index',
+                    'prompts':'Tests/prompt_Vlad.csv',
+                    'data':'Vladimir_images_clean.csv'},
+                    {'benchmark_name':'Екатеренбург',
+                    'index':'ekaterinburg.index',
+                    'prompts':'Tests/prompts_EKB.csv',
+                    'data':'EKB_images_clear (1).csv'},
+                    {'benchmark_name':'Ярославль',
+                    'index':'yaroslavl.index',
+                    'prompts':'Tests/prompts_yrl.csv',
+                    'data':'Yaroslavl_images_clean.csv'}]
 
-        self.set_index(index_path)
+    images_test = [{'benchmark_name':'Иркутск',
+                    'index':'irkutsk.index',
+                    'data':'photos_v3.csv.xz',
+                    'test_data': 'irk_validate.csv'},
+                    {'benchmark_name':'Нижний Новгород',
+                    'index':'niznii_novgorod.index',
+                    'data':'NN_images_clean_test.csv',
+                    'test_data': 'NN_validate.csv'},
+                    {'benchmark_name':'Владимир',
+                    'index':'vladimir.index',
+                    'data':'Vladimir_images_clean.csv',
+                    'test_data': 'Vladimir_validate.csv'},
+                    {'benchmark_name':'Екатеренбург',
+                    'index':'ekaterinburg.index',
+                    'data':'EKB_images_clean_test.csv',
+                    'test_data': 'EKB_validate.csv'},
+                    {'benchmark_name':'Ярославль',
+                    'index':'yaroslavl.index',
+                    'data':'Yaroslavl_images_clean_test.csv',
+                    'test_data': 'Yaroslavl_validate.csv'}]
+
+    def test_getting_by_prompt(self):
+        model = CLIP('irkutsk.index')
+        for benhmark in self.prompt_test:
+            model.set_index(benhmark['index'])
+            prompts = pd.read_csv(benhmark['prompts'])
+            data = pd.read_csv(benhmark['data'])
+
+            correct = 0
+            times = []
+            for prompt, name in zip(prompts['prompts'], prompts['name']):
+                start = time()
+                indexes = model.get_by_prompt(prompt)
+
+                print(data.iloc[indexes[0]]['name'], '|', name, '|', prompt)
+                if data.iloc[indexes[0]]['name'] == name:
+                    correct+=1
+                times.append(time()-start)
+
+            print('\n',benhmark['benchmark_name'])
+            print('Mean time:', sum(times) / len(times))
+            accuracy = (correct / len(prompts)) * 100
+            print("Result:", accuracy, '%')
 
 
-    def __decode_image(self, bs4):
-        img = Image.open(BytesIO(base64.b64decode(bs4[2:-1])))
-        return img
+    def test_getting_by_image(self):
+        model = CLIP('Tests/val.index')
 
+        for benhmark in self.image_test:
+            model.set_index(benhmark['index'])
+            data = pd.read_csv(benhmark['data'])
+            test_data = pd.read_csv(benhmark['test_data'])
 
-    def __decode_images(self, images: list):
-        start = time.time()
-        result = [self.__decode_image(bs4url) for bs4url in images]
-        print("images decoded for", time.time()-start)
-        return result
+            correct = 0
+            times = []
+            for image, name in zip(test_data['img'], test_data['name']):
+                start = time()
+                indexes = model.get_by_image(image)
 
+                print(data.iloc[indexes[0]]['name'], '|', name, '|', image)
+                if data.iloc[indexes[0]]['name'] == name:
+                    correct+=1
+                times.append(time()-start)
 
-    def get_by_prompt(self, prompt: str):
-
-        with torch.no_grad():
-            prompt_latent = self.__predictor.get_text_latents([prompt]).cpu().detach().numpy()
-        user_latents = np.concatenate((prompt_latent, prompt_latent), axis=1)
-        faiss.normalize_L2(user_latents)
-        D, I = self.index.search(user_latents, 1)
-        return I[0]
-
-
-    def get_by_image(self, user_image: str):
-        image = self.__decode_image(user_image)
-
-        start = time.time()
-        with torch.no_grad():
-            user_image_latent = self.__predictor.get_image_latents([image]).cpu().detach().numpy()
-        print("Vectorized for:", time.time() - start)
-        start = time.time()
-        user_latents = np.concatenate((user_image_latent, user_image_latent), axis=1)
-        faiss.normalize_L2(user_latents)
-        D, I = self.index.search(user_latents, 100)
-        print("Cosins in", time.time() - start, "seconds")
-        return I[0]
-
-
-    def set_index(self, index_path: str):
-        self.index = faiss.read_index(index_path)
-
-
-    @property
-    def predictor(self):
-        return self.__predictor
-
-
-    @predictor.setter
-    def predictor(self, templates: list):
-        self.__predictor = ruclip.Predictor(self.__model, self.__processor, device=self.device, bs=8, templates=templates)
+            print('\n',benhmark['benchmark_name'])
+            print('Mean time:', sum(times) / len(times))
+            accuracy = (correct / len(test_data)) * 100
+            print("Result:", accuracy, '%')
