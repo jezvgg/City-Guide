@@ -1,5 +1,9 @@
 const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+var container;
+
 document.addEventListener("DOMContentLoaded", async function () {
+    container = document.getElementById('places-holder');
     var orlogobar = $("div.logobar:not(#alternative)");
     if (Math.random() < 0.05) {
         var logobar = $(".logobar");
@@ -92,7 +96,9 @@ function sendImage() {
         contentType: false,
         type: "POST",
         success: function (data, textStatus, jqXHR) {
-            // process
+            data.forEach(place => {
+                drawPlace(place.name, place.description, place.address);
+            });
         }
     });
 
@@ -114,9 +120,25 @@ function sendText() {
         contentType: false,
         type: "POST",
         success: function (data, textStatus, jqXHR) {
-            // process
+            data.forEach(place => {
+                drawPlace(place.name, place.description, place.address);
+            });
         }
     });
 
+
     proceedToPage(3);
+}
+
+function drawPlace(name, description, address) {
+    const itemDiv = document.createElement('div');
+    itemDiv.classList.add('place');
+
+    itemDiv.innerHTML = `
+        <p class="place-name">${name}</p>
+        <p class="place-description">${description}</p>
+        <p class="place-address">${address}</p>
+    `;
+
+    container.appendChild(itemDiv);
 }

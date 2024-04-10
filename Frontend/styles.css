@@ -264,6 +264,10 @@ input.prompt-box {
     padding: 1rem;
 }
 
+.place {
+    margin-top: 1rem;
+}
+
 .place-name {
     font-size: 1.25rem;
     margin: 0.2rem 0 0 0;
