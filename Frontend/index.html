@@ -15,19 +15,40 @@
 </head>
 
 <body>
-    <div class="app-title-container">
-        <h1>Планируй свое путешествие с <span class="gradient-text gradient-underline">искусственным интеллектом</span>.
-        </h1>
-        <h3><b>uTraverse</b> использует искусственный интеллект чтобы найти те места, которые вы хотели бы посетить, и
-            построить оптимальный маршрут между ними.</h3>
+    <div id="page1">
+        <div class="app-title-container">
+            <h1>Планируй свое путешествие с <span class="gradient-text gradient-underline">искусственным
+                    интеллектом</span>.
+            </h1>
+        </div>
+
+        <div class="split-container">
+            <div>
+                <h3><b>uTraverse</b> использует продвинутый искусственный интеллект для моментального поиска мест,
+                    соответствующих запросу, и построения оптимального пути, по которому можно их посетить.</h3>
+                <h3>Для того, чтобы построить маршрут, выберите город и введите текстовый запрос, описывающий ваши
+                    предпочтения, либо загрузите изображение места и <b>uTraverse</b> покажет места, похожие на это.
+                </h3>
+            </div>
+            <div class="app-citypicker-container">
+                <label for="city">
+                    <h3>В каком городе будем путешествовать?</h3>
+                </label>
+                <select name="city" id="city">
+                    <option value="nino">Нижний Новгород</option>
+                    <option value="yaros">Ярославль</option>
+                    <option value="vlad">Владимир</option>
+                    <option value="ekb">Екатеринбург</option>
+                </select>
+                <a href="#" class="button" onclick="proceedToPage2()">Поехали!</a>
+            </div>
+        </div>
     </div>
-    <div class="app-citypicker-container">
-        <select name="city" id="city">
-            <option value="nino">Нижний Новгород</option>
-            <option value="yaros">Ярославль</option>
-            <option value="vlad">Владимир</option>
-            <option value="ekb">Екатеринбург</option>
-        </select>
+
+    <div id="page2" style="display: none">
+        <textarea name="prompt" id="prompt" cols="100" rows="10">
+
+        </textarea>
     </div>
 
     <div class="logobar startanim">

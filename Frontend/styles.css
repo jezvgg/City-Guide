@@ -12,7 +12,8 @@ body {
 }
 
 ::selection {
-    background: linear-gradient();
+    background: -webkit-linear-gradient(-45deg, var(--color-primary), var(--color-complementary));
+    color: var(--color-bg)
 }
 
 html {
@@ -28,7 +29,20 @@ html {
     overflow: hidden;
     --color-primary: #FA7268;
     --color-complementary: #C62368;
-    --color-background: #001220;
+    --color-bg: #001220;
+    --color-bg-dim: #0d2436;
+    --color-border: #374550;
+}
+
+div.split-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 35%;
+    align-items: center;
+}
+
+div.app-title-container {
+    margin-top: 5rem;
 }
 
 a {
@@ -137,23 +151,36 @@ div.blur-cover.end {
 }
 
 span.gradient-text {
-    background: -webkit-linear-gradient(-45deg, #FA7268, #C62368);
+    background: -webkit-linear-gradient(-45deg, var(--color-primary), var(--color-complementary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 select {
-    background-color: #333;
+    background-color: var(--color-bg-dim);
     color: #ccc;
     font-family: 'Inter', sans-serif;
     font-size: 1rem;
     padding: 1rem 2rem 1rem 2rem;
     border-radius: 1rem;
-    border: 1px solid gray;
+    border: 1px solid var(--color-border);
 }
 
 select::selection {
     border-radius: 1rem 1rem 0 0;
+}
+
+.block {
+    display: block;
+}
+
+.button {
+    padding: 1rem 2rem 1rem 2rem;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--color-bg-dim);
+    font-size: 1rem;
+    border-radius: 1rem;
+    border: 1px solid var(--color-border);
 }
 
 option:hover {

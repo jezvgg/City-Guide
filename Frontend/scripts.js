@@ -57,3 +57,10 @@ document.addEventListener("DOMContentLoaded", async function () {
     // Hide the fullscreen blur cover
     $(".blur-cover").hide();
 });
+
+
+
+function proceedToPage2() {
+    $("#page1").hide();
+    $("#page2").show();
+}
