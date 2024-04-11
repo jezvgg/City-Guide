@@ -1,6 +1,9 @@
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 var container;
+var coords;
+var names;
+var center;
 
 document.addEventListener("DOMContentLoaded", async function () {
     container = document.getElementById('places-holder');
@@ -113,11 +116,34 @@ function fetchDetails(ids) {
         traditional: true,
         type: "GET",
         success: function (data, status, jqXHR) {
-            console.log("in");
             console.log(data);
+
+            coords = [];
+            names = [];
+
+            var maxLat = -999;
+            var minLat = 999;
+            var maxLon = -999;
+            var minLon = 999;
+
             data.forEach(place => {
                 drawPlace(place.name, place.description, place.address);
+
+                console.log(place);
+
+                if (place.latitude > maxLat) maxLat = place.latitude;
+                if (place.latitude < minLat) minLat = place.latitude;
+
+                if (place.longtitude > maxLon) maxLon = place.longtitude;
+                if (place.longtitude < minLon) minLon = place.longtitude;
+
+                coords.push([place.longtitude, place.latitude]);
+                names.push(place.name);
             });
+
+            center = [(maxLon + minLon) / 2, (maxLat + minLat) / 2];
+
+            ymaps.ready(drawMap);
         }
     });
 }
@@ -137,8 +163,6 @@ function sendText() {
         contentType: false,
         type: "POST",
         success: function (data, textStatus, jqXHR) {
-            console.log("out");
-            console.log(data);
             fetchDetails(data);
         }
     });
@@ -158,4 +182,25 @@ function drawPlace(name, description, address) {
     `;
 
     container.appendChild(itemDiv);
+}
+
+function drawMap() {
+    var myMap = new ymaps.Map("map", {
+        center: center,
+        zoom: 10
+    });
+
+    ymaps.route(
+        coords
+    ).then(function (route) {
+        myMap.geoObjects.add(route);
+
+        var points = route.getWayPoints();
+
+        for (var i = 0; i < names.length; i++) {
+            points.get(i).properties.set('iconContent', names[i]);
+        }
+
+        points.options.set('preset', 'twirl#redStretchyIcon');
+    });
 }
