@@ -18,10 +18,13 @@ builder.Services.AddCors(policy =>
     policy.AddDefaultPolicy(p => p.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 });
 
+// Add Redis cache for indexes
+builder.AddRedisDistributedCache("utraverse-indexcache");
+
 builder.Services.AddAntiforgery();
 
 //builder.Services.AddHttpClient<IAiService, AiService>(client => client.BaseAddress = new Uri("http://localhost:5076"));  // For test use only
-builder.Services.AddHttpClient<IAiService, AiService>(client => client.BaseAddress = new Uri("http://172.17.54.27:5000"));
+builder.Services.AddHttpClient<IAiService, AiService>(client => client.BaseAddress = new Uri("http://utraverse-placematcher:5000"));
 
 builder.Services.AddScoped<IPlaceResolverService, PlaceResolverService>();
 
