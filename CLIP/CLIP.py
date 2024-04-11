@@ -94,7 +94,7 @@ class CLIP:
             list: Список расшифрованных изображений.
         """
         start = time.time()
-        result = [CLIP.__decode_image(bs4url) for bs4url in images]
+        result = [CLIP.decode_image(bs4url) for bs4url in images]
         print("images decoded for", time.time() - start)
         return result
 
