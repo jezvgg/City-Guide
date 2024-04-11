@@ -1,0 +1,30 @@
+### YamlMime:ManagedReference
+items:
+- uid: uTraverse.AiAPI.Exceptions
+  commentId: N:uTraverse.AiAPI.Exceptions
+  id: uTraverse.AiAPI.Exceptions
+  children:
+  - uTraverse.AiAPI.Exceptions.ApiResponseNullException
+  - uTraverse.AiAPI.Exceptions.IndexNotFoundException
+  langs:
+  - csharp
+  - vb
+  name: uTraverse.AiAPI.Exceptions
+  nameWithType: uTraverse.AiAPI.Exceptions
+  fullName: uTraverse.AiAPI.Exceptions
+  type: Namespace
+  assemblies:
+  - uTraverse.AiAPI
+references:
+- uid: uTraverse.AiAPI.Exceptions.ApiResponseNullException
+  commentId: T:uTraverse.AiAPI.Exceptions.ApiResponseNullException
+  href: uTraverse.AiAPI.Exceptions.ApiResponseNullException.html
+  name: ApiResponseNullException
+  nameWithType: ApiResponseNullException
+  fullName: uTraverse.AiAPI.Exceptions.ApiResponseNullException
+- uid: uTraverse.AiAPI.Exceptions.IndexNotFoundException
+  commentId: T:uTraverse.AiAPI.Exceptions.IndexNotFoundException
+  href: uTraverse.AiAPI.Exceptions.IndexNotFoundException.html
+  name: IndexNotFoundException
+  nameWithType: IndexNotFoundException
+  fullName: uTraverse.AiAPI.Exceptions.IndexNotFoundException

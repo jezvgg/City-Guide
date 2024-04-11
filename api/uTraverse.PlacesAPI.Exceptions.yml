@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: uTraverse.PlacesAPI.Exceptions
+  commentId: N:uTraverse.PlacesAPI.Exceptions
+  id: uTraverse.PlacesAPI.Exceptions
+  children:
+  - uTraverse.PlacesAPI.Exceptions.PlaceNotFoundException
+  langs:
+  - csharp
+  - vb
+  name: uTraverse.PlacesAPI.Exceptions
+  nameWithType: uTraverse.PlacesAPI.Exceptions
+  fullName: uTraverse.PlacesAPI.Exceptions
+  type: Namespace
+  assemblies:
+  - uTraverse.PlacesAPI
+references:
+- uid: uTraverse.PlacesAPI.Exceptions.PlaceNotFoundException
+  commentId: T:uTraverse.PlacesAPI.Exceptions.PlaceNotFoundException
+  href: uTraverse.PlacesAPI.Exceptions.PlaceNotFoundException.html
+  name: PlaceNotFoundException
+  nameWithType: PlaceNotFoundException
+  fullName: uTraverse.PlacesAPI.Exceptions.PlaceNotFoundException

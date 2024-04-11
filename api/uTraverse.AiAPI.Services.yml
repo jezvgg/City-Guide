@@ -1,0 +1,76 @@
+### YamlMime:ManagedReference
+items:
+- uid: uTraverse.AiAPI.Services
+  commentId: N:uTraverse.AiAPI.Services
+  id: uTraverse.AiAPI.Services
+  children:
+  - uTraverse.AiAPI.Services.AiService
+  - uTraverse.AiAPI.Services.IAiService
+  - uTraverse.AiAPI.Services.IPlaceResolverService
+  - uTraverse.AiAPI.Services.PlaceResolverService
+  langs:
+  - csharp
+  - vb
+  name: uTraverse.AiAPI.Services
+  nameWithType: uTraverse.AiAPI.Services
+  fullName: uTraverse.AiAPI.Services
+  type: Namespace
+  assemblies:
+  - uTraverse.AiAPI
+references:
+- uid: uTraverse.AiAPI.Services.AiService
+  commentId: T:uTraverse.AiAPI.Services.AiService
+  href: uTraverse.AiAPI.Services.AiService.html
+  name: AiService
+  nameWithType: AiService
+  fullName: uTraverse.AiAPI.Services.AiService
+- uid: uTraverse.AiAPI.Services.IAiService
+  commentId: T:uTraverse.AiAPI.Services.IAiService
+  parent: uTraverse.AiAPI.Services
+  href: uTraverse.AiAPI.Services.IAiService.html
+  name: IAiService
+  nameWithType: IAiService
+  fullName: uTraverse.AiAPI.Services.IAiService
+- uid: uTraverse.AiAPI.Services.IPlaceResolverService
+  commentId: T:uTraverse.AiAPI.Services.IPlaceResolverService
+  parent: uTraverse.AiAPI.Services
+  href: uTraverse.AiAPI.Services.IPlaceResolverService.html
+  name: IPlaceResolverService
+  nameWithType: IPlaceResolverService
+  fullName: uTraverse.AiAPI.Services.IPlaceResolverService
+- uid: uTraverse.AiAPI.Services.PlaceResolverService
+  commentId: T:uTraverse.AiAPI.Services.PlaceResolverService
+  href: uTraverse.AiAPI.Services.PlaceResolverService.html
+  name: PlaceResolverService
+  nameWithType: PlaceResolverService
+  fullName: uTraverse.AiAPI.Services.PlaceResolverService
+- uid: uTraverse.AiAPI.Services
+  commentId: N:uTraverse.AiAPI.Services
+  href: uTraverse.html
+  name: uTraverse.AiAPI.Services
+  nameWithType: uTraverse.AiAPI.Services
+  fullName: uTraverse.AiAPI.Services
+  spec.csharp:
+  - uid: uTraverse
+    name: uTraverse
+    href: uTraverse.html
+  - name: .
+  - uid: uTraverse.AiAPI
+    name: AiAPI
+    href: uTraverse.AiAPI.html
+  - name: .
+  - uid: uTraverse.AiAPI.Services
+    name: Services
+    href: uTraverse.AiAPI.Services.html
+  spec.vb:
+  - uid: uTraverse
+    name: uTraverse
+    href: uTraverse.html
+  - name: .
+  - uid: uTraverse.AiAPI
+    name: AiAPI
+    href: uTraverse.AiAPI.html
+  - name: .
+  - uid: uTraverse.AiAPI.Services
+    name: Services
+    href: uTraverse.AiAPI.Services.html

@@ -1,0 +1,122 @@
+{
+  "resources": {
+    "utraverse-placesdb": {
+      "type": "container.v0",
+      "connectionString": "Host={utraverse-placesdb.bindings.tcp.host};Port={utraverse-placesdb.bindings.tcp.port};Username=postgres;Password={utraverse-placesdb.inputs.password}",
+      "image": "postgres:16.2",
+      "env": {
+        "POSTGRES_HOST_AUTH_METHOD": "scram-sha-256",
+        "POSTGRES_INITDB_ARGS": "--auth-host=scram-sha-256 --auth-local=scram-sha-256",
+        "POSTGRES_PASSWORD": "{utraverse-placesdb.inputs.password}"
+      },
+      "bindings": {
+        "tcp": {
+          "scheme": "tcp",
+          "protocol": "tcp",
+          "transport": "tcp",
+          "containerPort": 5432
+        }
+      },
+      "inputs": {
+        "password": {
+          "type": "string",
+          "secret": true,
+          "default": {
+            "generate": {
+              "minLength": 10
+            }
+          }
+        }
+      }
+    },
+    "utraverse-indexdb": {
+      "type": "container.v0",
+      "connectionString": "Host={utraverse-indexdb.bindings.tcp.host};Port={utraverse-indexdb.bindings.tcp.port};Username=postgres;Password={utraverse-indexdb.inputs.password}",
+      "image": "postgres:16.2",
+      "env": {
+        "POSTGRES_HOST_AUTH_METHOD": "scram-sha-256",
+        "POSTGRES_INITDB_ARGS": "--auth-host=scram-sha-256 --auth-local=scram-sha-256",
+        "POSTGRES_PASSWORD": "{utraverse-indexdb.inputs.password}"
+      },
+      "bindings": {
+        "tcp": {
+          "scheme": "tcp",
+          "protocol": "tcp",
+          "transport": "tcp",
+          "containerPort": 5432
+        }
+      },
+      "inputs": {
+        "password": {
+          "type": "string",
+          "secret": true,
+          "default": {
+            "generate": {
+              "minLength": 10
+            }
+          }
+        }
+      }
+    },
+    "utraverse-placescache": {
+      "type": "container.v0",
+      "connectionString": "{utraverse-placescache.bindings.tcp.host}:{utraverse-placescache.bindings.tcp.port}",
+      "image": "redis:7.2.4",
+      "bindings": {
+        "tcp": {
+          "scheme": "tcp",
+          "protocol": "tcp",
+          "transport": "tcp",
+          "containerPort": 6379
+        }
+      }
+    },
+    "utraverse-placematcher": {
+      "type": "container.v0",
+      "image": "utraverse/placematcher:latest"
+    },
+    "utraverse-placesapi": {
+      "type": "project.v0",
+      "path": "../uTraverse.PlacesAPI/uTraverse.PlacesAPI.csproj",
+      "env": {
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES": "true",
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES": "true",
+        "ConnectionStrings__utraverse-placesdb": "{utraverse-placesdb.connectionString}",
+        "ConnectionStrings__utraverse-placescache": "{utraverse-placescache.connectionString}"
+      },
+      "bindings": {
+        "http": {
+          "scheme": "http",
+          "protocol": "tcp",
+          "transport": "http"
+        },
+        "https": {
+          "scheme": "https",
+          "protocol": "tcp",
+          "transport": "http"
+        }
+      }
+    },
+    "utraverse-aiapi": {
+      "type": "project.v0",
+      "path": "../uTraverse.AiAPI/uTraverse.AiAPI.csproj",
+      "env": {
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES": "true",
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES": "true",
+        "ConnectionStrings__utraverse-indexdb": "{utraverse-indexdb.connectionString}"
+      },
+      "bindings": {
+        "http": {
+          "scheme": "http",
+          "protocol": "tcp",
+          "transport": "http"
+        },
+        "https": {
+          "scheme": "https",
+          "protocol": "tcp",
+          "transport": "http"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,418 @@
+### YamlMime:ManagedReference
+items:
+- uid: uTraverse.AiAPI.Services.IPlaceResolverService
+  commentId: T:uTraverse.AiAPI.Services.IPlaceResolverService
+  id: IPlaceResolverService
+  parent: uTraverse.AiAPI.Services
+  children:
+  - uTraverse.AiAPI.Services.IPlaceResolverService.GetXidForIndexAsync(System.Int64)
+  - uTraverse.AiAPI.Services.IPlaceResolverService.GetXidsForIndexesAsync(System.Collections.Generic.IEnumerable{System.Int64})
+  langs:
+  - csharp
+  - vb
+  name: IPlaceResolverService
+  nameWithType: IPlaceResolverService
+  fullName: uTraverse.AiAPI.Services.IPlaceResolverService
+  type: Interface
+  source:
+    remote:
+      path: uTraverse.AiAPI/Services/IPlaceResolverService.cs
+      branch: backend/city-selection
+      repo: https://github.com/jezvgg/project.git
+    id: IPlaceResolverService
+    path: uTraverse.AiAPI/Services/IPlaceResolverService.cs
+    startLine: 6
+  assemblies:
+  - uTraverse.AiAPI
+  namespace: uTraverse.AiAPI.Services
+  summary: Manages resolution of XIDs by indexes
+  example: []
+  syntax:
+    content: public interface IPlaceResolverService
+    content.vb: Public Interface IPlaceResolverService
+- uid: uTraverse.AiAPI.Services.IPlaceResolverService.GetXidForIndexAsync(System.Int64)
+  commentId: M:uTraverse.AiAPI.Services.IPlaceResolverService.GetXidForIndexAsync(System.Int64)
+  id: GetXidForIndexAsync(System.Int64)
+  parent: uTraverse.AiAPI.Services.IPlaceResolverService
+  langs:
+  - csharp
+  - vb
+  name: GetXidForIndexAsync(long)
+  nameWithType: IPlaceResolverService.GetXidForIndexAsync(long)
+  fullName: uTraverse.AiAPI.Services.IPlaceResolverService.GetXidForIndexAsync(long)
+  type: Method
+  source:
+    remote:
+      path: uTraverse.AiAPI/Services/IPlaceResolverService.cs
+      branch: backend/city-selection
+      repo: https://github.com/jezvgg/project.git
+    id: GetXidForIndexAsync
+    path: uTraverse.AiAPI/Services/IPlaceResolverService.cs
+    startLine: 13
+  assemblies:
+  - uTraverse.AiAPI
+  namespace: uTraverse.AiAPI.Services
+  summary: Resolves XID from index
+  example: []
+  syntax:
+    content: Task<string> GetXidForIndexAsync(long index)
+    parameters:
+    - id: index
+      type: System.Int64
+      description: Index to look for
+    return:
+      type: System.Threading.Tasks.Task{System.String}
+      description: XID of the place
+    content.vb: Function GetXidForIndexAsync(index As Long) As Task(Of String)
+  overload: uTraverse.AiAPI.Services.IPlaceResolverService.GetXidForIndexAsync*
+  nameWithType.vb: IPlaceResolverService.GetXidForIndexAsync(Long)
+  fullName.vb: uTraverse.AiAPI.Services.IPlaceResolverService.GetXidForIndexAsync(Long)
+  name.vb: GetXidForIndexAsync(Long)
+- uid: uTraverse.AiAPI.Services.IPlaceResolverService.GetXidsForIndexesAsync(System.Collections.Generic.IEnumerable{System.Int64})
+  commentId: M:uTraverse.AiAPI.Services.IPlaceResolverService.GetXidsForIndexesAsync(System.Collections.Generic.IEnumerable{System.Int64})
+  id: GetXidsForIndexesAsync(System.Collections.Generic.IEnumerable{System.Int64})
+  parent: uTraverse.AiAPI.Services.IPlaceResolverService
+  langs:
+  - csharp
+  - vb
+  name: GetXidsForIndexesAsync(IEnumerable<long>)
+  nameWithType: IPlaceResolverService.GetXidsForIndexesAsync(IEnumerable<long>)
+  fullName: uTraverse.AiAPI.Services.IPlaceResolverService.GetXidsForIndexesAsync(System.Collections.Generic.IEnumerable<long>)
+  type: Method
+  source:
+    remote:
+      path: uTraverse.AiAPI/Services/IPlaceResolverService.cs
+      branch: backend/city-selection
+      repo: https://github.com/jezvgg/project.git
+    id: GetXidsForIndexesAsync
+    path: uTraverse.AiAPI/Services/IPlaceResolverService.cs
+    startLine: 20
+  assemblies:
+  - uTraverse.AiAPI
+  namespace: uTraverse.AiAPI.Services
+  summary: Resolves multiple XIDs from indexes
+  example: []
+  syntax:
+    content: Task<IEnumerable<string>> GetXidsForIndexesAsync(IEnumerable<long> indexes)
+    parameters:
+    - id: indexes
+      type: System.Collections.Generic.IEnumerable{System.Int64}
+      description: Collection of indexes to look for
+    return:
+      type: System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{System.String}}
+      description: Collection of XIDs
+    content.vb: Function GetXidsForIndexesAsync(indexes As IEnumerable(Of Long)) As Task(Of IEnumerable(Of String))
+  overload: uTraverse.AiAPI.Services.IPlaceResolverService.GetXidsForIndexesAsync*
+  nameWithType.vb: IPlaceResolverService.GetXidsForIndexesAsync(IEnumerable(Of Long))
+  fullName.vb: uTraverse.AiAPI.Services.IPlaceResolverService.GetXidsForIndexesAsync(System.Collections.Generic.IEnumerable(Of Long))
+  name.vb: GetXidsForIndexesAsync(IEnumerable(Of Long))
+references:
+- uid: uTraverse.AiAPI.Services
+  commentId: N:uTraverse.AiAPI.Services
+  href: uTraverse.html
+  name: uTraverse.AiAPI.Services
+  nameWithType: uTraverse.AiAPI.Services
+  fullName: uTraverse.AiAPI.Services
+  spec.csharp:
+  - uid: uTraverse
+    name: uTraverse
+    href: uTraverse.html
+  - name: .
+  - uid: uTraverse.AiAPI
+    name: AiAPI
+    href: uTraverse.AiAPI.html
+  - name: .
+  - uid: uTraverse.AiAPI.Services
+    name: Services
+    href: uTraverse.AiAPI.Services.html
+  spec.vb:
+  - uid: uTraverse
+    name: uTraverse
+    href: uTraverse.html
+  - name: .
+  - uid: uTraverse.AiAPI
+    name: AiAPI
+    href: uTraverse.AiAPI.html
+  - name: .
+  - uid: uTraverse.AiAPI.Services
+    name: Services
+    href: uTraverse.AiAPI.Services.html
+- uid: uTraverse.AiAPI.Services.IPlaceResolverService.GetXidForIndexAsync*
+  commentId: Overload:uTraverse.AiAPI.Services.IPlaceResolverService.GetXidForIndexAsync
+  href: uTraverse.AiAPI.Services.IPlaceResolverService.html#uTraverse_AiAPI_Services_IPlaceResolverService_GetXidForIndexAsync_System_Int64_
+  name: GetXidForIndexAsync
+  nameWithType: IPlaceResolverService.GetXidForIndexAsync
+  fullName: uTraverse.AiAPI.Services.IPlaceResolverService.GetXidForIndexAsync
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int64
+  name: long
+  nameWithType: long
+  fullName: long
+  nameWithType.vb: Long
+  fullName.vb: Long
+  name.vb: Long
+- uid: System.Threading.Tasks.Task{System.String}
+  commentId: T:System.Threading.Tasks.Task{System.String}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<string>
+  nameWithType: Task<string>
+  fullName: System.Threading.Tasks.Task<string>
+  nameWithType.vb: Task(Of String)
+  fullName.vb: System.Threading.Tasks.Task(Of String)
+  name.vb: Task(Of String)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+- uid: uTraverse.AiAPI.Services.IPlaceResolverService.GetXidsForIndexesAsync*
+  commentId: Overload:uTraverse.AiAPI.Services.IPlaceResolverService.GetXidsForIndexesAsync
+  href: uTraverse.AiAPI.Services.IPlaceResolverService.html#uTraverse_AiAPI_Services_IPlaceResolverService_GetXidsForIndexesAsync_System_Collections_Generic_IEnumerable_System_Int64__
+  name: GetXidsForIndexesAsync
+  nameWithType: IPlaceResolverService.GetXidsForIndexesAsync
+  fullName: uTraverse.AiAPI.Services.IPlaceResolverService.GetXidsForIndexesAsync
+- uid: System.Collections.Generic.IEnumerable{System.Int64}
+  commentId: T:System.Collections.Generic.IEnumerable{System.Int64}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<long>
+  nameWithType: IEnumerable<long>
+  fullName: System.Collections.Generic.IEnumerable<long>
+  nameWithType.vb: IEnumerable(Of Long)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of Long)
+  name.vb: IEnumerable(Of Long)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: System.Int64
+    name: long
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int64
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Int64
+    name: Long
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int64
+  - name: )
+- uid: System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{System.String}}
+  commentId: T:System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{System.String}}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<IEnumerable<string>>
+  nameWithType: Task<IEnumerable<string>>
+  fullName: System.Threading.Tasks.Task<System.Collections.Generic.IEnumerable<string>>
+  nameWithType.vb: Task(Of IEnumerable(Of String))
+  fullName.vb: System.Threading.Tasks.Task(Of System.Collections.Generic.IEnumerable(Of String))
+  name.vb: Task(Of IEnumerable(Of String))
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  - name: )
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic

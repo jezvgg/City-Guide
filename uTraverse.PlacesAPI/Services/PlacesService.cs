@@ -18,7 +18,6 @@ public class PlacesService(ILogger<PlacesService> logger, PlacesDbContext db, ID
 
     public async Task<Place> GetPlaceByIdCacheAsync(string xid)
     {
-        // TODO: Add distributed caching
         var placeString = await cache.GetStringAsync(xid);
 
         Place? place;
@@ -50,8 +49,6 @@ public class PlacesService(ILogger<PlacesService> logger, PlacesDbContext db, ID
 
     private async Task<Place> GetPlaceByIdAsync(string xid)
     {
-        // TODO: Add distributed caching
-
         _logger.LogDebug("Retrieving place with ID: {xid}", xid);
 
         var place = await db.Places.FirstOrDefaultAsync(x => x.XID == xid);
@@ -72,28 +69,13 @@ public class PlacesService(ILogger<PlacesService> logger, PlacesDbContext db, ID
     {
         Place? place = null;
         List<Place> places = [];
-        // TODO: Add distributed caching
 
         // Convert to HashSet for better performance
         var idsHash = ids.ToHashSet();
         HashSet<string> dbIds = [];
         string? placeString;
 
-        // Short-circuit if length is < 2
-        switch (idsHash.Count)
-        {
-            // Return empty if no IDs were passed
-            case 0:
-                return [];
-            // Return the only element
-            case 1:
-                {
-                    place = await GetPlaceByIdCacheAsync(idsHash.First());
-
-                    return [place];
-                }
-        }
-
+        // Retrieve cached places
         foreach (var id in idsHash)
         {
             placeString = await cache.GetStringAsync(id);
@@ -111,24 +93,11 @@ public class PlacesService(ILogger<PlacesService> logger, PlacesDbContext db, ID
             places.Add(place);
         }
 
-        switch (dbIds.Count)
-        {
-            // Return empty if no IDs were passed
-            case 0:
-                return places;
-            // Return the only element
-            case 1:
-                {
-                    place = await GetPlaceByIdAsync(dbIds.First());
-
-                    return [.. places, place];
-                }
-        }
-
         _logger.LogDebug("Retrieving places with IDs: {ids}", dbIds);
 
         var placesDb = await db.Places.Where(e => dbIds.Contains(e.XID)).ToArrayAsync();
 
+        // Cache places
         foreach (var placeDb in placesDb)
         {
             placeString = JsonSerializer.Serialize(placeDb);
@@ -147,7 +116,6 @@ public class PlacesService(ILogger<PlacesService> logger, PlacesDbContext db, ID
             _logger.LogWarning("Couldn't find places with given IDs");
             throw new PlaceNotFoundException($"No places with such IDs were found");
         }
-
 
         _logger.LogDebug("Retrieval succeeded");
 

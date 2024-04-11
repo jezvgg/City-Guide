@@ -1,0 +1,54 @@
+### YamlMime:ManagedReference
+items:
+- uid: uTraverse.PlacesAPI.Data
+  commentId: N:uTraverse.PlacesAPI.Data
+  id: uTraverse.PlacesAPI.Data
+  children:
+  - uTraverse.PlacesAPI.Data.PlacesDbContext
+  langs:
+  - csharp
+  - vb
+  name: uTraverse.PlacesAPI.Data
+  nameWithType: uTraverse.PlacesAPI.Data
+  fullName: uTraverse.PlacesAPI.Data
+  type: Namespace
+  assemblies:
+  - uTraverse.PlacesAPI
+references:
+- uid: uTraverse.PlacesAPI.Data.PlacesDbContext
+  commentId: T:uTraverse.PlacesAPI.Data.PlacesDbContext
+  parent: uTraverse.PlacesAPI.Data
+  href: uTraverse.PlacesAPI.Data.PlacesDbContext.html
+  name: PlacesDbContext
+  nameWithType: PlacesDbContext
+  fullName: uTraverse.PlacesAPI.Data.PlacesDbContext
+- uid: uTraverse.PlacesAPI.Data
+  commentId: N:uTraverse.PlacesAPI.Data
+  href: uTraverse.html
+  name: uTraverse.PlacesAPI.Data
+  nameWithType: uTraverse.PlacesAPI.Data
+  fullName: uTraverse.PlacesAPI.Data
+  spec.csharp:
+  - uid: uTraverse
+    name: uTraverse
+    href: uTraverse.html
+  - name: .
+  - uid: uTraverse.PlacesAPI
+    name: PlacesAPI
+    href: uTraverse.PlacesAPI.html
+  - name: .
+  - uid: uTraverse.PlacesAPI.Data
+    name: Data
+    href: uTraverse.PlacesAPI.Data.html
+  spec.vb:
+  - uid: uTraverse
+    name: uTraverse
+    href: uTraverse.html
+  - name: .
+  - uid: uTraverse.PlacesAPI
+    name: PlacesAPI
+    href: uTraverse.PlacesAPI.html
+  - name: .
+  - uid: uTraverse.PlacesAPI.Data
+    name: Data
+    href: uTraverse.PlacesAPI.Data.html

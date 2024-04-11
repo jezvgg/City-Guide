@@ -1,0 +1,9 @@
+{
+  "TemplatePath": null,
+  "ContainerSettings": {
+    "Registry": "ghcr.io",
+    "RepositoryPrefix": "1ffycat",
+    "Tag": null,
+    "Builder": "docker"
+  }
+}

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using uTraverse.AiAPI.Data;
 using uTraverse.AiAPI.Exceptions;
 using uTraverse.AiAPI.Services;
@@ -12,12 +13,25 @@ builder.AddServiceDefaults();
 // Add indexes DB reference
 builder.AddNpgsqlDbContext<AiDbContext>("utraverse-indexdb");
 
-builder.Services.AddHttpClient<IAiService, AiService>(client => client.BaseAddress = new Uri("http://localhost:5076"));  // For test use only
-//builder.Services.AddHttpClient<AIService>(client => client.BaseAddress = new Uri("http://utraverse-placematcher"));
+builder.Services.AddCors(policy =>
+{
+    policy.AddDefaultPolicy(p => p.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+});
+
+// Add Redis cache for indexes
+builder.AddRedisDistributedCache("utraverse-indexcache");
+
+builder.Services.AddAntiforgery();
+
+//builder.Services.AddHttpClient<IAiService, AiService>(client => client.BaseAddress = new Uri("http://localhost:5076"));  // For test use only
+builder.Services.AddHttpClient<IAiService, AiService>(client => client.BaseAddress = new Uri("http://utraverse-placematcher:5000"));
 
 builder.Services.AddScoped<IPlaceResolverService, PlaceResolverService>();
 
 var app = builder.Build();
+
+app.UseAntiforgery();
+app.UseCors();
 
 // Map health-checks and other Aspire stuff
 app.MapDefaultEndpoints();
@@ -25,7 +39,7 @@ app.MapDefaultEndpoints();
 // Map the /places API section
 var places = app.MapGroup("/ai/places");
 
-places.MapPost("/text", async (TextPromptRequest request, IAiService ai, IPlaceResolverService placeResolver) =>
+places.MapPost("/text", async ([FromForm] TextPromptRequest request, IAiService ai, IPlaceResolverService placeResolver) =>
 {
     app.Logger.LogDebug("Endpoint call on / with Prompt: {Prompt}", request.Prompt);
 
@@ -34,34 +48,34 @@ places.MapPost("/text", async (TextPromptRequest request, IAiService ai, IPlaceR
         // Retrieve place IDs from the AI microservice for the given Prompt
         var res = await ai.GetPlaceIndexesAsync(request.Prompt, request.City);
 
-        var xids = placeResolver.GetXidsForIndexesAsync(res);
+        var xids = await placeResolver.GetXidsForIndexesAsync(res);
 
-        return Results.Ok(xids);
+        return Results.Ok(xids.Take(10));
     }
     catch (ApiResponseNullException)
     {
         // The AI microservice has returned null
         return Results.NotFound();
     }
-});
+}).DisableAntiforgery();
 
-places.MapPost("/img", async (ImagePromptRequest request, IAiService ai, IPlaceResolverService placeResolver) =>
+places.MapPost("/img", async ([FromForm] ImagePromptRequest request, IAiService ai, IPlaceResolverService placeResolver) =>
 {
     try
     {
         // Retrieve place IDs from the AI microservice for the given Prompt
         var res = await ai.GetPlaceIndexesAsync(request.Image, request.City);
 
-        var xids = placeResolver.GetXidsForIndexesAsync(res);
+        var xids = await placeResolver.GetXidsForIndexesAsync(res);
 
-        return Results.Ok(xids);
+        return Results.Ok(xids.Take(10));
     }
     catch (ApiResponseNullException)
     {
         // The AI microservice has returned null
         return Results.NotFound();
     }
-});
+}).DisableAntiforgery();
 
 app.Run();
 
