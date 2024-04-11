@@ -26,15 +26,17 @@ public class PlaceResolverService (AiDbContext db, IDistributedCache cache) : IP
         return ind.XID;
     }
 
-    public async Task<IEnumerable<string>> GetXidsForIndexesAsync(IEnumerable<long> indexes)
+    public async Task<IEnumerable<string>> GetXidsForIndexesAsync(IEnumerable<long> indexes, string city)
     {
-        HashSet<long> rest = [];
+        HashSet<string> rest = [];
         var hindexes = indexes.ToArray();
 
         List<string> res = [];
 
-        foreach (var index in hindexes)
+        foreach (var ind in hindexes)
         {
+            var index = city + ind;
+
             var cached = await cache.GetStringAsync(index.ToString());
 
             if (cached is { } xcached)

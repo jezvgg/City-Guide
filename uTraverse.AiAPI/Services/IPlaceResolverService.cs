@@ -18,5 +18,5 @@ public interface IPlaceResolverService
     /// </summary>
     /// <param name="indexes">Collection of indexes to look for</param>
     /// <returns>Collection of XIDs</returns>
-    public Task<IEnumerable<string>> GetXidsForIndexesAsync(IEnumerable<long> indexes);
+    public Task<IEnumerable<string>> GetXidsForIndexesAsync(IEnumerable<long> indexes, string city);
 }

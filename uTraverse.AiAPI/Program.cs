@@ -40,10 +40,10 @@ using (var scope = app.Services.CreateScope())
 {
     var loader = new CsvLoader(scope.ServiceProvider.GetRequiredService<AiDbContext>());
 
-    loader.LoadFile("./Datasets/id_to_XID_EKB.csv");
-    loader.LoadFile("./Datasets/id_to_XID_NN.csv");
-    loader.LoadFile("./Datasets/id_to_XID_Vlad.csv");
-    loader.LoadFile("./Datasets/id_to_XID_Yaroslavl.csv");
+    loader.LoadFile("./Datasets/id_to_XID_EKB.csv", "ekb");
+    loader.LoadFile("./Datasets/id_to_XID_NN.csv", "nino");
+    loader.LoadFile("./Datasets/id_to_XID_Vlad.csv", "vlad");
+    loader.LoadFile("./Datasets/id_to_XID_Yaroslavl.csv", "yaros");
 }
 
 // Map health-checks and other Aspire stuff
@@ -61,7 +61,7 @@ places.MapPost("/text", async ([FromForm] TextPromptRequest request, IAiService 
         // Retrieve place IDs from the AI microservice for the given Prompt
         var res = await ai.GetPlaceIndexesAsync(request.Prompt, request.City);
 
-        var xids = await placeResolver.GetXidsForIndexesAsync(res);
+        var xids = await placeResolver.GetXidsForIndexesAsync(res, request.City);
 
         return Results.Ok(xids.Take(10));
     }
@@ -79,7 +79,7 @@ places.MapPost("/img", async ([FromForm] ImagePromptRequest request, IAiService 
         // Retrieve place IDs from the AI microservice for the given Prompt
         var res = await ai.GetPlaceIndexesAsync(request.Image, request.City);
 
-        var xids = await placeResolver.GetXidsForIndexesAsync(res);
+        var xids = await placeResolver.GetXidsForIndexesAsync(res, request.City);
 
         return Results.Ok(xids.Take(10));
     }
