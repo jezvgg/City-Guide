@@ -30,6 +30,8 @@ public class CsvLoader (PlacesDbContext db)
                 Longitude = record.Lon
             };
 
+            if (db.Places.Any(x => x.XID == place.XID)) continue;
+
             db.Places.Add(place);
         }
 
