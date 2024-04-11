@@ -16,6 +16,8 @@ var indexCache = builder.AddRedis("utraverse-indexcache");
 // Add the place matcher AI container
 var placeMatcher = builder.AddContainer("utraverse-placematcher", "utraverse/placematcher").WithEndpoint(5000, 1234);
 
+var frontend = builder.AddContainer("utraverse-frontend", "utraverse-frontend").WithEndpoint(80, 80);
+
 // Add the Places API project reference
 var placesApi = builder.AddProject<Projects.uTraverse_PlacesAPI>("utraverse-placesapi")
     .WithReference(placesDb)
