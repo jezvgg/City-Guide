@@ -21,7 +21,7 @@ def service_prompt(city):
     indexes = model.get_by_prompt(str(args['prompt']))
 
     return app.response_class(
-            response=f'{indexes}',
+            response='['+','.join(map(str, indexes))+']',
             status=200,
             mimetype="text"
         )
@@ -32,15 +32,15 @@ def service_image(city):
     args = request.data
     model.set_index(towns[city])
 
-    image = CLIP.__decode_binary(args)
-    indexes = model.get_by_prompt(image)
+    image = CLIP.decode_binary(args)
+    indexes = model.get_by_image(image)
 
     return app.response_class(
-            response=indexes,
+            response='['+','.join(map(str, indexes))+']',
             status=200,
             mimetype="text"
         )
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host="0.0.0.0")

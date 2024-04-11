@@ -27,21 +27,21 @@ class CLIP:
 
 
     @staticmethod
-    def __decode_image(bs4):
+    def decode_image(bs4):
         img = Image.open(BytesIO(base64.b64decode(bs4[2:-1])))
         return img
 
 
     @staticmethod
-    def __decode_binary(bin):
+    def decode_binary(bin):
         img = Image.open(BytesIO(bin))
         return img
 
 
     @staticmethod
-    def __decode_images(images: list):
+    def decode_images(images: list):
         start = time.time()
-        result = [CLIP.__decode_image(bs4url) for bs4url in images]
+        result = [CLIP.decode_image(bs4url) for bs4url in images]
         print("images decoded for", time.time()-start)
         return result
 
@@ -52,7 +52,7 @@ class CLIP:
             prompt_latent = self.__predictor.get_text_latents([prompt]).cpu().detach().numpy()
         user_latents = np.concatenate((prompt_latent, prompt_latent), axis=1)
         faiss.normalize_L2(user_latents)
-        D, I = self.index.search(user_latents, 1)
+        D, I = self.index.search(user_latents, 100)
         return I[0]
 
 
