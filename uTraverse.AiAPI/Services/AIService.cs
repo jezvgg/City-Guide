@@ -24,8 +24,6 @@ public class AiService(ILogger<AiService> logger, HttpClient httpClient) : IAiSe
 
         var response = await httpClient.PostAsync($"/get_by_prompt/{city}", multipart);
 
-        logger.LogCritical(await response.Content.ReadAsStringAsync());
-
         // Throw an exception if received null
         if (response is null)
         {
@@ -56,8 +54,6 @@ public class AiService(ILogger<AiService> logger, HttpClient httpClient) : IAiSe
         // Retrieve the IDs for the Prompt (TODO: replace with a better endpoint URL)
         var response = await httpClient.PostAsync($"/get_by_image/{city}", new StreamContent(stream));
         //GetFromJsonAsync<IEnumerable<Guid>>($"/?Prompt={imgPrompt}");
-
-        logger.LogCritical(await response.Content.ReadAsStringAsync());
 
         // Throw an exception if received null
         if (response is null)
