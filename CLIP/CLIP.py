@@ -55,10 +55,7 @@ class CLIP:
         self.set_index(index_path)
 
     @staticmethod
-<<<<<<< HEAD
     def decode_image(bs4):
-=======
-    def __decode_image(bs4):
         """
         Декодирует изображение из base64.
 
@@ -68,15 +65,11 @@ class CLIP:
         Returns:
             PIL.Image: Расшифрованное изображение.
         """
->>>>>>> refs/remotes/origin/CLIP-service
         img = Image.open(BytesIO(base64.b64decode(bs4[2:-1])))
         return img
 
     @staticmethod
-<<<<<<< HEAD
     def decode_binary(bin):
-=======
-    def __decode_binary(bin):
         """
         Декодирует изображение из бинарного кода.
 
@@ -86,18 +79,11 @@ class CLIP:
         Returns:
             PIL.Image: Расшифрованное изображение.
         """
->>>>>>> refs/remotes/origin/CLIP-service
         img = Image.open(BytesIO(bin))
         return img
 
     @staticmethod
-<<<<<<< HEAD
     def decode_images(images: list):
-        start = time.time()
-        result = [CLIP.decode_image(bs4url) for bs4url in images]
-        print("images decoded for", time.time()-start)
-=======
-    def __decode_images(images: list):
         """
         Декодирует список изображений.
 
@@ -110,7 +96,6 @@ class CLIP:
         start = time.time()
         result = [CLIP.__decode_image(bs4url) for bs4url in images]
         print("images decoded for", time.time() - start)
->>>>>>> refs/remotes/origin/CLIP-service
         return result
 
     def get_by_prompt(self, prompt: str):
