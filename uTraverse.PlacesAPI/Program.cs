@@ -2,6 +2,7 @@ using uTraverse.AspireServiceDefaults;
 using uTraverse.PlacesAPI.Data;
 using uTraverse.PlacesAPI.Exceptions;
 using uTraverse.PlacesAPI.Services;
+using uTraverse.PlacesAPI.Utility;
 
 // Create the API builder
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +30,17 @@ var app = builder.Build();
 app.MapDefaultEndpoints();
 
 app.UseCors();
+
+
+using (var scope = app.Services.CreateScope())
+{
+    var loader = new CsvLoader(scope.ServiceProvider.GetRequiredService<PlacesDbContext>());
+
+    loader.LoadFile("./Datasets/desc_EKB_places.csv");
+    loader.LoadFile("./Datasets/desc_NN_places.csv");
+    loader.LoadFile("./Datasets/desc_Vladimir_places.csv");
+    loader.LoadFile("./Datasets/desc_Yaroslavl_places.csv");
+}
 
 // Map /places section of the API
 var places = app.MapGroup("/places");

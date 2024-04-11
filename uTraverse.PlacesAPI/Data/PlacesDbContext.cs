@@ -5,7 +5,7 @@ namespace uTraverse.PlacesAPI.Data;
 
 public sealed class PlacesDbContext : DbContext
 {
-    public required DbSet<Place> Places { get; init; }
+    public DbSet<Place> Places { get; set; }
 
     public PlacesDbContext(DbContextOptions options) : base(options)
     {

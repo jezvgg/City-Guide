@@ -97,7 +97,7 @@ public class PlacesService(ILogger<PlacesService> logger, PlacesDbContext db, ID
 
         var placesDb = await db.Places.Where(e => dbIds.Contains(e.XID)).ToArrayAsync();
 
-        // Cache places
+        //// Cache places
         foreach (var placeDb in placesDb)
         {
             placeString = JsonSerializer.Serialize(placeDb);
