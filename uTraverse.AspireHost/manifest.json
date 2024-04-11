@@ -71,6 +71,19 @@
         }
       }
     },
+    "utraverse-indexcache": {
+      "type": "container.v0",
+      "connectionString": "{utraverse-indexcache.bindings.tcp.host}:{utraverse-indexcache.bindings.tcp.port}",
+      "image": "redis:7.2.4",
+      "bindings": {
+        "tcp": {
+          "scheme": "tcp",
+          "protocol": "tcp",
+          "transport": "tcp",
+          "containerPort": 6379
+        }
+      }
+    },
     "utraverse-placematcher": {
       "type": "container.v0",
       "image": "utraverse/placematcher:latest"
@@ -103,7 +116,8 @@
       "env": {
         "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES": "true",
         "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES": "true",
-        "ConnectionStrings__utraverse-indexdb": "{utraverse-indexdb.connectionString}"
+        "ConnectionStrings__utraverse-indexdb": "{utraverse-indexdb.connectionString}",
+        "ConnectionStrings__utraverse-indexcache": "{utraverse-indexcache.connectionString}"
       },
       "bindings": {
         "http": {
