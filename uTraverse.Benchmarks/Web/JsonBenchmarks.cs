@@ -24,7 +24,16 @@ public class JsonBenchmarks
         List<Place> places = [];
         for (var i = 0; i < ItemNumber; i++)
         {
-            places.Add(new Place { Address = "", Name = "" });
+            places.Add(new Place
+            {
+                XID = "null",
+                Name = "null",
+                Categories = [],
+                City = "null",
+                WikiId = "null",
+                Latitude = 0,
+                Longitude = 0
+            });
         }
 
         PlaceList = [.. places];

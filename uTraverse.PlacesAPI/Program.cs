@@ -12,6 +12,9 @@ builder.AddServiceDefaults();
 // Add PostgresSQL Places DB context
 builder.AddNpgsqlDbContext<PlacesDbContext>("utraverse-placesdb");
 
+//Add Redis Places cache
+builder.AddRedisDistributedCache("utraverse-placescache");
+
 // Add a service to interact with the Places DB
 builder.Services.AddScoped<IPlacesService, PlacesService>();
 
@@ -23,9 +26,9 @@ app.MapDefaultEndpoints();
 // Map /places section of the API
 var places = app.MapGroup("/places");
 
-places.MapGet("/get/batch", async (Guid[] ids, IPlacesService placesService) =>
+places.MapGet("/get/batch", async (string[] ids, IPlacesService placesService) =>
 {
-    app.Logger.LogDebug("Hit /places/batch/ids endpoint for IDs: {ids}", ids);
+    app.Logger.LogDebug("Hit /places/batch/ids endpoint");
 
     try
     {
