@@ -96,13 +96,30 @@ function sendImage() {
         contentType: false,
         type: "POST",
         success: function (data, textStatus, jqXHR) {
+            console.log("out");
+            console.log(data);
+            fetchDetails(data);
+        }
+    });
+
+    proceedToPage(3);
+}
+
+function fetchDetails(ids) {
+    console.log(ids);
+    $.ajax({
+        url: "http://127.0.0.1:5235/places/get/batch",
+        data: { ids: ids },
+        traditional: true,
+        type: "GET",
+        success: function (data, status, jqXHR) {
+            console.log("in");
+            console.log(data);
             data.forEach(place => {
                 drawPlace(place.name, place.description, place.address);
             });
         }
     });
-
-    proceedToPage(3);
 }
 
 function sendText() {
@@ -120,9 +137,9 @@ function sendText() {
         contentType: false,
         type: "POST",
         success: function (data, textStatus, jqXHR) {
-            data.forEach(place => {
-                drawPlace(place.name, place.description, place.address);
-            });
+            console.log("out");
+            console.log(data);
+            fetchDetails(data);
         }
     });
 
