@@ -1,3 +1,4 @@
+using uTraverse.AiAPI.Data;
 using uTraverse.AiAPI.Exceptions;
 using uTraverse.AiAPI.Services;
 using uTraverse.AspireServiceDefaults;
@@ -8,8 +9,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add default services (logging, configuration, etc.)
 builder.AddServiceDefaults();
 
+// Add indexes DB reference
+builder.AddNpgsqlDbContext<AiDbContext>("utraverse-indexdb");
+
 builder.Services.AddHttpClient<IAiService, AiService>(client => client.BaseAddress = new Uri("http://localhost:5076"));  // For test use only
 //builder.Services.AddHttpClient<AIService>(client => client.BaseAddress = new Uri("http://utraverse-placematcher"));
+
+builder.Services.AddScoped<IPlaceResolverService, PlaceResolverService>();
 
 var app = builder.Build();
 
@@ -19,16 +25,18 @@ app.MapDefaultEndpoints();
 // Map the /places API section
 var places = app.MapGroup("/ai/places");
 
-places.MapPost("/text", async (TextPromptRequest request, IAiService ai) =>
+places.MapPost("/text", async (TextPromptRequest request, IAiService ai, IPlaceResolverService placeResolver) =>
 {
     app.Logger.LogDebug("Endpoint call on / with Prompt: {Prompt}", request.Prompt);
 
     try
     {
         // Retrieve place IDs from the AI microservice for the given Prompt
-        var res = await ai.GetPlaceIdsAsync(request.Prompt);
+        var res = await ai.GetPlaceIndexesAsync(request.Prompt, request.City);
 
-        return Results.Ok(res);
+        var xids = placeResolver.GetXidsForIndexesAsync(res);
+
+        return Results.Ok(xids);
     }
     catch (ApiResponseNullException)
     {
@@ -37,14 +45,16 @@ places.MapPost("/text", async (TextPromptRequest request, IAiService ai) =>
     }
 });
 
-places.MapPost("/img", async (ImagePromptRequest request, IAiService ai) =>
+places.MapPost("/img", async (ImagePromptRequest request, IAiService ai, IPlaceResolverService placeResolver) =>
 {
     try
     {
         // Retrieve place IDs from the AI microservice for the given Prompt
-        var res = await ai.GetPlaceIdsAsync(request.Image);
+        var res = await ai.GetPlaceIndexesAsync(request.Image, request.City);
 
-        return Results.Ok(res);
+        var xids = placeResolver.GetXidsForIndexesAsync(res);
+
+        return Results.Ok(xids);
     }
     catch (ApiResponseNullException)
     {
@@ -55,5 +65,5 @@ places.MapPost("/img", async (ImagePromptRequest request, IAiService ai) =>
 
 app.Run();
 
-record ImagePromptRequest(IFormFile Image);
-record TextPromptRequest(string Prompt);
+record ImagePromptRequest(IFormFile Image, string City);
+record TextPromptRequest(string Prompt, string City);

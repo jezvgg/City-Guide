@@ -11,6 +11,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.0-preview.2.24162.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\uTraverse.AspireServiceDefaults\uTraverse.AspireServiceDefaults.csproj" />
   </ItemGroup>
 
