@@ -3,6 +3,7 @@ using uTraverse.AiAPI.Data;
 using uTraverse.AiAPI.Exceptions;
 using uTraverse.AiAPI.Services;
 using uTraverse.AspireServiceDefaults;
+using uTraverse.PlacesAPI.Utility;
 
 // Create the API builder
 var builder = WebApplication.CreateBuilder(args);
@@ -38,6 +39,16 @@ app.MapDefaultEndpoints();
 
 // Map the /places API section
 var places = app.MapGroup("/ai/places");
+
+using (var scope = app.Services.CreateScope())
+{
+    var loader = new CsvLoader(scope.ServiceProvider.GetRequiredService<AiDbContext>());
+
+    loader.LoadFile("./Datasets/id_to_XID_EKB.csv");
+    loader.LoadFile("./Datasets/id_to_XID_NN.csv");
+    loader.LoadFile("./Datasets/id_to_XID_Vlad.csv");
+    loader.LoadFile("./Datasets/id_to_XID_Yaroslavl.csv");
+}
 
 places.MapPost("/text", async ([FromForm] TextPromptRequest request, IAiService ai, IPlaceResolverService placeResolver) =>
 {

@@ -14,7 +14,7 @@ public class Place
     [Length(0, 256)]
     public string? Description { get; set; }
 
-    public required IEnumerable<string> Categories { get; set; }
+    public required List<string> Categories { get; set; }
 
     [Length(1, 64)]
     public required string City { get; set; }
