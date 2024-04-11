@@ -18,9 +18,9 @@ public class DatabaseBenchmark
 {
     private PlacesDbContext _db;
     private List<Place> _places;
-    private List<Guid> _masterIdList;
-    private Guid[] _idArray;
-    private IEnumerable<Guid> _idEnumerable;
+    private List<string> _masterIdList;
+    private string[] _idArray;
+    private IEnumerable<string> _idEnumerable;
 
     private const int ItemCount = 1000;
 
@@ -44,9 +44,18 @@ public class DatabaseBenchmark
 
         for (var i = 0; i < ItemCount; i++)
         {
-            var place = new Place() { Address = "", Name = "" };
+            var place = new Place
+            {
+                XID = "null",
+                Name = "null",
+                Categories = [],
+                City = "null",
+                WikiId = "null",
+                Latitude = 0,
+                Longitude = 0
+            };
             _places.Add(place);
-            _masterIdList.Add(place.Id);
+            _masterIdList.Add(place.XID);
             _db.Places.Add(place);
         }
 
@@ -64,8 +73,8 @@ public class DatabaseBenchmark
     [IterationSetup]
     public void IterationSetup()
     {
-        List<Guid> left = [.. _masterIdList];
-        List<Guid> aggreg = [];
+        List<string> left = [.. _masterIdList];
+        List<string> aggreg = [];
         for (int i = 0; i < _getCount; i++)
         {
             var id = Random.Shared.Next(left.Count);
@@ -81,19 +90,19 @@ public class DatabaseBenchmark
     [Benchmark(Baseline = true)]
     public List<Place> GetPlacesContainsArray()
     {
-        return [.. _db.Places.Where(x => _idArray.Contains(x.Id))];
+        return [.. _db.Places.Where(x => _idArray.Contains(x.XID))];
     }
 
     [Benchmark]
     public List<Place> GetPlacesContainsEnumerable()
     {
-        return [.. _db.Places.Where(x => _idEnumerable.Contains(x.Id))];
+        return [.. _db.Places.Where(x => _idEnumerable.Contains(x.XID))];
     }
 
     [Benchmark]
     public List<Place> GetPlacesJoinArray()
     {
-        return [.. _db.Places.Join(_idArray, e => e.Id, id => id, (e, id) => e)];
+        return [.. _db.Places.Join(_idArray, e => e.XID, id => id, (e, id) => e)];
     }
 
 }
