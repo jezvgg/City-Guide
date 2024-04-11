@@ -59,7 +59,7 @@ class CLIP:
     def get_by_image(self, user_image: Image):
         
         with torch.no_grad():
-            user_image_latent = self.__predictor.get_image_latents([image]).cpu().detach().numpy()
+            user_image_latent = self.__predictor.get_image_latents([user_image]).cpu().detach().numpy()
         user_latents = np.concatenate((user_image_latent, user_image_latent), axis=1)
         faiss.normalize_L2(user_latents)
         D, I = self.index.search(user_latents, 100)
