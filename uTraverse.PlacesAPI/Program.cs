@@ -31,6 +31,7 @@ app.MapDefaultEndpoints();
 
 app.UseCors();
 
+Thread.Sleep(10000);
 
 using (var scope = app.Services.CreateScope())
 {

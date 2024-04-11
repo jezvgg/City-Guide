@@ -34,6 +34,8 @@ var app = builder.Build();
 app.UseAntiforgery();
 app.UseCors();
 
+Thread.Sleep(10000);
+
 using (var scope = app.Services.CreateScope())
 {
     var loader = new CsvLoader(scope.ServiceProvider.GetRequiredService<AiDbContext>());
