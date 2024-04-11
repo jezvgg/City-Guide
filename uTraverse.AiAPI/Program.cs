@@ -34,12 +34,6 @@ var app = builder.Build();
 app.UseAntiforgery();
 app.UseCors();
 
-// Map health-checks and other Aspire stuff
-app.MapDefaultEndpoints();
-
-// Map the /places API section
-var places = app.MapGroup("/ai/places");
-
 using (var scope = app.Services.CreateScope())
 {
     var loader = new CsvLoader(scope.ServiceProvider.GetRequiredService<AiDbContext>());
@@ -49,6 +43,12 @@ using (var scope = app.Services.CreateScope())
     loader.LoadFile("./Datasets/id_to_XID_Vlad.csv");
     loader.LoadFile("./Datasets/id_to_XID_Yaroslavl.csv");
 }
+
+// Map health-checks and other Aspire stuff
+app.MapDefaultEndpoints();
+
+// Map the /places API section
+var places = app.MapGroup("/ai/places");
 
 places.MapPost("/text", async ([FromForm] TextPromptRequest request, IAiService ai, IPlaceResolverService placeResolver) =>
 {

@@ -21,8 +21,10 @@ public class CsvLoader(AiDbContext db)
             var index = new Index
             {
                 XID = record.XID,
-                Id = record.Index
+                Id = record.index
             };
+
+            if (db.Indexes.Any(x => x.XID == index.XID)) continue;
 
             db.Indexes.Add(index);
         }
@@ -32,7 +34,7 @@ public class CsvLoader(AiDbContext db)
 
     private class IndexDto
     {
+        public int index { get; set; }
         public string XID { get; set; }
-        public int Index { get; set; }
     }
 }
