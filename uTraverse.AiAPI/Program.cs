@@ -24,7 +24,7 @@ builder.AddRedisDistributedCache("utraverse-indexcache");
 builder.Services.AddAntiforgery();
 
 //builder.Services.AddHttpClient<IAiService, AiService>(client => client.BaseAddress = new Uri("http://localhost:5076"));  // For test use only
-builder.Services.AddHttpClient<IAiService, AiService>(client => client.BaseAddress = new Uri("http://utraverse-placematcher:5000"));
+builder.Services.AddHttpClient<IAiService, AiService>(client => client.BaseAddress = new Uri("http://localhost:1234"));
 
 builder.Services.AddScoped<IPlaceResolverService, PlaceResolverService>();
 
