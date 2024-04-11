@@ -1,0 +1,192 @@
+{
+  "Docs/C#/Code.html": {
+    "href": "Docs/C#/Code.html",
+    "title": "Конвенции по коду в специфике C# | uTraverse.Documentation",
+    "keywords": "Конвенции по коду в специфике C# SOLID, архитектура Слушаемся принципов SOLID, планируем код наперед Нейминг Слушаемся конвенций языка: Классы в PascalCase Методы в PascalCase Свойства в PascalCase Поля в _lowerPascalCase (поля не делаем публичными, только свойства) Переменные в lowerPascalCase Интерфейсы префиксим с I Классы называем существительными Методы называем глаголами Названия классов, методов и переменных должны быть минимальной длины, при которой можно полноценно описать их функционал. Лишнего не сокращаем Аббревиатуры длиннее 2 символов пишем в PascalCase (AIService и RuClipService) Пространства имен, структура Пространства имен должны соответствовать структуре проекта Пространства имен и папки должны называться в PascalCase Распределяем классы по логичной, адекватной структуре Комментарии Для классов и методов пишем документацию в формате XML (///) Для кода пишем комментарии в отдельную строку через // В коротких строках комментарии можно писать на одной строке с кодом, обязательно после. Между кодом и комментарием должно быть два пробела Между // и комментарем должен быть один пробел Если нужно использовать многострочные комментарии, используем /**/, а не несколько строк // Модификаторы Грамотно используем модификаторы доступа Грамотно используем static, abstract и т.п. async/await Используем async/await и Task для IO-операций (сетевые запросы, работа с файлами, БД) Постфиксим названия методов с Async (public async Task<User> GetUserAsync (int id)) Когда работаем с асинхронностью, используем CancellationToken Nullability Не забываем проверки на null Не забываем возвращать null или Exception Исключения Не забываем ловить исключения Выбрасываем исключения подходящего типа, описывающего суть ошибки Не забываем писать текст, описывающий ошибку. Где надо, передаем nameof() для соответствующего аргумента Логгирование Пишем логи достаточно часто (по ним должно быть просто отследить, что, где и когда пошло не так) Логи пишем с соответствующим уровнем серьезности Dependency Injection Не забываем инжектить сервисы, если есть общий интерфейс (а он почти всегда должен быть) - инжектим по нему ILogger принимаем как generic, передавая тип текущего сервиса (например, в классе PlacesService: public PlacesService (ILogger<PlacesService> logger) { ... }) Принимаем грамотные решения по жизненному циклу сервисов Юнит-тесты Используем моки. В тестах не должно быть запросов к реальным API, БД и т.п.. Это юнит-тесты, а не интеграционные, мы тестируем только наше приложение, а не всю систему Не забываем про правильный нейминг и комментарии в тестах"
+  },
+  "Docs/Code.html": {
+    "href": "Docs/Code.html",
+    "title": "Конвенции относительно кода | uTraverse.Documentation",
+    "keywords": "Конвенции относительно кода Комментарии Комментарии пишем на ГРАМОТНОМ английском На комментарии не скупимся, но не комментируем очевидные вещи. Смотрим на код со стороны разработчика, который видит его впервые, и думаем, нужно ли его объяснять В комментариях используем теги: TODO: Something to do later FIXME: Used to highlight a known issue or bug in the code that needs to be fixed. BUG: Similar to FIXME, denotes the presence of a bug in the code. HACK: Indicates a temporary or workaround solution in the code that may not be ideal but serves a purpose. OPTIMIZE: Points out a section of code that could be improved for better performance or efficiency. NOTE: General purpose note to provide additional context or information about the code. IDEA: Indicates a suggestion or potential improvement for future development. REFACTOR: Suggests that a particular section of code should be refactored for better structure or readability. REVIEW: Signifies that the code or a particular section of it needs to be reviewed by other team members. DOC: Indicates that documentation needs to be added or updated for a specific part of the code. DEPRECATED: Marks a feature or functionality that is no longer recommended for use and will likely be removed in future versions. пример: TODO: Implement parallel execution пример: OPTIMIZE: Unify DB calls for multiple entities Для ВСЕХ методов и классов пишем комментарии в формате языка (\"\"\" в Python, /// в C#). Описываем, что делает метод, какие аргументы принимает, какие ошибки может выбрасывать и какой результат возвращает Очень полезно использовать комментарии чтобы передать какую-то информацию другим разработчикам (пример: // NOTE: userSession here is readonly and shall not be modified) SOLID / архитектура Следуем принципам SOLID, продумываем код наперед. ЕЩЕ РАЗ ПОВТОРЮ, СЛЕДУЕМ ПРИНЦИПАМ SOLID, ВСЕМ ОБЯЗАТЕЛЬНО ИХ ИЗУЧИТЬ Юнит-тесты Пишем юнит-тесты для кода Используем инструменты для замера code-coverage. Стремимся к 100% Создаем тесты для проверки работы функционала кода Создаем тесты для крайних случаев, когда может сломаться код (например, принимаем число в виде строки. Проверяем пустую строку, null/None, отрицательное число, дробное число, т.д. т.п.) НЕ КОММИТИМ ЕСЛИ ТЕСТЫ НЕ ПРОХОДЯТ. В крайнем случае можно закоммитить, но ни в коем случае не мержить в основную ветку. В идеале в таких случаях писать TODO, FIXME и т.п. Форматирование Слушаемся специфичных для языка конвенций Используем авто-линтеры (ruff для Python, dotnet format для C#) Слушаемся инструментов языка (PEP8/ruff для Python, IntelliSense для C#) Минимизируем предупреждения компилятора, линтера и т.п. Сами тоже следим, чтобы код выглядел опрятно и красиво С помощью пустых строк разбиваем код на логические блоки или группы действий. Обязательно API Помним, что с нашим кодом работают другие разработчики. Если уже построили контракт API, не нарушаем его (не переименовываем методы, эндпоинты, т.п.). В общем - не ломаем чужой код, который может основываться на нашем Микросервисы/Docker Помним, что работаем в специфике микросервисной архитектуры и контейнеров Никаких URL типа localhost, 127.0.0.1 и т.п., используем подсеть докера и DNS Зависимости Перед внедрением любой библиотеки обязательно собираемся и обсуждаем, действительно ли она нужна и как это может повлиять на проект"
+  },
+  "Docs/Git.html": {
+    "href": "Docs/Git.html",
+    "title": "Конвенции относительно Git и GitHub | uTraverse.Documentation",
+    "keywords": "Конвенции относительно Git и GitHub Коммиты Пример использования коммитов можно посмотреть здесь Коммиты называем на ГРАМОТНОМ английском Названия коммитов должны четко отражать изменения, сделанные в них, не скупимся на слова Код в каждом коммите должен работать, или как минимум компилироваться/запускаться Коммиты нужно делать часто, но не слишком. Расценивайте коммиты как ключевые точки в истории кодовой базы При решении какой-то issue, отмечаем ее в коммите (пример: Optimized DB calls for multiple entities in Backend.Services.PlacesService.cs (fixes #1337), где 1337 - номер issue) Необязательно коммитить все файлы сразу, можно разбивать на несколько коммитов (например, разделять на два коммита основной код и тесты) Не забываем пушить довольно часто, чтобы остальные могли видеть нашу работу Ветки Пример использования веток (без специфики нескольких проектов в monorepo) здесь Разделяем ветки по проектам Для каждой новой фичи, фикса и т.п. создаем ветку (feature/*, hotfix/*) При создании веток, опираемся на самую свежую общую ветку (master, patches/patch-1, т.п.) В master/main НЕ КОММИТИМ, только мержим PR из других веток Если будем использовать релизную систему, создаем ветки для разных обновлений (patches/patch-1, patches/hotfix-1, т.п.) Пулл-реквесты Пример использования пулл-реквестов здесь Создаем пулл-реквесты для фич (общее правило: одна фича = одна ветка = один PR) Не мержим, пока PR не будет одобрен хотя бы одним другим разработчиком (а лучше двумя) Если будем использовать релизную систему, PR создаем из ветки фичи в кумулятивную, а не в main. Если не будем - можно и в main В пулл-реквестах детально описываем, что поменяли. В идеале с хэшами коммитов (они автоматом конвертируются в ссылки) и четким описанием, ГДЕ мы что поменяли При ревью отмечаем строки, по которым вопрос Прикрепляем лейблы Прикрепляем связанные issue Выбираем людей, от которых запросить ревью Используем Markdown на полную Issues Пример использования issues здесь Четко и детально описываем суть задачи Прикрепляем лейблы Выбираем, кто будет заниматься задачей (либо оставляем, чтобы взял кто угодно. Тот, кто взял, должен отметить, что он взял задачу) На доске перекидываем issue во вторую колонку Issue не закрываем, пока коммит не замержен. GitHub должен автоматом закрыть связанные issues при мерже Используем Markdown на полную .gitignore НИКАКИХ ЛИШНИХ ФАЙЛОВ В КОММИТАХ: никаких pycache никаких bin/* в коммитах должен быть ТОЛЬКО код никаких code-coverage репортов"
+  },
+  "Docs/Schedule.html": {
+    "href": "Docs/Schedule.html",
+    "title": "| uTraverse.Documentation",
+    "keywords": "УТРОМ ПРЕСС КАЧАТ Т) БЕГИТ ТУРНИК АНЖУМАНЯ ВЕЧЕРОМ ПРЕСС КАЧАТ БЕГИТ ТУРНИК АНЖУМАНЯ"
+  },
+  "Docs/getting-started.html": {
+    "href": "Docs/getting-started.html",
+    "title": "Getting Started | uTraverse.Documentation",
+    "keywords": "Getting Started"
+  },
+  "Docs/introduction.html": {
+    "href": "Docs/introduction.html",
+    "title": "Introduction | uTraverse.Documentation",
+    "keywords": "Introduction"
+  },
+  "README.html": {
+    "href": "README.html",
+    "title": "project | uTraverse.Documentation",
+    "keywords": "project"
+  },
+  "api/Projects.html": {
+    "href": "api/Projects.html",
+    "title": "Namespace Projects | uTraverse.Documentation",
+    "keywords": "Namespace Projects Classes uTraverse_AiAPI uTraverse_PlacesAPI"
+  },
+  "api/Projects.uTraverse_AiAPI.html": {
+    "href": "api/Projects.uTraverse_AiAPI.html",
+    "title": "Class uTraverse_AiAPI | uTraverse.Documentation",
+    "keywords": "Class uTraverse_AiAPI Namespace Projects Assembly uTraverse.AspireHost.dll public class uTraverse_AiAPI : IProjectMetadata, IResourceAnnotation Inheritance object uTraverse_AiAPI Implements IProjectMetadata IResourceAnnotation Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Properties ProjectPath Gets the fully-qualified path to the project. public string ProjectPath { get; } Property Value string"
+  },
+  "api/Projects.uTraverse_PlacesAPI.html": {
+    "href": "api/Projects.uTraverse_PlacesAPI.html",
+    "title": "Class uTraverse_PlacesAPI | uTraverse.Documentation",
+    "keywords": "Class uTraverse_PlacesAPI Namespace Projects Assembly uTraverse.AspireHost.dll public class uTraverse_PlacesAPI : IProjectMetadata, IResourceAnnotation Inheritance object uTraverse_PlacesAPI Implements IProjectMetadata IResourceAnnotation Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Properties ProjectPath Gets the fully-qualified path to the project. public string ProjectPath { get; } Property Value string"
+  },
+  "api/uTraverse.AiAPI.Data.AiDbContext.html": {
+    "href": "api/uTraverse.AiAPI.Data.AiDbContext.html",
+    "title": "Class AiDbContext | uTraverse.Documentation",
+    "keywords": "Class AiDbContext Namespace uTraverse.AiAPI.Data Assembly uTraverse.AiAPI.dll public sealed class AiDbContext : DbContext, IInfrastructure<IServiceProvider>, IDbContextDependencies, IDbSetCache, IDbContextPoolable, IResettableService, IDisposable, IAsyncDisposable Inheritance object DbContext AiDbContext Implements IInfrastructure<IServiceProvider> IDbContextDependencies IDbSetCache IDbContextPoolable IResettableService IDisposable IAsyncDisposable Inherited Members DbContext.Set<TEntity>() DbContext.Set<TEntity>(string) DbContext.SaveChanges() DbContext.SaveChanges(bool) DbContext.SaveChangesAsync(CancellationToken) DbContext.SaveChangesAsync(bool, CancellationToken) DbContext.Dispose() DbContext.DisposeAsync() DbContext.Entry<TEntity>(TEntity) DbContext.Entry(object) DbContext.Add<TEntity>(TEntity) DbContext.AddAsync<TEntity>(TEntity, CancellationToken) DbContext.Attach<TEntity>(TEntity) DbContext.Update<TEntity>(TEntity) DbContext.Remove<TEntity>(TEntity) DbContext.Add(object) DbContext.AddAsync(object, CancellationToken) DbContext.Attach(object) DbContext.Update(object) DbContext.Remove(object) DbContext.AddRange(params object[]) DbContext.AddRangeAsync(params object[]) DbContext.AttachRange(params object[]) DbContext.UpdateRange(params object[]) DbContext.RemoveRange(params object[]) DbContext.AddRange(IEnumerable<object>) DbContext.AddRangeAsync(IEnumerable<object>, CancellationToken) DbContext.AttachRange(IEnumerable<object>) DbContext.UpdateRange(IEnumerable<object>) DbContext.RemoveRange(IEnumerable<object>) DbContext.Find(Type, params object[]) DbContext.FindAsync(Type, params object[]) DbContext.FindAsync(Type, object[], CancellationToken) DbContext.Find<TEntity>(params object[]) DbContext.FindAsync<TEntity>(params object[]) DbContext.FindAsync<TEntity>(object[], CancellationToken) DbContext.FromExpression<TResult>(Expression<Func<IQueryable<TResult>>>) DbContext.Database DbContext.ChangeTracker DbContext.Model DbContext.ContextId DbContext.SavingChanges DbContext.SavedChanges DbContext.SaveChangesFailed object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.ReferenceEquals(object, object) object.ToString() Constructors AiDbContext(DbContextOptions) public AiDbContext(DbContextOptions options) Parameters options DbContextOptions Properties Indexes public required DbSet<Index> Indexes { get; set; } Property Value DbSet<Index>"
+  },
+  "api/uTraverse.AiAPI.Data.html": {
+    "href": "api/uTraverse.AiAPI.Data.html",
+    "title": "Namespace uTraverse.AiAPI.Data | uTraverse.Documentation",
+    "keywords": "Namespace uTraverse.AiAPI.Data Classes AiDbContext"
+  },
+  "api/uTraverse.AiAPI.Exceptions.ApiResponseNullException.html": {
+    "href": "api/uTraverse.AiAPI.Exceptions.ApiResponseNullException.html",
+    "title": "Class ApiResponseNullException | uTraverse.Documentation",
+    "keywords": "Class ApiResponseNullException Namespace uTraverse.AiAPI.Exceptions Assembly uTraverse.AiAPI.dll public class ApiResponseNullException : Exception, ISerializable Inheritance object Exception ApiResponseNullException Implements ISerializable Inherited Members Exception.GetBaseException() Exception.GetType() Exception.ToString() Exception.Data Exception.HelpLink Exception.HResult Exception.InnerException Exception.Message Exception.Source Exception.StackTrace Exception.TargetSite Exception.SerializeObjectState object.Equals(object) object.Equals(object, object) object.GetHashCode() object.MemberwiseClone() object.ReferenceEquals(object, object) Constructors ApiResponseNullException() public ApiResponseNullException() ApiResponseNullException(string) public ApiResponseNullException(string message) Parameters message string ApiResponseNullException(string, Exception) public ApiResponseNullException(string message, Exception inner) Parameters message string inner Exception"
+  },
+  "api/uTraverse.AiAPI.Exceptions.IndexNotFoundException.html": {
+    "href": "api/uTraverse.AiAPI.Exceptions.IndexNotFoundException.html",
+    "title": "Class IndexNotFoundException | uTraverse.Documentation",
+    "keywords": "Class IndexNotFoundException Namespace uTraverse.AiAPI.Exceptions Assembly uTraverse.AiAPI.dll public class IndexNotFoundException : Exception, ISerializable Inheritance object Exception IndexNotFoundException Implements ISerializable Inherited Members Exception.GetBaseException() Exception.GetType() Exception.ToString() Exception.Data Exception.HelpLink Exception.HResult Exception.InnerException Exception.Message Exception.Source Exception.StackTrace Exception.TargetSite Exception.SerializeObjectState object.Equals(object) object.Equals(object, object) object.GetHashCode() object.MemberwiseClone() object.ReferenceEquals(object, object) Constructors IndexNotFoundException() public IndexNotFoundException() IndexNotFoundException(string) public IndexNotFoundException(string message) Parameters message string IndexNotFoundException(string, Exception) public IndexNotFoundException(string message, Exception inner) Parameters message string inner Exception"
+  },
+  "api/uTraverse.AiAPI.Exceptions.html": {
+    "href": "api/uTraverse.AiAPI.Exceptions.html",
+    "title": "Namespace uTraverse.AiAPI.Exceptions | uTraverse.Documentation",
+    "keywords": "Namespace uTraverse.AiAPI.Exceptions Classes ApiResponseNullException IndexNotFoundException"
+  },
+  "api/uTraverse.AiAPI.Models.Index.html": {
+    "href": "api/uTraverse.AiAPI.Models.Index.html",
+    "title": "Class Index | uTraverse.Documentation",
+    "keywords": "Class Index Namespace uTraverse.AiAPI.Models Assembly uTraverse.AiAPI.dll public class Index Inheritance object Index Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Properties Id public long Id { get; set; } Property Value long XID [Length(1, 16)] public required string XID { get; set; } Property Value string"
+  },
+  "api/uTraverse.AiAPI.Models.html": {
+    "href": "api/uTraverse.AiAPI.Models.html",
+    "title": "Namespace uTraverse.AiAPI.Models | uTraverse.Documentation",
+    "keywords": "Namespace uTraverse.AiAPI.Models Classes Index"
+  },
+  "api/uTraverse.AiAPI.Services.AiService.html": {
+    "href": "api/uTraverse.AiAPI.Services.AiService.html",
+    "title": "Class AiService | uTraverse.Documentation",
+    "keywords": "Class AiService Namespace uTraverse.AiAPI.Services Assembly uTraverse.AiAPI.dll Manages communication with the AI microservice public class AiService : IAiService Inheritance object AiService Implements IAiService Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors AiService(ILogger<AiService>, HttpClient) Manages communication with the AI microservice public AiService(ILogger<AiService> logger, HttpClient httpClient) Parameters logger ILogger<AiService> A logger instance for internal usage httpClient HttpClient An HttpClient instance for communication with the AI microservice (should have BaseAddress set to the AI microservice URL) Methods GetPlaceIndexesAsync(IFormFile, string) public Task<IEnumerable<long>> GetPlaceIndexesAsync(IFormFile imgPrompt, string city) Parameters imgPrompt IFormFile city string Returns Task<IEnumerable<long>> GetPlaceIndexesAsync(string, string) Retrieves an array of place IDs matching the given Prompt public Task<IEnumerable<long>> GetPlaceIndexesAsync(string prompt, string city) Parameters prompt string The Prompt to match the places city string Returns Task<IEnumerable<long>> An array of place IDs that match the Prompt Exceptions ApiResponseNullException The AI API returned null response"
+  },
+  "api/uTraverse.AiAPI.Services.IAiService.html": {
+    "href": "api/uTraverse.AiAPI.Services.IAiService.html",
+    "title": "Interface IAiService | uTraverse.Documentation",
+    "keywords": "Interface IAiService Namespace uTraverse.AiAPI.Services Assembly uTraverse.AiAPI.dll Manages communication with the AI microservice public interface IAiService Methods GetPlaceIndexesAsync(IFormFile, string) Task<IEnumerable<long>> GetPlaceIndexesAsync(IFormFile imgPrompt, string city) Parameters imgPrompt IFormFile city string Returns Task<IEnumerable<long>> GetPlaceIndexesAsync(string, string) Retrieves an array of place IDs matching the given Prompt Task<IEnumerable<long>> GetPlaceIndexesAsync(string prompt, string city) Parameters prompt string The Prompt to match the places city string Returns Task<IEnumerable<long>> An array of place IDs that match the Prompt Exceptions ApiResponseNullException The AI API returned null response"
+  },
+  "api/uTraverse.AiAPI.Services.IPlaceResolverService.html": {
+    "href": "api/uTraverse.AiAPI.Services.IPlaceResolverService.html",
+    "title": "Interface IPlaceResolverService | uTraverse.Documentation",
+    "keywords": "Interface IPlaceResolverService Namespace uTraverse.AiAPI.Services Assembly uTraverse.AiAPI.dll Manages resolution of XIDs by indexes public interface IPlaceResolverService Methods GetXidForIndexAsync(long) Resolves XID from index Task<string> GetXidForIndexAsync(long index) Parameters index long Index to look for Returns Task<string> XID of the place GetXidsForIndexesAsync(IEnumerable<long>) Resolves multiple XIDs from indexes Task<IEnumerable<string>> GetXidsForIndexesAsync(IEnumerable<long> indexes) Parameters indexes IEnumerable<long> Collection of indexes to look for Returns Task<IEnumerable<string>> Collection of XIDs"
+  },
+  "api/uTraverse.AiAPI.Services.PlaceResolverService.html": {
+    "href": "api/uTraverse.AiAPI.Services.PlaceResolverService.html",
+    "title": "Class PlaceResolverService | uTraverse.Documentation",
+    "keywords": "Class PlaceResolverService Namespace uTraverse.AiAPI.Services Assembly uTraverse.AiAPI.dll Manages resolution of XIDs by their indexes public class PlaceResolverService : IPlaceResolverService Inheritance object PlaceResolverService Implements IPlaceResolverService Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors PlaceResolverService(AiDbContext) Manages resolution of XIDs by their indexes public PlaceResolverService(AiDbContext db) Parameters db AiDbContext Database context containing index table Methods GetXidForIndexAsync(long) Resolves XID from index public Task<string> GetXidForIndexAsync(long index) Parameters index long Index to look for Returns Task<string> XID of the place GetXidsForIndexesAsync(IEnumerable<long>) Resolves multiple XIDs from indexes public Task<IEnumerable<string>> GetXidsForIndexesAsync(IEnumerable<long> indexes) Parameters indexes IEnumerable<long> Collection of indexes to look for Returns Task<IEnumerable<string>> Collection of XIDs"
+  },
+  "api/uTraverse.AiAPI.Services.html": {
+    "href": "api/uTraverse.AiAPI.Services.html",
+    "title": "Namespace uTraverse.AiAPI.Services | uTraverse.Documentation",
+    "keywords": "Namespace uTraverse.AiAPI.Services Classes AiService Manages communication with the AI microservice PlaceResolverService Manages resolution of XIDs by their indexes Interfaces IAiService Manages communication with the AI microservice IPlaceResolverService Manages resolution of XIDs by indexes"
+  },
+  "api/uTraverse.AspireServiceDefaults.Extensions.html": {
+    "href": "api/uTraverse.AspireServiceDefaults.Extensions.html",
+    "title": "Class Extensions | uTraverse.Documentation",
+    "keywords": "Class Extensions Namespace uTraverse.AspireServiceDefaults Assembly uTraverse.AspireServiceDefaults.dll public static class Extensions Inheritance object Extensions Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Methods AddDefaultHealthChecks(IHostApplicationBuilder) public static IHostApplicationBuilder AddDefaultHealthChecks(this IHostApplicationBuilder builder) Parameters builder IHostApplicationBuilder Returns IHostApplicationBuilder AddServiceDefaults(IHostApplicationBuilder) public static IHostApplicationBuilder AddServiceDefaults(this IHostApplicationBuilder builder) Parameters builder IHostApplicationBuilder Returns IHostApplicationBuilder ConfigureOpenTelemetry(IHostApplicationBuilder) public static IHostApplicationBuilder ConfigureOpenTelemetry(this IHostApplicationBuilder builder) Parameters builder IHostApplicationBuilder Returns IHostApplicationBuilder MapDefaultEndpoints(WebApplication) public static WebApplication MapDefaultEndpoints(this WebApplication app) Parameters app WebApplication Returns WebApplication"
+  },
+  "api/uTraverse.AspireServiceDefaults.html": {
+    "href": "api/uTraverse.AspireServiceDefaults.html",
+    "title": "Namespace uTraverse.AspireServiceDefaults | uTraverse.Documentation",
+    "keywords": "Namespace uTraverse.AspireServiceDefaults Classes Extensions"
+  },
+  "api/uTraverse.Benchmarks.Data.DatabaseBenchmark.html": {
+    "href": "api/uTraverse.Benchmarks.Data.DatabaseBenchmark.html",
+    "title": "Class DatabaseBenchmark | uTraverse.Documentation",
+    "keywords": "Class DatabaseBenchmark Namespace uTraverse.Benchmarks.Data Assembly uTraverse.Benchmarks.dll public class DatabaseBenchmark Inheritance object DatabaseBenchmark Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Fields _getCount [Params(new object?[] { 10, 100, 1000 })] public int _getCount Field Value int Methods Cleanup() [GlobalCleanup] public void Cleanup() GetPlacesContainsArray() [Benchmark(90, \"R:\\\\nto\\\\project\\\\uTraverse.Benchmarks\\\\Data\\\\DatabaseBenchmark.cs\", Baseline = true)] public List<Place> GetPlacesContainsArray() Returns List<Place> GetPlacesContainsEnumerable() [Benchmark(96, \"R:\\\\nto\\\\project\\\\uTraverse.Benchmarks\\\\Data\\\\DatabaseBenchmark.cs\")] public List<Place> GetPlacesContainsEnumerable() Returns List<Place> GetPlacesJoinArray() [Benchmark(102, \"R:\\\\nto\\\\project\\\\uTraverse.Benchmarks\\\\Data\\\\DatabaseBenchmark.cs\")] public List<Place> GetPlacesJoinArray() Returns List<Place> IterationSetup() [IterationSetup] public void IterationSetup() Setup() [GlobalSetup] public void Setup()"
+  },
+  "api/uTraverse.Benchmarks.Data.html": {
+    "href": "api/uTraverse.Benchmarks.Data.html",
+    "title": "Namespace uTraverse.Benchmarks.Data | uTraverse.Documentation",
+    "keywords": "Namespace uTraverse.Benchmarks.Data Classes DatabaseBenchmark"
+  },
+  "api/uTraverse.Benchmarks.Web.JsonBenchmarks.html": {
+    "href": "api/uTraverse.Benchmarks.Web.JsonBenchmarks.html",
+    "title": "Class JsonBenchmarks | uTraverse.Documentation",
+    "keywords": "Class JsonBenchmarks Namespace uTraverse.Benchmarks.Web Assembly uTraverse.Benchmarks.dll public class JsonBenchmarks Inheritance object JsonBenchmarks Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Fields ItemNumber [Params(new object?[] { 10000 })] public int ItemNumber Field Value int Methods SerializeArrayAsync() [Benchmark(44, \"R:\\\\nto\\\\project\\\\uTraverse.Benchmarks\\\\Web\\\\JsonBenchmarks.cs\")] public string SerializeArrayAsync() Returns string SerializeIEnumerableAsync() [Benchmark(56, \"R:\\\\nto\\\\project\\\\uTraverse.Benchmarks\\\\Web\\\\JsonBenchmarks.cs\")] public string SerializeIEnumerableAsync() Returns string SerializeListAsync() [Benchmark(50, \"R:\\\\nto\\\\project\\\\uTraverse.Benchmarks\\\\Web\\\\JsonBenchmarks.cs\")] public string SerializeListAsync() Returns string Setup() [GlobalSetup] public void Setup()"
+  },
+  "api/uTraverse.Benchmarks.Web.html": {
+    "href": "api/uTraverse.Benchmarks.Web.html",
+    "title": "Namespace uTraverse.Benchmarks.Web | uTraverse.Documentation",
+    "keywords": "Namespace uTraverse.Benchmarks.Web Classes JsonBenchmarks"
+  },
+  "api/uTraverse.PlacesAPI.Data.PlacesDbContext.html": {
+    "href": "api/uTraverse.PlacesAPI.Data.PlacesDbContext.html",
+    "title": "Class PlacesDbContext | uTraverse.Documentation",
+    "keywords": "Class PlacesDbContext Namespace uTraverse.PlacesAPI.Data Assembly uTraverse.PlacesAPI.dll public sealed class PlacesDbContext : DbContext, IInfrastructure<IServiceProvider>, IDbContextDependencies, IDbSetCache, IDbContextPoolable, IResettableService, IDisposable, IAsyncDisposable Inheritance object DbContext PlacesDbContext Implements IInfrastructure<IServiceProvider> IDbContextDependencies IDbSetCache IDbContextPoolable IResettableService IDisposable IAsyncDisposable Inherited Members DbContext.Set<TEntity>() DbContext.Set<TEntity>(string) DbContext.SaveChanges() DbContext.SaveChanges(bool) DbContext.SaveChangesAsync(CancellationToken) DbContext.SaveChangesAsync(bool, CancellationToken) DbContext.Dispose() DbContext.DisposeAsync() DbContext.Entry<TEntity>(TEntity) DbContext.Entry(object) DbContext.Add<TEntity>(TEntity) DbContext.AddAsync<TEntity>(TEntity, CancellationToken) DbContext.Attach<TEntity>(TEntity) DbContext.Update<TEntity>(TEntity) DbContext.Remove<TEntity>(TEntity) DbContext.Add(object) DbContext.AddAsync(object, CancellationToken) DbContext.Attach(object) DbContext.Update(object) DbContext.Remove(object) DbContext.AddRange(params object[]) DbContext.AddRangeAsync(params object[]) DbContext.AttachRange(params object[]) DbContext.UpdateRange(params object[]) DbContext.RemoveRange(params object[]) DbContext.AddRange(IEnumerable<object>) DbContext.AddRangeAsync(IEnumerable<object>, CancellationToken) DbContext.AttachRange(IEnumerable<object>) DbContext.UpdateRange(IEnumerable<object>) DbContext.RemoveRange(IEnumerable<object>) DbContext.Find(Type, params object[]) DbContext.FindAsync(Type, params object[]) DbContext.FindAsync(Type, object[], CancellationToken) DbContext.Find<TEntity>(params object[]) DbContext.FindAsync<TEntity>(params object[]) DbContext.FindAsync<TEntity>(object[], CancellationToken) DbContext.FromExpression<TResult>(Expression<Func<IQueryable<TResult>>>) DbContext.Database DbContext.ChangeTracker DbContext.Model DbContext.ContextId DbContext.SavingChanges DbContext.SavedChanges DbContext.SaveChangesFailed object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.ReferenceEquals(object, object) object.ToString() Constructors PlacesDbContext(DbContextOptions) public PlacesDbContext(DbContextOptions options) Parameters options DbContextOptions Properties Places public required DbSet<Place> Places { get; init; } Property Value DbSet<Place>"
+  },
+  "api/uTraverse.PlacesAPI.Data.html": {
+    "href": "api/uTraverse.PlacesAPI.Data.html",
+    "title": "Namespace uTraverse.PlacesAPI.Data | uTraverse.Documentation",
+    "keywords": "Namespace uTraverse.PlacesAPI.Data Classes PlacesDbContext"
+  },
+  "api/uTraverse.PlacesAPI.Exceptions.PlaceNotFoundException.html": {
+    "href": "api/uTraverse.PlacesAPI.Exceptions.PlaceNotFoundException.html",
+    "title": "Class PlaceNotFoundException | uTraverse.Documentation",
+    "keywords": "Class PlaceNotFoundException Namespace uTraverse.PlacesAPI.Exceptions Assembly uTraverse.PlacesAPI.dll public class PlaceNotFoundException : Exception, ISerializable Inheritance object Exception PlaceNotFoundException Implements ISerializable Inherited Members Exception.GetBaseException() Exception.GetType() Exception.ToString() Exception.Data Exception.HelpLink Exception.HResult Exception.InnerException Exception.Message Exception.Source Exception.StackTrace Exception.TargetSite Exception.SerializeObjectState object.Equals(object) object.Equals(object, object) object.GetHashCode() object.MemberwiseClone() object.ReferenceEquals(object, object) Constructors PlaceNotFoundException() public PlaceNotFoundException() PlaceNotFoundException(string) public PlaceNotFoundException(string message) Parameters message string PlaceNotFoundException(string, Exception) public PlaceNotFoundException(string message, Exception inner) Parameters message string inner Exception"
+  },
+  "api/uTraverse.PlacesAPI.Exceptions.html": {
+    "href": "api/uTraverse.PlacesAPI.Exceptions.html",
+    "title": "Namespace uTraverse.PlacesAPI.Exceptions | uTraverse.Documentation",
+    "keywords": "Namespace uTraverse.PlacesAPI.Exceptions Classes PlaceNotFoundException"
+  },
+  "api/uTraverse.PlacesAPI.Models.Place.html": {
+    "href": "api/uTraverse.PlacesAPI.Models.Place.html",
+    "title": "Class Place | uTraverse.Documentation",
+    "keywords": "Class Place Namespace uTraverse.PlacesAPI.Models Assembly uTraverse.PlacesAPI.dll public class Place Inheritance object Place Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Properties Categories public required IEnumerable<string> Categories { get; set; } Property Value IEnumerable<string> City [Length(1, 64)] public required string City { get; set; } Property Value string Latitude public decimal Latitude { get; set; } Property Value decimal Longitude public decimal Longitude { get; set; } Property Value decimal Name [Length(1, 128)] public required string Name { get; set; } Property Value string WikiId [Length(1, 10)] public required string WikiId { get; set; } Property Value string XID [Key] public required string XID { get; set; } Property Value string"
+  },
+  "api/uTraverse.PlacesAPI.Models.html": {
+    "href": "api/uTraverse.PlacesAPI.Models.html",
+    "title": "Namespace uTraverse.PlacesAPI.Models | uTraverse.Documentation",
+    "keywords": "Namespace uTraverse.PlacesAPI.Models Classes Place"
+  },
+  "api/uTraverse.PlacesAPI.Services.IPlacesService.html": {
+    "href": "api/uTraverse.PlacesAPI.Services.IPlacesService.html",
+    "title": "Interface IPlacesService | uTraverse.Documentation",
+    "keywords": "Interface IPlacesService Namespace uTraverse.PlacesAPI.Services Assembly uTraverse.PlacesAPI.dll Handles retrieving place details from the DB public interface IPlacesService Methods GetPlaceByIdCacheAsync(string) Get place details by place ID Task<Place> GetPlaceByIdCacheAsync(string id) Parameters id string The ID of the place Returns Task<Place> Place instance containing the details of the place with given ID GetPlacesByIdsAsync(IEnumerable<string>) Get details for places with given IDs Task<IEnumerable<Place>> GetPlacesByIdsAsync(IEnumerable<string> ids) Parameters ids IEnumerable<string> A collection of Returns Task<IEnumerable<Place>>"
+  },
+  "api/uTraverse.PlacesAPI.Services.PlacesService.html": {
+    "href": "api/uTraverse.PlacesAPI.Services.PlacesService.html",
+    "title": "Class PlacesService | uTraverse.Documentation",
+    "keywords": "Class PlacesService Namespace uTraverse.PlacesAPI.Services Assembly uTraverse.PlacesAPI.dll Handles retrieving places details from the DB public class PlacesService : IPlacesService Inheritance object PlacesService Implements IPlacesService Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors PlacesService(ILogger<PlacesService>, PlacesDbContext, IDistributedCache) Handles retrieving places details from the DB public PlacesService(ILogger<PlacesService> logger, PlacesDbContext db, IDistributedCache cache) Parameters logger ILogger<PlacesService> Logger for internal usage db PlacesDbContext DbContext for querying cache IDistributedCache Methods GetPlaceByIdCacheAsync(string) Get place details by place ID public Task<Place> GetPlaceByIdCacheAsync(string xid) Parameters xid string Returns Task<Place> Place instance containing the details of the place with given ID GetPlacesByIdsAsync(IEnumerable<string>) Get details for places with given IDs public Task<IEnumerable<Place>> GetPlacesByIdsAsync(IEnumerable<string> ids) Parameters ids IEnumerable<string> A collection of Returns Task<IEnumerable<Place>>"
+  },
+  "api/uTraverse.PlacesAPI.Services.html": {
+    "href": "api/uTraverse.PlacesAPI.Services.html",
+    "title": "Namespace uTraverse.PlacesAPI.Services | uTraverse.Documentation",
+    "keywords": "Namespace uTraverse.PlacesAPI.Services Classes PlacesService Handles retrieving places details from the DB Interfaces IPlacesService Handles retrieving place details from the DB"
+  },
+  "index.html": {
+    "href": "index.html",
+    "title": "This is the HOMEPAGE. | uTraverse.Documentation",
+    "keywords": "This is the HOMEPAGE. Refer to Markdown for how to write markdown files. Quick Start Notes: Add images to the images folder if the file is referencing an image."
+  }
+}

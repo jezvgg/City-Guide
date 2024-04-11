@@ -1,0 +1,332 @@
+### YamlMime:ManagedReference
+items:
+- uid: uTraverse.AiAPI.Services.IAiService
+  commentId: T:uTraverse.AiAPI.Services.IAiService
+  id: IAiService
+  parent: uTraverse.AiAPI.Services
+  children:
+  - uTraverse.AiAPI.Services.IAiService.GetPlaceIndexesAsync(Microsoft.AspNetCore.Http.IFormFile,System.String)
+  - uTraverse.AiAPI.Services.IAiService.GetPlaceIndexesAsync(System.String,System.String)
+  langs:
+  - csharp
+  - vb
+  name: IAiService
+  nameWithType: IAiService
+  fullName: uTraverse.AiAPI.Services.IAiService
+  type: Interface
+  source:
+    remote:
+      path: uTraverse.AiAPI/Services/IAIService.cs
+      branch: backend/city-selection
+      repo: https://github.com/jezvgg/project.git
+    id: IAiService
+    path: uTraverse.AiAPI/Services/IAIService.cs
+    startLine: 7
+  assemblies:
+  - uTraverse.AiAPI
+  namespace: uTraverse.AiAPI.Services
+  summary: Manages communication with the AI microservice
+  example: []
+  syntax:
+    content: public interface IAiService
+    content.vb: Public Interface IAiService
+- uid: uTraverse.AiAPI.Services.IAiService.GetPlaceIndexesAsync(System.String,System.String)
+  commentId: M:uTraverse.AiAPI.Services.IAiService.GetPlaceIndexesAsync(System.String,System.String)
+  id: GetPlaceIndexesAsync(System.String,System.String)
+  parent: uTraverse.AiAPI.Services.IAiService
+  langs:
+  - csharp
+  - vb
+  name: GetPlaceIndexesAsync(string, string)
+  nameWithType: IAiService.GetPlaceIndexesAsync(string, string)
+  fullName: uTraverse.AiAPI.Services.IAiService.GetPlaceIndexesAsync(string, string)
+  type: Method
+  source:
+    remote:
+      path: uTraverse.AiAPI/Services/IAIService.cs
+      branch: backend/city-selection
+      repo: https://github.com/jezvgg/project.git
+    id: GetPlaceIndexesAsync
+    path: uTraverse.AiAPI/Services/IAIService.cs
+    startLine: 15
+  assemblies:
+  - uTraverse.AiAPI
+  namespace: uTraverse.AiAPI.Services
+  summary: Retrieves an array of place IDs matching the given Prompt
+  example: []
+  syntax:
+    content: Task<IEnumerable<long>> GetPlaceIndexesAsync(string prompt, string city)
+    parameters:
+    - id: prompt
+      type: System.String
+      description: The Prompt to match the places
+    - id: city
+      type: System.String
+    return:
+      type: System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{System.Int64}}
+      description: An array of place IDs that match the Prompt
+    content.vb: Function GetPlaceIndexesAsync(prompt As String, city As String) As Task(Of IEnumerable(Of Long))
+  overload: uTraverse.AiAPI.Services.IAiService.GetPlaceIndexesAsync*
+  exceptions:
+  - type: uTraverse.AiAPI.Exceptions.ApiResponseNullException
+    commentId: T:uTraverse.AiAPI.Exceptions.ApiResponseNullException
+    description: The AI API returned null response
+  nameWithType.vb: IAiService.GetPlaceIndexesAsync(String, String)
+  fullName.vb: uTraverse.AiAPI.Services.IAiService.GetPlaceIndexesAsync(String, String)
+  name.vb: GetPlaceIndexesAsync(String, String)
+- uid: uTraverse.AiAPI.Services.IAiService.GetPlaceIndexesAsync(Microsoft.AspNetCore.Http.IFormFile,System.String)
+  commentId: M:uTraverse.AiAPI.Services.IAiService.GetPlaceIndexesAsync(Microsoft.AspNetCore.Http.IFormFile,System.String)
+  id: GetPlaceIndexesAsync(Microsoft.AspNetCore.Http.IFormFile,System.String)
+  parent: uTraverse.AiAPI.Services.IAiService
+  langs:
+  - csharp
+  - vb
+  name: GetPlaceIndexesAsync(IFormFile, string)
+  nameWithType: IAiService.GetPlaceIndexesAsync(IFormFile, string)
+  fullName: uTraverse.AiAPI.Services.IAiService.GetPlaceIndexesAsync(Microsoft.AspNetCore.Http.IFormFile, string)
+  type: Method
+  source:
+    remote:
+      path: uTraverse.AiAPI/Services/IAIService.cs
+      branch: backend/city-selection
+      repo: https://github.com/jezvgg/project.git
+    id: GetPlaceIndexesAsync
+    path: uTraverse.AiAPI/Services/IAIService.cs
+    startLine: 16
+  assemblies:
+  - uTraverse.AiAPI
+  namespace: uTraverse.AiAPI.Services
+  syntax:
+    content: Task<IEnumerable<long>> GetPlaceIndexesAsync(IFormFile imgPrompt, string city)
+    parameters:
+    - id: imgPrompt
+      type: Microsoft.AspNetCore.Http.IFormFile
+    - id: city
+      type: System.String
+    return:
+      type: System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{System.Int64}}
+    content.vb: Function GetPlaceIndexesAsync(imgPrompt As IFormFile, city As String) As Task(Of IEnumerable(Of Long))
+  overload: uTraverse.AiAPI.Services.IAiService.GetPlaceIndexesAsync*
+  nameWithType.vb: IAiService.GetPlaceIndexesAsync(IFormFile, String)
+  fullName.vb: uTraverse.AiAPI.Services.IAiService.GetPlaceIndexesAsync(Microsoft.AspNetCore.Http.IFormFile, String)
+  name.vb: GetPlaceIndexesAsync(IFormFile, String)
+references:
+- uid: uTraverse.AiAPI.Services
+  commentId: N:uTraverse.AiAPI.Services
+  href: uTraverse.html
+  name: uTraverse.AiAPI.Services
+  nameWithType: uTraverse.AiAPI.Services
+  fullName: uTraverse.AiAPI.Services
+  spec.csharp:
+  - uid: uTraverse
+    name: uTraverse
+    href: uTraverse.html
+  - name: .
+  - uid: uTraverse.AiAPI
+    name: AiAPI
+    href: uTraverse.AiAPI.html
+  - name: .
+  - uid: uTraverse.AiAPI.Services
+    name: Services
+    href: uTraverse.AiAPI.Services.html
+  spec.vb:
+  - uid: uTraverse
+    name: uTraverse
+    href: uTraverse.html
+  - name: .
+  - uid: uTraverse.AiAPI
+    name: AiAPI
+    href: uTraverse.AiAPI.html
+  - name: .
+  - uid: uTraverse.AiAPI.Services
+    name: Services
+    href: uTraverse.AiAPI.Services.html
+- uid: uTraverse.AiAPI.Exceptions.ApiResponseNullException
+  commentId: T:uTraverse.AiAPI.Exceptions.ApiResponseNullException
+  href: uTraverse.AiAPI.Exceptions.ApiResponseNullException.html
+  name: ApiResponseNullException
+  nameWithType: ApiResponseNullException
+  fullName: uTraverse.AiAPI.Exceptions.ApiResponseNullException
+- uid: uTraverse.AiAPI.Services.IAiService.GetPlaceIndexesAsync*
+  commentId: Overload:uTraverse.AiAPI.Services.IAiService.GetPlaceIndexesAsync
+  href: uTraverse.AiAPI.Services.IAiService.html#uTraverse_AiAPI_Services_IAiService_GetPlaceIndexesAsync_System_String_System_String_
+  name: GetPlaceIndexesAsync
+  nameWithType: IAiService.GetPlaceIndexesAsync
+  fullName: uTraverse.AiAPI.Services.IAiService.GetPlaceIndexesAsync
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{System.Int64}}
+  commentId: T:System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{System.Int64}}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<IEnumerable<long>>
+  nameWithType: Task<IEnumerable<long>>
+  fullName: System.Threading.Tasks.Task<System.Collections.Generic.IEnumerable<long>>
+  nameWithType.vb: Task(Of IEnumerable(Of Long))
+  fullName.vb: System.Threading.Tasks.Task(Of System.Collections.Generic.IEnumerable(Of Long))
+  name.vb: Task(Of IEnumerable(Of Long))
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: System.Int64
+    name: long
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int64
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Int64
+    name: Long
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int64
+  - name: )
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+- uid: Microsoft.AspNetCore.Http.IFormFile
+  commentId: T:Microsoft.AspNetCore.Http.IFormFile
+  parent: Microsoft.AspNetCore.Http
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.http.iformfile
+  name: IFormFile
+  nameWithType: IFormFile
+  fullName: Microsoft.AspNetCore.Http.IFormFile
+- uid: Microsoft.AspNetCore.Http
+  commentId: N:Microsoft.AspNetCore.Http
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft
+  name: Microsoft.AspNetCore.Http
+  nameWithType: Microsoft.AspNetCore.Http
+  fullName: Microsoft.AspNetCore.Http
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.AspNetCore
+    name: AspNetCore
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore
+  - name: .
+  - uid: Microsoft.AspNetCore.Http
+    name: Http
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.http
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.AspNetCore
+    name: AspNetCore
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore
+  - name: .
+  - uid: Microsoft.AspNetCore.Http
+    name: Http
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.http

@@ -9,6 +9,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add default services (logging, configuration, etc.)
 builder.AddServiceDefaults();
 
+builder.Services.AddCors(policy =>
+{
+    policy.AddDefaultPolicy(p => p.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+});
+
 // Add PostgresSQL Places DB context
 builder.AddNpgsqlDbContext<PlacesDbContext>("utraverse-placesdb");
 
@@ -22,6 +27,8 @@ var app = builder.Build();
 
 // Map health-checks and other Aspire stuff
 app.MapDefaultEndpoints();
+
+app.UseCors();
 
 // Map /places section of the API
 var places = app.MapGroup("/places");
@@ -41,6 +48,6 @@ places.MapGet("/get/batch", async (string[] ids, IPlacesService placesService) =
         // The places with such IDs could not be found
         return Results.NotFound();
     }
-});
+}).DisableAntiforgery();
 
 app.Run();

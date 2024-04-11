@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Конвенции по коду в специфике C# | uTraverse.Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Конвенции по коду в специфике C# | uTraverse.Documentation ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/jezvgg/project/blob/backend/city-selection/Docs/C#/Code.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="uTraverse.Documentation">
+            uTraverse.Documentation
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="конвенции-по-коду-в-специфике-c">Конвенции по коду в специфике C#</h1>
+
+<h2 id="solid-архитектура">SOLID, архитектура</h2>
+<p>Слушаемся принципов SOLID, планируем код наперед</p>
+<h2 id="нейминг">Нейминг</h2>
+<p>Слушаемся конвенций языка:</p>
+<ol>
+<li>Классы в <code>PascalCase</code></li>
+<li>Методы в <code>PascalCase</code></li>
+<li>Свойства в <code>PascalCase</code></li>
+<li>Поля в <code>_lowerPascalCase</code> (поля не делаем публичными, только свойства)</li>
+<li>Переменные в <code>lowerPascalCase</code></li>
+<li>Интерфейсы префиксим с I</li>
+<li>Классы называем существительными</li>
+<li>Методы называем глаголами</li>
+<li>Названия классов, методов и переменных должны быть минимальной длины, при которой можно полноценно описать их функционал. Лишнего не сокращаем</li>
+<li>Аббревиатуры длиннее <strong>2</strong> символов пишем в PascalCase (<code>AIService</code> и <code>RuClipService</code>)</li>
+</ol>
+<h2 id="пространства-имен-структура">Пространства имен, структура</h2>
+<ol>
+<li>Пространства имен должны соответствовать структуре проекта</li>
+<li>Пространства имен и папки должны называться в <code>PascalCase</code></li>
+<li>Распределяем классы по логичной, адекватной структуре</li>
+</ol>
+<h2 id="комментарии">Комментарии</h2>
+<ol>
+<li>Для классов и методов пишем документацию в формате XML (<code>///</code>)</li>
+<li>Для кода пишем комментарии в отдельную строку через <code>//</code></li>
+<li>В коротких строках комментарии можно писать на одной строке с кодом, обязательно после. Между кодом и комментарием должно быть два пробела</li>
+<li>Между <code>//</code> и комментарем должен быть один пробел</li>
+<li>Если нужно использовать многострочные комментарии, используем <code>/**/</code>, а не несколько строк <code>//</code></li>
+</ol>
+<h2 id="модификаторы">Модификаторы</h2>
+<ol>
+<li>Грамотно используем модификаторы доступа</li>
+<li>Грамотно используем <code>static</code>, <code>abstract</code> и т.п.</li>
+</ol>
+<h2 id="asyncawait">async/await</h2>
+<ol>
+<li>Используем <code>async/await</code> и <code>Task</code> для IO-операций (сетевые запросы, работа с файлами, БД)</li>
+<li>Постфиксим названия методов с <code>Async</code> (<code>public async Task&lt;User&gt; GetUserAsync (int id)</code>)</li>
+<li>Когда работаем с асинхронностью, используем CancellationToken</li>
+</ol>
+<h2 id="nullability">Nullability</h2>
+<ol>
+<li>Не забываем проверки на <code>null</code></li>
+<li>Не забываем возвращать <code>null</code> или <code>Exception</code></li>
+</ol>
+<h2 id="исключения">Исключения</h2>
+<ol>
+<li>Не забываем ловить исключения</li>
+<li>Выбрасываем исключения подходящего типа, описывающего суть ошибки</li>
+<li>Не забываем писать текст, описывающий ошибку. Где надо, передаем <code>nameof()</code> для соответствующего аргумента</li>
+</ol>
+<h2 id="логгирование">Логгирование</h2>
+<ol>
+<li>Пишем логи достаточно часто (по ним должно быть просто отследить, что, где и когда пошло не так)</li>
+<li>Логи пишем с соответствующим уровнем серьезности</li>
+</ol>
+<h2 id="dependency-injection">Dependency Injection</h2>
+<ol>
+<li>Не забываем инжектить сервисы, если есть общий интерфейс (а он почти всегда должен быть) - инжектим по нему</li>
+<li><code>ILogger</code> принимаем как generic, передавая тип текущего сервиса (<em>например, в классе PlacesService: <code>public PlacesService (ILogger&lt;PlacesService&gt; logger) { ... }</code></em>)</li>
+<li>Принимаем грамотные решения по жизненному циклу сервисов</li>
+</ol>
+<h2 id="юнит-тесты">Юнит-тесты</h2>
+<ol>
+<li>Используем моки. В тестах не должно быть запросов к реальным API, БД и т.п.. Это юнит-тесты, а не интеграционные, мы тестируем только наше приложение, а не всю систему</li>
+<li>Не забываем про правильный нейминг и комментарии в тестах</li>
+</ol>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/jezvgg/project/blob/backend/city-selection/Docs/C#/Code.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

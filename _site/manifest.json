@@ -1,0 +1,438 @@
+{
+  "source_base_path": "R:/nto/project",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Docs/C#/Code.md",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/C#/Code.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Docs/Code.md",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/Code.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Docs/Git.md",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/Git.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Docs/Schedule.md",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/Schedule.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Docs/getting-started.md",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/getting-started.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Docs/introduction.md",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/introduction.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "Docs/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/toc.html"
+        },
+        ".json": {
+          "relative_path": "Docs/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "README.md",
+      "output": {
+        ".html": {
+          "relative_path": "README.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Projects.uTraverse_AiAPI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Projects.uTraverse_AiAPI.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Projects.uTraverse_PlacesAPI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Projects.uTraverse_PlacesAPI.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Projects.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Projects.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html"
+        },
+        ".json": {
+          "relative_path": "api/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/uTraverse.AiAPI.Data.AiDbContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/uTraverse.AiAPI.Data.AiDbContext.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/uTraverse.AiAPI.Data.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/uTraverse.AiAPI.Data.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/uTraverse.AiAPI.Exceptions.ApiResponseNullException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/uTraverse.AiAPI.Exceptions.ApiResponseNullException.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/uTraverse.AiAPI.Exceptions.IndexNotFoundException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/uTraverse.AiAPI.Exceptions.IndexNotFoundException.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/uTraverse.AiAPI.Exceptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/uTraverse.AiAPI.Exceptions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/uTraverse.AiAPI.Models.Index.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/uTraverse.AiAPI.Models.Index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/uTraverse.AiAPI.Models.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/uTraverse.AiAPI.Models.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/uTraverse.AiAPI.Services.AiService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/uTraverse.AiAPI.Services.AiService.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/uTraverse.AiAPI.Services.IAiService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/uTraverse.AiAPI.Services.IAiService.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/uTraverse.AiAPI.Services.IPlaceResolverService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/uTraverse.AiAPI.Services.IPlaceResolverService.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/uTraverse.AiAPI.Services.PlaceResolverService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/uTraverse.AiAPI.Services.PlaceResolverService.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/uTraverse.AiAPI.Services.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/uTraverse.AiAPI.Services.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/uTraverse.AspireServiceDefaults.Extensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/uTraverse.AspireServiceDefaults.Extensions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/uTraverse.AspireServiceDefaults.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/uTraverse.AspireServiceDefaults.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/uTraverse.Benchmarks.Data.DatabaseBenchmark.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/uTraverse.Benchmarks.Data.DatabaseBenchmark.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/uTraverse.Benchmarks.Data.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/uTraverse.Benchmarks.Data.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/uTraverse.Benchmarks.Web.JsonBenchmarks.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/uTraverse.Benchmarks.Web.JsonBenchmarks.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/uTraverse.Benchmarks.Web.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/uTraverse.Benchmarks.Web.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/uTraverse.PlacesAPI.Data.PlacesDbContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/uTraverse.PlacesAPI.Data.PlacesDbContext.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/uTraverse.PlacesAPI.Data.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/uTraverse.PlacesAPI.Data.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/uTraverse.PlacesAPI.Exceptions.PlaceNotFoundException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/uTraverse.PlacesAPI.Exceptions.PlaceNotFoundException.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/uTraverse.PlacesAPI.Exceptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/uTraverse.PlacesAPI.Exceptions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/uTraverse.PlacesAPI.Models.Place.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/uTraverse.PlacesAPI.Models.Place.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/uTraverse.PlacesAPI.Models.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/uTraverse.PlacesAPI.Models.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/uTraverse.PlacesAPI.Services.IPlacesService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/uTraverse.PlacesAPI.Services.IPlacesService.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/uTraverse.PlacesAPI.Services.PlacesService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/uTraverse.PlacesAPI.Services.PlacesService.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/uTraverse.PlacesAPI.Services.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/uTraverse.PlacesAPI.Services.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

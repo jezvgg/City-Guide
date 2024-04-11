@@ -93,7 +93,7 @@ function sendImage() {
     formData.append("city", city);
 
     $.ajax({
-        url: "http://127.0.0.1:5235/ai/places/img",
+        url: "http://127.0.0.1:5045/ai/places/img",
         data: formData,
         processData: false,
         contentType: false,
@@ -111,7 +111,7 @@ function sendImage() {
 function fetchDetails(ids) {
     console.log(ids);
     $.ajax({
-        url: "http://127.0.0.1:5235/places/get/batch",
+        url: "http://127.0.0.1:5008/places/get/batch",
         data: { ids: ids },
         traditional: true,
         type: "GET",
@@ -157,7 +157,7 @@ function sendText() {
     formData.append("city", city);
 
     $.ajax({
-        url: "http://127.0.0.1:5235/ai/places/text",
+        url: "http://127.0.0.1:5045/ai/places/text",
         data: formData,
         processData: false,
         contentType: false,

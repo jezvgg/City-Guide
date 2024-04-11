@@ -1,0 +1,863 @@
+### YamlMime:ManagedReference
+items:
+- uid: uTraverse.AiAPI.Services.AiService
+  commentId: T:uTraverse.AiAPI.Services.AiService
+  id: AiService
+  parent: uTraverse.AiAPI.Services
+  children:
+  - uTraverse.AiAPI.Services.AiService.#ctor(Microsoft.Extensions.Logging.ILogger{uTraverse.AiAPI.Services.AiService},System.Net.Http.HttpClient)
+  - uTraverse.AiAPI.Services.AiService.GetPlaceIndexesAsync(Microsoft.AspNetCore.Http.IFormFile,System.String)
+  - uTraverse.AiAPI.Services.AiService.GetPlaceIndexesAsync(System.String,System.String)
+  langs:
+  - csharp
+  - vb
+  name: AiService
+  nameWithType: AiService
+  fullName: uTraverse.AiAPI.Services.AiService
+  type: Class
+  source:
+    remote:
+      path: uTraverse.AiAPI/Services/AIService.cs
+      branch: backend/city-selection
+      repo: https://github.com/jezvgg/project.git
+    id: AiService
+    path: uTraverse.AiAPI/Services/AIService.cs
+    startLine: 9
+  assemblies:
+  - uTraverse.AiAPI
+  namespace: uTraverse.AiAPI.Services
+  summary: Manages communication with the AI microservice
+  example: []
+  syntax:
+    content: 'public class AiService : IAiService'
+    content.vb: Public Class AiService Implements IAiService
+  inheritance:
+  - System.Object
+  implements:
+  - uTraverse.AiAPI.Services.IAiService
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: uTraverse.AiAPI.Services.AiService.#ctor(Microsoft.Extensions.Logging.ILogger{uTraverse.AiAPI.Services.AiService},System.Net.Http.HttpClient)
+  commentId: M:uTraverse.AiAPI.Services.AiService.#ctor(Microsoft.Extensions.Logging.ILogger{uTraverse.AiAPI.Services.AiService},System.Net.Http.HttpClient)
+  id: '#ctor(Microsoft.Extensions.Logging.ILogger{uTraverse.AiAPI.Services.AiService},System.Net.Http.HttpClient)'
+  parent: uTraverse.AiAPI.Services.AiService
+  langs:
+  - csharp
+  - vb
+  name: AiService(ILogger<AiService>, HttpClient)
+  nameWithType: AiService.AiService(ILogger<AiService>, HttpClient)
+  fullName: uTraverse.AiAPI.Services.AiService.AiService(Microsoft.Extensions.Logging.ILogger<uTraverse.AiAPI.Services.AiService>, System.Net.Http.HttpClient)
+  type: Constructor
+  source:
+    remote:
+      path: uTraverse.AiAPI/Services/AIService.cs
+      branch: backend/city-selection
+      repo: https://github.com/jezvgg/project.git
+    id: .ctor
+    path: uTraverse.AiAPI/Services/AIService.cs
+    startLine: 9
+  assemblies:
+  - uTraverse.AiAPI
+  namespace: uTraverse.AiAPI.Services
+  summary: Manages communication with the AI microservice
+  example: []
+  syntax:
+    content: public AiService(ILogger<AiService> logger, HttpClient httpClient)
+    parameters:
+    - id: logger
+      type: Microsoft.Extensions.Logging.ILogger{uTraverse.AiAPI.Services.AiService}
+      description: A logger instance for internal usage
+    - id: httpClient
+      type: System.Net.Http.HttpClient
+      description: An HttpClient instance for communication with the AI microservice (should have BaseAddress set to the AI microservice URL)
+    content.vb: Public Sub New(logger As ILogger(Of AiService), httpClient As HttpClient)
+  overload: uTraverse.AiAPI.Services.AiService.#ctor*
+  nameWithType.vb: AiService.New(ILogger(Of AiService), HttpClient)
+  fullName.vb: uTraverse.AiAPI.Services.AiService.New(Microsoft.Extensions.Logging.ILogger(Of uTraverse.AiAPI.Services.AiService), System.Net.Http.HttpClient)
+  name.vb: New(ILogger(Of AiService), HttpClient)
+- uid: uTraverse.AiAPI.Services.AiService.GetPlaceIndexesAsync(System.String,System.String)
+  commentId: M:uTraverse.AiAPI.Services.AiService.GetPlaceIndexesAsync(System.String,System.String)
+  id: GetPlaceIndexesAsync(System.String,System.String)
+  parent: uTraverse.AiAPI.Services.AiService
+  langs:
+  - csharp
+  - vb
+  name: GetPlaceIndexesAsync(string, string)
+  nameWithType: AiService.GetPlaceIndexesAsync(string, string)
+  fullName: uTraverse.AiAPI.Services.AiService.GetPlaceIndexesAsync(string, string)
+  type: Method
+  source:
+    remote:
+      path: uTraverse.AiAPI/Services/AIService.cs
+      branch: backend/city-selection
+      repo: https://github.com/jezvgg/project.git
+    id: GetPlaceIndexesAsync
+    path: uTraverse.AiAPI/Services/AIService.cs
+    startLine: 13
+  assemblies:
+  - uTraverse.AiAPI
+  namespace: uTraverse.AiAPI.Services
+  summary: Retrieves an array of place IDs matching the given Prompt
+  example: []
+  syntax:
+    content: public Task<IEnumerable<long>> GetPlaceIndexesAsync(string prompt, string city)
+    parameters:
+    - id: prompt
+      type: System.String
+      description: The Prompt to match the places
+    - id: city
+      type: System.String
+    return:
+      type: System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{System.Int64}}
+      description: An array of place IDs that match the Prompt
+    content.vb: Public Function GetPlaceIndexesAsync(prompt As String, city As String) As Task(Of IEnumerable(Of Long))
+  overload: uTraverse.AiAPI.Services.AiService.GetPlaceIndexesAsync*
+  exceptions:
+  - type: uTraverse.AiAPI.Exceptions.ApiResponseNullException
+    commentId: T:uTraverse.AiAPI.Exceptions.ApiResponseNullException
+    description: The AI API returned null response
+  implements:
+  - uTraverse.AiAPI.Services.IAiService.GetPlaceIndexesAsync(System.String,System.String)
+  nameWithType.vb: AiService.GetPlaceIndexesAsync(String, String)
+  fullName.vb: uTraverse.AiAPI.Services.AiService.GetPlaceIndexesAsync(String, String)
+  name.vb: GetPlaceIndexesAsync(String, String)
+- uid: uTraverse.AiAPI.Services.AiService.GetPlaceIndexesAsync(Microsoft.AspNetCore.Http.IFormFile,System.String)
+  commentId: M:uTraverse.AiAPI.Services.AiService.GetPlaceIndexesAsync(Microsoft.AspNetCore.Http.IFormFile,System.String)
+  id: GetPlaceIndexesAsync(Microsoft.AspNetCore.Http.IFormFile,System.String)
+  parent: uTraverse.AiAPI.Services.AiService
+  langs:
+  - csharp
+  - vb
+  name: GetPlaceIndexesAsync(IFormFile, string)
+  nameWithType: AiService.GetPlaceIndexesAsync(IFormFile, string)
+  fullName: uTraverse.AiAPI.Services.AiService.GetPlaceIndexesAsync(Microsoft.AspNetCore.Http.IFormFile, string)
+  type: Method
+  source:
+    remote:
+      path: uTraverse.AiAPI/Services/AIService.cs
+      branch: backend/city-selection
+      repo: https://github.com/jezvgg/project.git
+    id: GetPlaceIndexesAsync
+    path: uTraverse.AiAPI/Services/AIService.cs
+    startLine: 45
+  assemblies:
+  - uTraverse.AiAPI
+  namespace: uTraverse.AiAPI.Services
+  example: []
+  syntax:
+    content: public Task<IEnumerable<long>> GetPlaceIndexesAsync(IFormFile imgPrompt, string city)
+    parameters:
+    - id: imgPrompt
+      type: Microsoft.AspNetCore.Http.IFormFile
+    - id: city
+      type: System.String
+    return:
+      type: System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{System.Int64}}
+    content.vb: Public Function GetPlaceIndexesAsync(imgPrompt As IFormFile, city As String) As Task(Of IEnumerable(Of Long))
+  overload: uTraverse.AiAPI.Services.AiService.GetPlaceIndexesAsync*
+  implements:
+  - uTraverse.AiAPI.Services.IAiService.GetPlaceIndexesAsync(Microsoft.AspNetCore.Http.IFormFile,System.String)
+  nameWithType.vb: AiService.GetPlaceIndexesAsync(IFormFile, String)
+  fullName.vb: uTraverse.AiAPI.Services.AiService.GetPlaceIndexesAsync(Microsoft.AspNetCore.Http.IFormFile, String)
+  name.vb: GetPlaceIndexesAsync(IFormFile, String)
+references:
+- uid: uTraverse.AiAPI.Services
+  commentId: N:uTraverse.AiAPI.Services
+  href: uTraverse.html
+  name: uTraverse.AiAPI.Services
+  nameWithType: uTraverse.AiAPI.Services
+  fullName: uTraverse.AiAPI.Services
+  spec.csharp:
+  - uid: uTraverse
+    name: uTraverse
+    href: uTraverse.html
+  - name: .
+  - uid: uTraverse.AiAPI
+    name: AiAPI
+    href: uTraverse.AiAPI.html
+  - name: .
+  - uid: uTraverse.AiAPI.Services
+    name: Services
+    href: uTraverse.AiAPI.Services.html
+  spec.vb:
+  - uid: uTraverse
+    name: uTraverse
+    href: uTraverse.html
+  - name: .
+  - uid: uTraverse.AiAPI
+    name: AiAPI
+    href: uTraverse.AiAPI.html
+  - name: .
+  - uid: uTraverse.AiAPI.Services
+    name: Services
+    href: uTraverse.AiAPI.Services.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: uTraverse.AiAPI.Services.IAiService
+  commentId: T:uTraverse.AiAPI.Services.IAiService
+  parent: uTraverse.AiAPI.Services
+  href: uTraverse.AiAPI.Services.IAiService.html
+  name: IAiService
+  nameWithType: IAiService
+  fullName: uTraverse.AiAPI.Services.IAiService
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: uTraverse.AiAPI.Services.AiService.#ctor*
+  commentId: Overload:uTraverse.AiAPI.Services.AiService.#ctor
+  href: uTraverse.AiAPI.Services.AiService.html#uTraverse_AiAPI_Services_AiService__ctor_Microsoft_Extensions_Logging_ILogger_uTraverse_AiAPI_Services_AiService__System_Net_Http_HttpClient_
+  name: AiService
+  nameWithType: AiService.AiService
+  fullName: uTraverse.AiAPI.Services.AiService.AiService
+  nameWithType.vb: AiService.New
+  fullName.vb: uTraverse.AiAPI.Services.AiService.New
+  name.vb: New
+- uid: Microsoft.Extensions.Logging.ILogger{uTraverse.AiAPI.Services.AiService}
+  commentId: T:Microsoft.Extensions.Logging.ILogger{uTraverse.AiAPI.Services.AiService}
+  parent: Microsoft.Extensions.Logging
+  definition: Microsoft.Extensions.Logging.ILogger`1
+  href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger-1
+  name: ILogger<AiService>
+  nameWithType: ILogger<AiService>
+  fullName: Microsoft.Extensions.Logging.ILogger<uTraverse.AiAPI.Services.AiService>
+  nameWithType.vb: ILogger(Of AiService)
+  fullName.vb: Microsoft.Extensions.Logging.ILogger(Of uTraverse.AiAPI.Services.AiService)
+  name.vb: ILogger(Of AiService)
+  spec.csharp:
+  - uid: Microsoft.Extensions.Logging.ILogger`1
+    name: ILogger
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger-1
+  - name: <
+  - uid: uTraverse.AiAPI.Services.AiService
+    name: AiService
+    href: uTraverse.AiAPI.Services.AiService.html
+  - name: '>'
+  spec.vb:
+  - uid: Microsoft.Extensions.Logging.ILogger`1
+    name: ILogger
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: uTraverse.AiAPI.Services.AiService
+    name: AiService
+    href: uTraverse.AiAPI.Services.AiService.html
+  - name: )
+- uid: System.Net.Http.HttpClient
+  commentId: T:System.Net.Http.HttpClient
+  parent: System.Net.Http
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclient
+  name: HttpClient
+  nameWithType: HttpClient
+  fullName: System.Net.Http.HttpClient
+- uid: Microsoft.Extensions.Logging.ILogger`1
+  commentId: T:Microsoft.Extensions.Logging.ILogger`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger-1
+  name: ILogger<TCategoryName>
+  nameWithType: ILogger<TCategoryName>
+  fullName: Microsoft.Extensions.Logging.ILogger<TCategoryName>
+  nameWithType.vb: ILogger(Of TCategoryName)
+  fullName.vb: Microsoft.Extensions.Logging.ILogger(Of TCategoryName)
+  name.vb: ILogger(Of TCategoryName)
+  spec.csharp:
+  - uid: Microsoft.Extensions.Logging.ILogger`1
+    name: ILogger
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger-1
+  - name: <
+  - name: TCategoryName
+  - name: '>'
+  spec.vb:
+  - uid: Microsoft.Extensions.Logging.ILogger`1
+    name: ILogger
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TCategoryName
+  - name: )
+- uid: Microsoft.Extensions.Logging
+  commentId: N:Microsoft.Extensions.Logging
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft
+  name: Microsoft.Extensions.Logging
+  nameWithType: Microsoft.Extensions.Logging
+  fullName: Microsoft.Extensions.Logging
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Extensions
+    name: Extensions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions
+  - name: .
+  - uid: Microsoft.Extensions.Logging
+    name: Logging
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Extensions
+    name: Extensions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions
+  - name: .
+  - uid: Microsoft.Extensions.Logging
+    name: Logging
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging
+- uid: System.Net.Http
+  commentId: N:System.Net.Http
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Net.Http
+  nameWithType: System.Net.Http
+  fullName: System.Net.Http
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Net
+    name: Net
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net
+  - name: .
+  - uid: System.Net.Http
+    name: Http
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Net
+    name: Net
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net
+  - name: .
+  - uid: System.Net.Http
+    name: Http
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http
+- uid: uTraverse.AiAPI.Exceptions.ApiResponseNullException
+  commentId: T:uTraverse.AiAPI.Exceptions.ApiResponseNullException
+  href: uTraverse.AiAPI.Exceptions.ApiResponseNullException.html
+  name: ApiResponseNullException
+  nameWithType: ApiResponseNullException
+  fullName: uTraverse.AiAPI.Exceptions.ApiResponseNullException
+- uid: uTraverse.AiAPI.Services.AiService.GetPlaceIndexesAsync*
+  commentId: Overload:uTraverse.AiAPI.Services.AiService.GetPlaceIndexesAsync
+  href: uTraverse.AiAPI.Services.AiService.html#uTraverse_AiAPI_Services_AiService_GetPlaceIndexesAsync_System_String_System_String_
+  name: GetPlaceIndexesAsync
+  nameWithType: AiService.GetPlaceIndexesAsync
+  fullName: uTraverse.AiAPI.Services.AiService.GetPlaceIndexesAsync
+- uid: uTraverse.AiAPI.Services.IAiService.GetPlaceIndexesAsync(System.String,System.String)
+  commentId: M:uTraverse.AiAPI.Services.IAiService.GetPlaceIndexesAsync(System.String,System.String)
+  parent: uTraverse.AiAPI.Services.IAiService
+  isExternal: true
+  href: uTraverse.AiAPI.Services.IAiService.html#uTraverse_AiAPI_Services_IAiService_GetPlaceIndexesAsync_System_String_System_String_
+  name: GetPlaceIndexesAsync(string, string)
+  nameWithType: IAiService.GetPlaceIndexesAsync(string, string)
+  fullName: uTraverse.AiAPI.Services.IAiService.GetPlaceIndexesAsync(string, string)
+  nameWithType.vb: IAiService.GetPlaceIndexesAsync(String, String)
+  fullName.vb: uTraverse.AiAPI.Services.IAiService.GetPlaceIndexesAsync(String, String)
+  name.vb: GetPlaceIndexesAsync(String, String)
+  spec.csharp:
+  - uid: uTraverse.AiAPI.Services.IAiService.GetPlaceIndexesAsync(System.String,System.String)
+    name: GetPlaceIndexesAsync
+    href: uTraverse.AiAPI.Services.IAiService.html#uTraverse_AiAPI_Services_IAiService_GetPlaceIndexesAsync_System_String_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: uTraverse.AiAPI.Services.IAiService.GetPlaceIndexesAsync(System.String,System.String)
+    name: GetPlaceIndexesAsync
+    href: uTraverse.AiAPI.Services.IAiService.html#uTraverse_AiAPI_Services_IAiService_GetPlaceIndexesAsync_System_String_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{System.Int64}}
+  commentId: T:System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{System.Int64}}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<IEnumerable<long>>
+  nameWithType: Task<IEnumerable<long>>
+  fullName: System.Threading.Tasks.Task<System.Collections.Generic.IEnumerable<long>>
+  nameWithType.vb: Task(Of IEnumerable(Of Long))
+  fullName.vb: System.Threading.Tasks.Task(Of System.Collections.Generic.IEnumerable(Of Long))
+  name.vb: Task(Of IEnumerable(Of Long))
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: System.Int64
+    name: long
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int64
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Int64
+    name: Long
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int64
+  - name: )
+  - name: )
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+- uid: uTraverse.AiAPI.Services.IAiService.GetPlaceIndexesAsync(Microsoft.AspNetCore.Http.IFormFile,System.String)
+  commentId: M:uTraverse.AiAPI.Services.IAiService.GetPlaceIndexesAsync(Microsoft.AspNetCore.Http.IFormFile,System.String)
+  parent: uTraverse.AiAPI.Services.IAiService
+  isExternal: true
+  href: uTraverse.AiAPI.Services.IAiService.html#uTraverse_AiAPI_Services_IAiService_GetPlaceIndexesAsync_Microsoft_AspNetCore_Http_IFormFile_System_String_
+  name: GetPlaceIndexesAsync(IFormFile, string)
+  nameWithType: IAiService.GetPlaceIndexesAsync(IFormFile, string)
+  fullName: uTraverse.AiAPI.Services.IAiService.GetPlaceIndexesAsync(Microsoft.AspNetCore.Http.IFormFile, string)
+  nameWithType.vb: IAiService.GetPlaceIndexesAsync(IFormFile, String)
+  fullName.vb: uTraverse.AiAPI.Services.IAiService.GetPlaceIndexesAsync(Microsoft.AspNetCore.Http.IFormFile, String)
+  name.vb: GetPlaceIndexesAsync(IFormFile, String)
+  spec.csharp:
+  - uid: uTraverse.AiAPI.Services.IAiService.GetPlaceIndexesAsync(Microsoft.AspNetCore.Http.IFormFile,System.String)
+    name: GetPlaceIndexesAsync
+    href: uTraverse.AiAPI.Services.IAiService.html#uTraverse_AiAPI_Services_IAiService_GetPlaceIndexesAsync_Microsoft_AspNetCore_Http_IFormFile_System_String_
+  - name: (
+  - uid: Microsoft.AspNetCore.Http.IFormFile
+    name: IFormFile
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.http.iformfile
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: uTraverse.AiAPI.Services.IAiService.GetPlaceIndexesAsync(Microsoft.AspNetCore.Http.IFormFile,System.String)
+    name: GetPlaceIndexesAsync
+    href: uTraverse.AiAPI.Services.IAiService.html#uTraverse_AiAPI_Services_IAiService_GetPlaceIndexesAsync_Microsoft_AspNetCore_Http_IFormFile_System_String_
+  - name: (
+  - uid: Microsoft.AspNetCore.Http.IFormFile
+    name: IFormFile
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.http.iformfile
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: Microsoft.AspNetCore.Http.IFormFile
+  commentId: T:Microsoft.AspNetCore.Http.IFormFile
+  parent: Microsoft.AspNetCore.Http
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.http.iformfile
+  name: IFormFile
+  nameWithType: IFormFile
+  fullName: Microsoft.AspNetCore.Http.IFormFile
+- uid: Microsoft.AspNetCore.Http
+  commentId: N:Microsoft.AspNetCore.Http
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft
+  name: Microsoft.AspNetCore.Http
+  nameWithType: Microsoft.AspNetCore.Http
+  fullName: Microsoft.AspNetCore.Http
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.AspNetCore
+    name: AspNetCore
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore
+  - name: .
+  - uid: Microsoft.AspNetCore.Http
+    name: Http
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.http
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.AspNetCore
+    name: AspNetCore
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore
+  - name: .
+  - uid: Microsoft.AspNetCore.Http
+    name: Http
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.http
