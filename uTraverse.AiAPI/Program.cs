@@ -26,7 +26,7 @@ places.MapPost("/text", async (TextPromptRequest request, IAiService ai) =>
     try
     {
         // Retrieve place IDs from the AI microservice for the given Prompt
-        var res = await ai.GetPlaceIdsAsync(request.Prompt);
+        var res = await ai.GetPlaceIdsAsync(request.Prompt, request.City);
 
         return Results.Ok(res);
     }
@@ -42,7 +42,7 @@ places.MapPost("/img", async (ImagePromptRequest request, IAiService ai) =>
     try
     {
         // Retrieve place IDs from the AI microservice for the given Prompt
-        var res = await ai.GetPlaceIdsAsync(request.Image);
+        var res = await ai.GetPlaceIdsAsync(request.Image, request.City);
 
         return Results.Ok(res);
     }
@@ -55,5 +55,5 @@ places.MapPost("/img", async (ImagePromptRequest request, IAiService ai) =>
 
 app.Run();
 
-record ImagePromptRequest(IFormFile Image);
-record TextPromptRequest(string Prompt);
+record ImagePromptRequest(IFormFile Image, string City);
+record TextPromptRequest(string Prompt, string City);

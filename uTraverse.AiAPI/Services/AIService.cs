@@ -11,14 +11,14 @@ public class AiService(ILogger<AiService> logger, HttpClient httpClient) : IAiSe
 {
     private readonly ILogger _logger = logger;
 
-    public async Task<IEnumerable<Guid>> GetPlaceIdsAsync(string prompt)
+    public async Task<IEnumerable<Guid>> GetPlaceIdsAsync(string prompt, string city)
     {
         // TODO: Add distributed caching to offload the AI and speed up execution
 
         _logger.LogDebug("Retrieving place IDs from the Prompt: {Prompt}", prompt);
 
         // Retrieve the IDs for the Prompt (TODO: replace with a better endpoint URL)
-        var response = await httpClient.PostAsync("/text/", new StringContent(prompt));
+        var response = await httpClient.PostAsync($"/text/{city}", new StringContent(prompt));
 
         // Throw an exception if received null
         if (response is null)
@@ -41,14 +41,14 @@ public class AiService(ILogger<AiService> logger, HttpClient httpClient) : IAiSe
         return res;
     }
 
-    public async Task<IEnumerable<Guid>> GetPlaceIdsAsync(IFormFile imgPrompt)
+    public async Task<IEnumerable<Guid>> GetPlaceIdsAsync(IFormFile imgPrompt, string city)
     {
         // TODO: Add distributed caching to offload the AI and speed up execution
 
         var stream = imgPrompt.OpenReadStream();
 
         // Retrieve the IDs for the Prompt (TODO: replace with a better endpoint URL)
-        var response = await httpClient.PostAsync("/img/", new StreamContent(stream));
+        var response = await httpClient.PostAsync($"/img/{city}", new StreamContent(stream));
         //GetFromJsonAsync<IEnumerable<Guid>>($"/?Prompt={imgPrompt}");
 
         // Throw an exception if received null
