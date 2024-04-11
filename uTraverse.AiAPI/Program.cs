@@ -19,14 +19,14 @@ app.MapDefaultEndpoints();
 // Map the /places API section
 var places = app.MapGroup("/ai/places");
 
-places.MapPost("/text", async (string prompt, IAiService ai) =>
+places.MapPost("/text", async (TextPromptRequest request, IAiService ai) =>
 {
-    app.Logger.LogDebug("Endpoint call on / with prompt: {prompt}", prompt);
+    app.Logger.LogDebug("Endpoint call on / with Prompt: {Prompt}", request.Prompt);
 
     try
     {
-        // Retrieve place IDs from the AI microservice for the given prompt
-        var res = await ai.GetPlaceIdsAsync(prompt);
+        // Retrieve place IDs from the AI microservice for the given Prompt
+        var res = await ai.GetPlaceIdsAsync(request.Prompt);
 
         return Results.Ok(res);
     }
@@ -37,12 +37,12 @@ places.MapPost("/text", async (string prompt, IAiService ai) =>
     }
 });
 
-places.MapPost("/img", async (IFormFile imgPrompt, IAiService ai) =>
+places.MapPost("/img", async (ImagePromptRequest request, IAiService ai) =>
 {
     try
     {
-        // Retrieve place IDs from the AI microservice for the given prompt
-        var res = await ai.GetPlaceIdsAsync(imgPrompt);
+        // Retrieve place IDs from the AI microservice for the given Prompt
+        var res = await ai.GetPlaceIdsAsync(request.Image);
 
         return Results.Ok(res);
     }
@@ -54,3 +54,6 @@ places.MapPost("/img", async (IFormFile imgPrompt, IAiService ai) =>
 });
 
 app.Run();
+
+record ImagePromptRequest(IFormFile Image);
+record TextPromptRequest(string Prompt);
