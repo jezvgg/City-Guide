@@ -121,27 +121,16 @@ function fetchDetails(ids) {
             coords = [];
             names = [];
 
-            var maxLat = -999;
-            var minLat = 999;
-            var maxLon = -999;
-            var minLon = 999;
-
             data.forEach(place => {
                 drawPlace(place.name, place.description, place.address);
 
                 console.log(place);
 
-                if (place.latitude > maxLat) maxLat = place.latitude;
-                if (place.latitude < minLat) minLat = place.latitude;
-
-                if (place.longtitude > maxLon) maxLon = place.longtitude;
-                if (place.longtitude < minLon) minLon = place.longtitude;
-
-                coords.push([place.longtitude, place.latitude]);
+                coords.push([place.longitude, place.latitude]);
                 names.push(place.name);
             });
 
-            center = [(maxLon + minLon) / 2, (maxLat + minLat) / 2];
+            center = coords[0];
 
             ymaps.ready(drawMap);
         }
@@ -189,7 +178,7 @@ function drawMap() {
         center: center,
         zoom: 10
     });
-
+    const {YMapZoomControl} = ymaps3.import('@yandex/ymaps3-controls@0.0.1')
     ymaps.route(
         coords
     ).then(function (route) {

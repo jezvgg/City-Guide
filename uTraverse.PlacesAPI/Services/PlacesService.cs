@@ -79,6 +79,7 @@ public class PlacesService(ILogger<PlacesService> logger, PlacesDbContext db, ID
         foreach (var id in idsHash)
         {
             placeString = await cache.GetStringAsync(id);
+            place = null;
             if (placeString is not null)
             {
                 place = JsonSerializer.Deserialize<Place>(placeString);

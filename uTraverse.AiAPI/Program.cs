@@ -63,7 +63,9 @@ places.MapPost("/text", async ([FromForm] TextPromptRequest request, IAiService 
 
         var xids = await placeResolver.GetXidsForIndexesAsync(res, request.City);
 
-        return Results.Ok(xids.Take(10));
+        var w = xids.Distinct().Take(5);
+
+        return Results.Ok(xids.Distinct().Take(5));
     }
     catch (ApiResponseNullException)
     {

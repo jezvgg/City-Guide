@@ -22,7 +22,7 @@ public class CsvLoader (PlacesDbContext db)
             {
                 XID = record.XID,
                 Name = record.Name,
-                Description = record.Description,
+                Description = new string(record.Description.Take(record.Description.IndexOf('.')).ToArray()),
                 Categories = record.Categories.ToList(),
                 City = record.City,
                 WikiId = record.WikiData,

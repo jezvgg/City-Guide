@@ -37,10 +37,10 @@ using (var scope = app.Services.CreateScope())
 {
     var loader = new CsvLoader(scope.ServiceProvider.GetRequiredService<PlacesDbContext>());
 
-    loader.LoadFile("./Datasets/desc_EKB_places.csv");
-    loader.LoadFile("./Datasets/desc_NN_places.csv");
-    loader.LoadFile("./Datasets/desc_Vladimir_places.csv");
-    loader.LoadFile("./Datasets/desc_Yaroslavl_places.csv");
+    loader.LoadFile("./Datasets/EKB_places (1).csv");
+    loader.LoadFile("./Datasets/NN_places.csv");
+    loader.LoadFile("./Datasets/Vlaf_places.csv");
+    loader.LoadFile("./Datasets/Yar_places.csv");
 }
 
 // Map /places section of the API
