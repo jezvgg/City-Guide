@@ -5,13 +5,13 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "uTraverse.AspireHost", "uTraverse.AspireHost\uTraverse.AspireHost.csproj", "{690AC209-B3DE-461A-A455-DE3D329CF74B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "uTraverse.AspireServiceDefaults", "uTraverse.AspireServiceDefaults\uTraverse.AspireServiceDefaults.csproj", "{43E64DEB-32CA-42AC-8222-CDDB5028E216}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "uTraverse.PlacesAPI", "uTraverse.PlacesAPI\uTraverse.PlacesAPI.csproj", "{D7077408-6A42-48EF-97BC-F679CCCEF25C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "uTraverse.AiAPI", "uTraverse.AiAPI\uTraverse.AiAPI.csproj", "{6DA37A2D-4029-4482-9985-F93B275290F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "uTraverse.Benchmarks", "uTraverse.Benchmarks\uTraverse.Benchmarks.csproj", "{32E2FB19-3D88-4BA4-8E5A-98C787B1537D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "uTraverse.Benchmarks", "uTraverse.Benchmarks\uTraverse.Benchmarks.csproj", "{32E2FB19-3D88-4BA4-8E5A-98C787B1537D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "uTraverse.ServiceDefaults", "uTraverse.ServiceDefaults\uTraverse.ServiceDefaults.csproj", "{B650CF40-5CD4-48B7-B092-27230C97E35D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,6 @@ Global
 		{690AC209-B3DE-461A-A455-DE3D329CF74B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{690AC209-B3DE-461A-A455-DE3D329CF74B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{690AC209-B3DE-461A-A455-DE3D329CF74B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{43E64DEB-32CA-42AC-8222-CDDB5028E216}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{43E64DEB-32CA-42AC-8222-CDDB5028E216}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{43E64DEB-32CA-42AC-8222-CDDB5028E216}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{43E64DEB-32CA-42AC-8222-CDDB5028E216}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D7077408-6A42-48EF-97BC-F679CCCEF25C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D7077408-6A42-48EF-97BC-F679CCCEF25C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7077408-6A42-48EF-97BC-F679CCCEF25C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +35,10 @@ Global
 		{32E2FB19-3D88-4BA4-8E5A-98C787B1537D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32E2FB19-3D88-4BA4-8E5A-98C787B1537D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32E2FB19-3D88-4BA4-8E5A-98C787B1537D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B650CF40-5CD4-48B7-B092-27230C97E35D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B650CF40-5CD4-48B7-B092-27230C97E35D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B650CF40-5CD4-48B7-B092-27230C97E35D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B650CF40-5CD4-48B7-B092-27230C97E35D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

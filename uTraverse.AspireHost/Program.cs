@@ -1,4 +1,6 @@
 // Create the application builder
+using Aspire.Hosting;
+
 var builder = DistributedApplication.CreateBuilder(args);
 
 // Add PostgresSQL DB container for place details

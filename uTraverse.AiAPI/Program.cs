@@ -2,8 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using uTraverse.AiAPI.Data;
 using uTraverse.AiAPI.Exceptions;
 using uTraverse.AiAPI.Services;
-using uTraverse.AspireServiceDefaults;
 using uTraverse.PlacesAPI.Utility;
+
+
 
 // Create the API builder
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +25,9 @@ builder.AddRedisDistributedCache("utraverse-indexcache");
 
 builder.Services.AddAntiforgery();
 
+builder.Services.AddSwaggerGen();
+builder.Services.AddEndpointsApiExplorer();
+
 //builder.Services.AddHttpClient<IAiService, AiService>(client => client.BaseAddress = new Uri("http://localhost:5076"));  // For test use only
 builder.Services.AddHttpClient<IAiService, AiService>(client => client.BaseAddress = new Uri("http://localhost:1234"));
 
@@ -33,6 +37,12 @@ var app = builder.Build();
 
 app.UseAntiforgery();
 app.UseCors();
+
+if (builder.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 Thread.Sleep(10000);
 

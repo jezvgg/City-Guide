@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <InvariantGlobalization>true</InvariantGlobalization>
@@ -12,12 +12,15 @@
 
   <ItemGroup>
     <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0-preview.5.24201.12" />
-    <PackageReference Include="Aspire.StackExchange.Redis.DistributedCaching" Version="9.0.0-preview.2.24162.2" />
+    <PackageReference Include="Aspire.StackExchange.Redis.DistributedCaching" Version="8.0.2" />
     <PackageReference Include="CsvHelper" Version="31.0.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.9.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.9.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.9.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.9.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\uTraverse.AspireServiceDefaults\uTraverse.AspireServiceDefaults.csproj" />
+    <ProjectReference Include="..\uTraverse.ServiceDefaults\uTraverse.ServiceDefaults.csproj" />
   </ItemGroup>
-
 </Project>

@@ -1,4 +1,3 @@
-using uTraverse.AspireServiceDefaults;
 using uTraverse.PlacesAPI.Data;
 using uTraverse.PlacesAPI.Exceptions;
 using uTraverse.PlacesAPI.Services;
@@ -24,10 +23,19 @@ builder.AddRedisDistributedCache("utraverse-placescache");
 // Add a service to interact with the Places DB
 builder.Services.AddScoped<IPlacesService, PlacesService>();
 
+builder.Services.AddSwaggerGen();
+builder.Services.AddEndpointsApiExplorer();
+
 var app = builder.Build();
 
 // Map health-checks and other Aspire stuff
 app.MapDefaultEndpoints();
+
+if (builder.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.UseCors();
 
