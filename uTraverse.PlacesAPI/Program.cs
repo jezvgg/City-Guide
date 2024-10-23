@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using uTraverse.PlacesAPI.Data;
 using uTraverse.PlacesAPI.Exceptions;
 using uTraverse.PlacesAPI.Services;
@@ -15,10 +16,12 @@ builder.Services.AddCors(policy =>
 });
 
 // Add PostgresSQL Places DB context
-builder.AddNpgsqlDbContext<PlacesDbContext>("utraverse-placesdb");
+//builder.AddNpgsqlDbContext<PlacesDbContext>("utraverse-placesdb");
+builder.Services.AddDbContext<PlacesDbContext>(build => build.UseNpgsql(builder.Configuration.GetConnectionString("Postgres")));
 
 //Add Redis Places cache
-builder.AddRedisDistributedCache("utraverse-placescache");
+//builder.AddRedisDistributedCache("utraverse-placescache");
+builder.Services.AddStackExchangeRedisCache(options => options.Configuration = builder.Configuration.GetConnectionString("Redis"));
 
 // Add a service to interact with the Places DB
 builder.Services.AddScoped<IPlacesService, PlacesService>();
@@ -31,11 +34,11 @@ var app = builder.Build();
 // Map health-checks and other Aspire stuff
 app.MapDefaultEndpoints();
 
-if (builder.Environment.IsDevelopment())
-{
+//if (builder.Environment.IsDevelopment())
+//{
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+//}
 
 app.UseCors();
 
@@ -54,7 +57,13 @@ using (var scope = app.Services.CreateScope())
 // Map /places section of the API
 var places = app.MapGroup("/places");
 
-places.MapGet("/get/batch", async (string[] ids, IPlacesService placesService) =>
+places.MapPost("/test", async (PlacesDbContext db) =>
+{
+    db.Places.Add(new uTraverse.PlacesAPI.Models.Place { Categories = ["a"], City="q", Name="w", WikiId="s", XID="2" });
+    db.SaveChanges();
+}).DisableAntiforgery();
+
+places.MapPost("/get/batch", async (string[] ids, IPlacesService placesService) =>
 {
     app.Logger.LogDebug("Hit /places/batch/ids endpoint");
 

@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using uTraverse.AiAPI.Data;
 using uTraverse.AiAPI.Exceptions;
 using uTraverse.AiAPI.Services;
@@ -12,16 +14,20 @@ var builder = WebApplication.CreateBuilder(args);
 // Add default services (logging, configuration, etc.)
 builder.AddServiceDefaults();
 
-// Add indexes DB reference
-builder.AddNpgsqlDbContext<AiDbContext>("utraverse-indexdb");
-
 builder.Services.AddCors(policy =>
 {
     policy.AddDefaultPolicy(p => p.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 });
 
+// Add indexes DB reference
+//builder.AddNpgsqlDbContext<AiDbContext>("utraverse-indexdb");
+builder.Services.AddDbContext<AiDbContext>(build => 
+build.UseNpgsql(builder.Configuration.GetConnectionString("Postgres")));
+
 // Add Redis cache for indexes
-builder.AddRedisDistributedCache("utraverse-indexcache");
+//builder.AddRedisDistributedCache("utraverse-indexcache");
+builder.Services.AddStackExchangeRedisCache(options => 
+options.Configuration = builder.Configuration.GetConnectionString("Redis"));
 
 builder.Services.AddAntiforgery();
 
@@ -38,11 +44,11 @@ var app = builder.Build();
 app.UseAntiforgery();
 app.UseCors();
 
-if (builder.Environment.IsDevelopment())
-{
+//if (builder.Environment.IsDevelopment())
+//{
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+//}
 
 Thread.Sleep(10000);
 
@@ -61,6 +67,12 @@ app.MapDefaultEndpoints();
 
 // Map the /places API section
 var places = app.MapGroup("/ai/places");
+
+places.MapPost("/test", async (AiDbContext db) =>
+{
+    db.Indexes.Add(new uTraverse.AiAPI.Models.Index { Id = "1", XID="2" });
+    db.SaveChanges();
+}).DisableAntiforgery();
 
 places.MapPost("/text", async ([FromForm] TextPromptRequest request, IAiService ai, IPlaceResolverService placeResolver) =>
 {

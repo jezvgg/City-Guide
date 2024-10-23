@@ -11,21 +11,21 @@ EXPOSE 8080
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["uTraverse.AiAPI/uTraverse.AiAPI.csproj", "uTraverse.AiAPI/"]
+COPY ["uTraverse.PlacesAPI/uTraverse.PlacesAPI.csproj", "uTraverse.PlacesAPI/"]
 COPY ["uTraverse.ServiceDefaults/uTraverse.ServiceDefaults.csproj", "uTraverse.ServiceDefaults/"]
-RUN dotnet restore "./uTraverse.AiAPI/uTraverse.AiAPI.csproj"
+RUN dotnet restore "./uTraverse.PlacesAPI/uTraverse.PlacesAPI.csproj"
 COPY . .
-WORKDIR "/src/uTraverse.AiAPI"
-RUN dotnet build "./uTraverse.AiAPI.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/uTraverse.PlacesAPI"
+RUN dotnet build "./uTraverse.PlacesAPI.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # Этот этап используется для публикации проекта службы, который будет скопирован на последний этап
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./uTraverse.AiAPI.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./uTraverse.PlacesAPI.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # Этот этап используется в рабочей среде или при запуске из VS в обычном режиме (по умолчанию, когда конфигурация отладки не используется)
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-COPY ["uTraverse.AiAPI/Datasets/", "Datasets/"]
-ENTRYPOINT ["dotnet", "uTraverse.AiAPI.dll"]
+COPY ["uTraverse.PlacesAPI/Datasets/", "Datasets/"]
+ENTRYPOINT ["dotnet", "uTraverse.PlacesAPI.dll"]
