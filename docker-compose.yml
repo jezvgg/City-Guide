@@ -1,0 +1,44 @@
+services:
+  ai_api:
+    image: ${DOCKER_REGISTRY-}ai_api
+    ports:
+      - 5045:8080
+    depends_on:
+      - db
+      - redis
+    build:
+      context: .
+      dockerfile: uTraverse.AiAPI/Dockerfile
+
+  places_api:
+    image: ${DOCKER_REGISTRY-}places_api
+    ports:
+      - 5008:8080
+    depends_on:
+      - db
+      - redis
+    build:
+      context: .
+      dockerfile: uTraverse.PlacesAPI/Dockerfile
+
+  db:
+    image: postgres:latest
+    volumes:
+      - ./docker-postgresql-multiple-databases:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
+      POSTGRES_DB: test
+    ports:
+      - 5432:5432
+    restart: unless-stopped
+
+  redis:
+    image: redis:latest
+    restart: always
+    expose:
+      - 6379
+    environment:
+      - REDIS_PASSWORD=test
+      - REDIS_PORT=6379
+      - REDIS_DATABASES=16
