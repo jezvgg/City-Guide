@@ -6,8 +6,7 @@ import time
 import ruclip
 import torch
 import numpy as np
-import faiss
-# from pymilvus import MilvusClient
+from pymilvus import MilvusClient
 
 
 class CLIP:
@@ -32,7 +31,8 @@ class CLIP:
     text_latents = []
     images_latents = []
     cousine_similitaries = []
-    index = None
+    database: MilvusClient
+
 
     def __init__(self, index_path, templates=['{}', 'это {}', 'на фото {}'], model_name="ruclip-vit-base-patch32-384"):
         """
@@ -47,8 +47,8 @@ class CLIP:
         self.__model, self.__processor = ruclip.load(model_name, device=self.device)
         self.__predictor = ruclip.Predictor(self.__model, self.__processor, device=self.device, bs=8,
                                             templates=templates)
-        self.set_index(index_path)
-        # self.__database = database
+        self.database = MilvusClient(index_path)
+
 
     @staticmethod
     def decode_image(bs4):
@@ -94,12 +94,14 @@ class CLIP:
         print("images decoded for", time.time() - start)
         return result
 
-    def get_by_prompt(self, prompt: str):
+    def get_by_prompt(self, prompt: str, collection_name: str, output_fields: list = '*'):
         """
         Получает индексы похожих латентов по текстовому запросу.
 
         Args:
             prompt (str): Текстовый запрос.
+            collection_name (str): Название коллекции в базе данных.
+            output_fields (list): Список возвращаемых полей.
 
         Returns:
             list: Индексы похожих латентов.
@@ -108,16 +110,27 @@ class CLIP:
             prompt_latent = self.__predictor.get_text_latents([prompt]).cpu().detach().numpy()
         user_latents = np.concatenate((prompt_latent, prompt_latent), axis=1)
 
-        faiss.normalize_L2(user_latents)
-        D, I = self.index.search(user_latents, 100)
-        return I[0]
+        if output_fields == '*': 
+            output_fields = [field['name'] for field in self.database.describe_collection(collection_name)['fields'] \
+                            if field['type'] < 100 and not field.get('is_primary')]
 
-    def get_by_image(self, user_image: Image):
+        res = self.database.search(
+            collection_name=collection_name,
+            data=user_latents,
+            limit=5,
+            output_fields = output_fields
+        )
+
+        return res
+
+    def get_by_image(self, user_image: Image, collection_name: str, output_fields: list = '*'):
         """
         Получает индексы похожих латентов по изображению.
 
         Args:
             user_image (PIL.Image): Изображение.
+            collection_name (str): Название коллекции в базе данных.
+            output_fields (list): Список возвращаемых полей.
 
         Returns:
             list: Индексы похожих латентов.
@@ -125,18 +138,21 @@ class CLIP:
         with torch.no_grad():
             user_image_latent = self.__predictor.get_image_latents([user_image]).cpu().detach().numpy()
         user_latents = np.concatenate((user_image_latent, user_image_latent), axis=1)
-        faiss.normalize_L2(user_latents)
-        D, I = self.index.search(user_latents, 100)
-        return I[0]
 
-    def set_index(self, index_path: str):
-        """
-        Устанавливает индекс FAISS из файла.
+        if output_fields == '*': 
+            output_fields = [field['name'] for field in self.database.describe_collection(collection_name)['fields'] \
+                            if field['type'] < 100 and not field.get('is_primary')]
+                            # Вынести в отдельную функцию
 
-        Args:
-            index_path (str): Путь до файла с индексом FAISS.
-        """
-        self.index = faiss.read_index(index_path)
+        res = self.database.search(
+            collection_name=collection_name,
+            data=user_latents,
+            limit=5,
+            output_fields=output_fields
+        )
+
+        return res
+
 
     @property
     def predictor(self):

@@ -26,11 +26,10 @@ class test_benchmarks(unittest.TestCase):
 
 
     def test_getting_by_prompt(self):
-        model = CLIP('irkutsk.index')
+        model = CLIP('milvus.db')
         times_bench = []
         mean_accuracy = []
         for benhmark in self.prompt_test:
-            model.set_index(benhmark['index'])
             prompts = pd.read_csv(self.cwbd / 'text' / benhmark['prompts'])
             data = pd.read_csv(self.cwbd / 'text' / benhmark['data'])
 
@@ -38,10 +37,10 @@ class test_benchmarks(unittest.TestCase):
             times = []
             for prompt, name in zip(prompts['prompts'], prompts['name']):
                 start = time()
-                indexes = model.get_by_prompt(prompt)
+                indexes = model.get_by_prompt(prompt, benhmark['index'])
                 times.append(time()-start)
 
-                if data.loc[indexes[0]]['name'] == name:
+                if indexes[0][0]['entity']['name'] == name:
                     correct+=1
             
             mean_time = sum(times) / len(times)
@@ -54,29 +53,28 @@ class test_benchmarks(unittest.TestCase):
 
 
     def test_getting_by_image(self):
-        model = CLIP('irkutsk.index')
+        model = CLIP('milvus.db')
         times_bench = []
         mean_accuracy = []
 
         for benhmark in self.images_test:
             print('\n',benhmark['benchmark_name'])
-            model.set_index(benhmark['index'])
-            data = pd.read_csv(self.cwbd / 'image' / benhmark['data'], index_col=0)
-            test_data = pd.read_csv(self.cwbd / 'image' / benhmark['test_data'], index_col=0)
+            data = pd.read_csv(self.cwbd / 'image' / benhmark['data'])
+            test_data = pd.read_csv(self.cwbd / 'image' / benhmark['test_data'])
 
             correct = 0
             times = []
-            for i, image, name in zip(test_data.index, test_data['img'], test_data['name']):
+            for i, image, name in zip(test_data['guid'], test_data['img'], test_data['name']):
                 start = time()
                 image = CLIP.decode_image(image)
-                indexes = model.get_by_image(image)
-
+                indexes = model.get_by_image(image, benhmark['index'])
                 times.append(time()-start)
 
-                index = indexes[0] if indexes[0] != i else indexes[1]
-                if index not in data.index: continue # Заменить когда буду прикручивать новую БД
+                with open("example.json", 'w') as f: json.dump(indexes[0], f, indent=4, ensure_ascii=False)
 
-                if data.loc[index]['name'] == name:
+                index_name = indexes[0][0]['entity']['name'] if indexes[0][0]['id'] != i else indexes[0][1]['entity']['name']
+
+                if index_name == name:
                     correct+=1
 
             mean_time = sum(times) / len(times)
