@@ -7,6 +7,8 @@ import json
 import pandas as pd
 
 from Model import CLIP
+from service import service
+from pymilvus import MilvusClient
 
 
 
@@ -25,19 +27,23 @@ class test_benchmarks(unittest.TestCase):
     with open(cwbd / 'image' / 'config.json') as f: images_test = json.load(f)
 
 
+    with open("milvus_conf.json") as f:
+        database_client = MilvusClient(**json.load(f))
+    model = CLIP()
+    main_service = service(database_client, model)
+
+
     def test_getting_by_prompt(self):
-        model = CLIP('milvus.db')
         times_bench = []
         mean_accuracy = []
         for benhmark in self.prompt_test:
             prompts = pd.read_csv(self.cwbd / 'text' / benhmark['prompts'])
-            data = pd.read_csv(self.cwbd / 'text' / benhmark['data'])
 
             correct = 0
             times = []
             for prompt, name in zip(prompts['prompts'], prompts['name']):
                 start = time()
-                indexes = model.get_by_prompt(prompt, benhmark['index'])
+                indexes = self.main_service.get_by_prompt(prompt, benhmark['index'])
                 times.append(time()-start)
 
                 if indexes[0][0]['entity']['name'] == name:
@@ -53,24 +59,20 @@ class test_benchmarks(unittest.TestCase):
 
 
     def test_getting_by_image(self):
-        model = CLIP('milvus.db')
         times_bench = []
         mean_accuracy = []
 
         for benhmark in self.images_test:
             print('\n',benhmark['benchmark_name'])
-            data = pd.read_csv(self.cwbd / 'image' / benhmark['data'])
             test_data = pd.read_csv(self.cwbd / 'image' / benhmark['test_data'])
 
             correct = 0
             times = []
             for i, image, name in zip(test_data['guid'], test_data['img'], test_data['name']):
+                image = service.decode_image(image)
                 start = time()
-                image = CLIP.decode_image(image)
-                indexes = model.get_by_image(image, benhmark['index'])
+                indexes = self.main_service.get_by_image(image, benhmark['index'])
                 times.append(time()-start)
-
-                with open("example.json", 'w') as f: json.dump(indexes[0], f, indent=4, ensure_ascii=False)
 
                 index_name = indexes[0][0]['entity']['name'] if indexes[0][0]['id'] != i else indexes[0][1]['entity']['name']
 

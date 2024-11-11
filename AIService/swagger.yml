@@ -9,7 +9,7 @@ paths:
   /get_by_prompt/{city}:
     post:
       summary: Получить список мест по описанию
-      operationId: service.service_prompt
+      operationId: main.service_prompt
       produces:
         - application/json
       responses:
@@ -34,7 +34,7 @@ paths:
   /get_by_image/{city}:
     post:
       summary: Получить список мест по картинке
-      operationId: service.service_image
+      operationId: main.service_image
       produces:
         - application/text
       consumes:
