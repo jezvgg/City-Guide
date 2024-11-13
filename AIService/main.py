@@ -3,7 +3,7 @@ import json
 from flask import request
 from connexion import FlaskApp
 
-from Model import CLIP
+from Model import ruCLIP
 from service import service
 from pymilvus import MilvusClient
 
@@ -13,7 +13,7 @@ app = FlaskApp(__name__)
 
 with open("milvus_conf.json") as f:
     database_client = MilvusClient(**json.load(f))
-model = CLIP()
+model = ruCLIP()
 main_service = service(database_client, model)
 
 

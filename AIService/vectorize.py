@@ -1,11 +1,12 @@
-import ruclip
-import torch
 from PIL import Image
 from io import BytesIO
 import numpy as np
 import base64
 import pandas as pd
 from pymilvus import MilvusClient, DataType
+
+import json
+from Model import ONNX_CLIP, ruCLIP_proccesor
 
 
 client = MilvusClient('milvus.db')
@@ -21,19 +22,26 @@ def __decode_images(images: list):
     return result
 
 
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-__model, __processor = ruclip.load("ruclip-vit-base-patch32-384", device=device)
-__predictor = ruclip.Predictor(__model, __processor, device=device, bs=8, templates=['{}', 'это {}', 'на фото {}'])
+with open("milvus_conf.json") as f:
+    database_client = MilvusClient(**json.load(f))
+proccesor = ruCLIP_proccesor('proccesor_config.json')
+model = ONNX_CLIP(proccesor, 'clip_textual.onnx', 'clip_visual.onnx')
 
 
 data = pd.read_csv('./Tests/Benchmarks/text/Irk_images.csv.xz')
 images = __decode_images(data['img'])
-with torch.no_grad():
-    images_latents = __predictor.get_image_latents(images).cpu().detach().numpy()
-    text_latents = __predictor.get_text_latents(data['name']).cpu().detach().numpy()
 
+datas = []
+imagess = []
+for dat, image in zip(data['name'], images):
+    imagess.append(model.get_image_latents(image)[0])
+    datas.append(model.get_text_latents(dat)[0])
 
-latents = np.concatenate((images_latents, text_latents), axis=1)
+images_latents = np.array(imagess)
+text_latents = np.array(datas)
+print(images_latents)
+latents = np.concatenate((images_latents, text_latents), axis=1).astype(np.float64)
+print(latents)
 dimensions = latents[0].size
 
 data.insert(0, 'vector', latents.tolist())

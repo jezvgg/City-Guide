@@ -10,3 +10,5 @@ flask-restplus==0.13.0
 connexion[flask]
 connexion[uvicorn]
 connexion[swagger-ui]
+onnxruntime-gpu==1.20.0
+youtokentome==1.0.6

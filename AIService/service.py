@@ -5,7 +5,7 @@ from PIL import Image
 import numpy as np
 from pymilvus import MilvusClient
 
-from Model import CLIP
+from Model import clip
 
 
 class service:
@@ -16,11 +16,11 @@ class service:
         databse: MilvusClient - объект векторной базы данных
         model: CLIP - модель ИИ, которая используется в поиске
     """
-    model: CLIP
+    model: clip
     database: MilvusClient
 
 
-    def __init__(self, database: MilvusClient, model: CLIP):
+    def __init__(self, database: MilvusClient, model: clip):
         """
         Инициализирует сервис получения картинок по запросу
 
@@ -67,7 +67,7 @@ class service:
         Returns:
             list[list[dict[str:obj]]]: Результат поиска в базе данных.
         """
-        prompt_latent = self.model.get_text_latents([prompt])
+        prompt_latent = self.model.get_text_latents(prompt)
         user_latents = np.concatenate((prompt_latent, prompt_latent), axis=1)
 
         return self.__get_by_latents(user_latents, collection_name, limit, output_fields)
@@ -86,7 +86,7 @@ class service:
         Returns:
             list[list[dict[str:obj]]]: Результат поиска в базе данных.
         """
-        image_latent = self.model.get_image_latents([user_image])
+        image_latent = self.model.get_image_latents(user_image)
         user_latents = np.concatenate((image_latent, image_latent), axis=1)
 
         return self.__get_by_latents(user_latents, collection_name, limit, output_fields)
@@ -107,8 +107,8 @@ class service:
         Returns:
             list[list[dict[str:obj]]]: Результат поиска в базе данных.
         '''
-        image_latent = self.model.get_image_latents([user_image])
-        prompt_latent = self.model.get_text_latents([prompt])
+        image_latent = self.model.get_image_latents(user_image)
+        prompt_latent = self.model.get_text_latents(prompt)
         user_latents = np.concatenate((image_latent, prompt_latent), axis=1)
 
         return self.__get_by_latents(user_latents, collection_name, limit, output_fields)

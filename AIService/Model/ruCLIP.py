@@ -2,14 +2,16 @@ import ruclip
 import torch
 import numpy as np
 
+from Model import clip
 
-class CLIP:
+
+class ruCLIP(clip):
     """
-    Обёртка для использования модели ИИ.
+    Обёртка для использования модели ruCLIP.
 
     Methods:
-        !get_text_latents: обязательный метод, векторизует текстовый запрос.
-        !get_image_latents: обязательный метод, векторизует картинку.
+        get_text_latents: векторизует текстовый запрос.
+        get_image_latents: векторизует картинку.
     """
     __model = None
     __processor = None
@@ -31,15 +33,6 @@ class CLIP:
 
 
     def get_text_latents(self, prompts: list[str]) -> np.ndarray:
-        '''
-        Получить векторные представления текстовых запросов.
-        
-        Args:
-            prompts (list[str]): Список текстовых запросов.
-
-        Returns:
-            np.ndarray: массив вектороных представлений.
-        '''
         latents = self.__predictor.get_text_latents(prompts)
 
         with torch.no_grad():
@@ -49,15 +42,6 @@ class CLIP:
 
 
     def get_image_latents(self, images: list) -> np.ndarray:
-        '''
-        Получить векторные представления изображений.
-        
-        Args:
-            prompts (list[str]): Список изображений.
-
-        Returns:
-            np.ndarray: массив вектороных представлений.
-        '''
         latents = self.__predictor.get_image_latents(images)
 
         with torch.no_grad():
