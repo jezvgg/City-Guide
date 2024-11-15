@@ -176,5 +176,5 @@ class service:
         Returns:
             list: Список расшифрованных изображений.
         """
-        result = [CLIP.decode_image(bs4url) for bs4url in images]
+        result = [service.decode_image(bs4url) for bs4url in images]
         return result

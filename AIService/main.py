@@ -11,7 +11,7 @@ from pymilvus import MilvusClient
 app = FlaskApp(__name__)
 
 
-with open("milvus_conf.json") as f: database_config = json.load(f)
+with open("milvus_config.json") as f: database_config = json.load(f)
 with open("processor_config.json") as f: processor_config = json.load(f)
 with open("model_config.json") as f: model_config = json.load(f)
     
@@ -42,4 +42,4 @@ def service_image(city: str):
 
 if __name__ == "__main__":
     app.add_api('swagger.yml')
-    app.run(port='0.0.0.0')
+    app.run(host='0.0.0.0', port=8000)

@@ -27,7 +27,7 @@ class test_benchmarks(unittest.TestCase):
     with open(cwbd / 'image' / 'config.json') as f: images_test = json.load(f)
 
 
-    with open("milvus_conf.json") as f: database_config = json.load(f)
+    with open("milvus_config.json") as f: database_config = json.load(f)
     with open("processor_config.json") as f: processor_config = json.load(f)
     with open("model_config.json") as f: model_config = json.load(f)
     

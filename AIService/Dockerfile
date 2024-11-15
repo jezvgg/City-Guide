@@ -13,6 +13,7 @@ COPY ./req_productaion.txt /app/req_productaion.txt
 RUN echo 'deb http://deb.debian.org/debian testing main' >> /etc/apt/sources.list \
     && apt-get update && apt-get install -y --no-install-recommends -o APT::Immediate-Configure=false gcc g++
 
+RUN cd /app
 RUN pip install Cython
 RUN pip install -r req_productaion.txt
-ENTRYPOINT python3 /app/main.py
+ENTRYPOINT python3 main.py
