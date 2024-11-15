@@ -3,7 +3,7 @@ import json
 from flask import request
 from connexion import FlaskApp
 
-from Model import ruCLIP
+from Model import ONNX_CLIP, ruCLIP_proccesor
 from service import service
 from pymilvus import MilvusClient
 
@@ -11,9 +11,13 @@ from pymilvus import MilvusClient
 app = FlaskApp(__name__)
 
 
-with open("milvus_conf.json") as f:
-    database_client = MilvusClient(**json.load(f))
-model = ruCLIP()
+with open("milvus_conf.json") as f: database_config = json.load(f)
+with open("processor_config.json") as f: processor_config = json.load(f)
+with open("model_config.json") as f: model_config = json.load(f)
+    
+database_client = MilvusClient(**database_config)
+proccesor = ruCLIP_proccesor(**processor_config)
+model = ONNX_CLIP(proccesor, **model_config)
 main_service = service(database_client, model)
 
 
@@ -38,4 +42,4 @@ def service_image(city: str):
 
 if __name__ == "__main__":
     app.add_api('swagger.yml')
-    app.run()
+    app.run(port='0.0.0.0')

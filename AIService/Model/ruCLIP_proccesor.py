@@ -1,5 +1,3 @@
-import json
-
 import numpy as np
 import youtokentome as yttm
 from PIL import Image
@@ -8,19 +6,30 @@ from Model import processor
 
 
 class ruCLIP_proccesor(processor):
+    '''
+    Предобработчик данных для модели ruCLIP.
+    '''
     eos_id = 3
     bos_id = 2
     unk_id = 1
     pad_id = 0
 
-    def __init__(self, config_path: str):
-        with open(config_path) as f: config = json.load(f)
+    def __init__(self, tokenizer_path: str, image_resolution: int, context_length: int, \
+        mean: list[float], std: list[float]):
+        '''
+        Args:
+            tokenizer_path (str): путь до весов BPE товенизатора из youtokentome.
+            image_resolution (int): размер картинки, к которому нужно изменить.
+            context_length (int): длина контекста.
+            mean (list[float]): медианы для нормализации.
+            std (list[float]): СКО для нормализации.
+        '''
 
-        self.mean = config['mean']
-        self.std = config['std']
-        self.image_resolution = config['image_resolution']
-        self.context_lenght = config['context_length']
-        self.tokenizer = yttm.BPE(config['BPE_path'])
+        self.mean = mean
+        self.std = std
+        self.image_resolution = image_resolution
+        self.context_lenght = context_length
+        self.tokenizer = yttm.BPE(tokenizer_path)
 
 
     def encode_image(self, img) -> np.ndarray:
@@ -52,4 +61,4 @@ class ruCLIP_proccesor(processor):
             tokens = np.hstack((tokens, np.zeros(empty_positions)))  # position tokens after text
         if len(tokens) > self.context_lenght:
             tokens = tokens[:self.context_lenght-1] + tokens[-1:]
-        return np.array(tokens, dtype=int).reshape((1, *tokens.shape))
+        return np.array(tokens, dtype=int).reshape((1, *tokens.shape)).astype(np.int64)

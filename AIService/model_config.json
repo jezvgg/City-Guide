@@ -1,0 +1,5 @@
+{
+    "visual_path": "clip_visual.onnx",
+    "textual_path": "my_clip_textual.onnx",
+    "provider": "CUDAExecutionProvider"
+}

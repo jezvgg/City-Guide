@@ -27,10 +27,13 @@ class test_benchmarks(unittest.TestCase):
     with open(cwbd / 'image' / 'config.json') as f: images_test = json.load(f)
 
 
-    with open("milvus_conf.json") as f:
-        database_client = MilvusClient(**json.load(f))
-    proccesor = ruCLIP_proccesor('proccesor_config.json')
-    model = ONNX_CLIP(proccesor, 'clip_textual.onnx', 'clip_visual.onnx')
+    with open("milvus_conf.json") as f: database_config = json.load(f)
+    with open("processor_config.json") as f: processor_config = json.load(f)
+    with open("model_config.json") as f: model_config = json.load(f)
+    
+    database_client = MilvusClient(**database_config)
+    proccesor = ruCLIP_proccesor(**processor_config)
+    model = ONNX_CLIP(proccesor, **model_config)
     main_service = service(database_client, model)
 
 
@@ -47,8 +50,8 @@ class test_benchmarks(unittest.TestCase):
                 indexes = self.main_service.get_by_prompt(prompt, benhmark['index'])
                 times.append(time()-start)
 
-                logging.getLogger().info(name)
-                logging.getLogger().info([index['entity']['name'] for index in indexes[0]])
+                logging.getLogger().debug(name)
+                logging.getLogger().debug([index['entity']['name'] for index in indexes[0]])
 
                 if indexes[0][0]['entity']['name'] == name:
                     correct+=1
@@ -78,8 +81,8 @@ class test_benchmarks(unittest.TestCase):
                 indexes = self.main_service.get_by_image(image, benhmark['index'])
                 times.append(time()-start)
 
-                logging.getLogger().info(name)
-                logging.getLogger().info([index['entity']['name'] for index in indexes[0]])
+                logging.getLogger().debug(name)
+                logging.getLogger().debug([index['entity']['name'] for index in indexes[0]])
 
                 index_name = indexes[0][0]['entity']['name'] if indexes[0][0]['id'] != i else indexes[0][1]['entity']['name']
 

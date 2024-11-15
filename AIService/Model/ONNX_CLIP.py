@@ -3,20 +3,39 @@ import numpy as np
 
 from Model import clip, processor
 
-import logging
 
 class ONNX_CLIP(clip):
+    '''
+    Реализация универсального интерфеса для использования модели CLIP, на основе ONNX.
+    '''
     textual: ort.InferenceSession
     visual: ort.InferenceSession
     preprocessor: processor
 
     def __init__(self, preprocessor: processor, textual_path: str, visual_path: str, provider: str = 'CPUExecutionProvider'):
+        '''
+        Args:
+            preprocessor (processor): класс для предобработки данных для входа в модель.
+            textual_path (str): путь до текстовой модели.
+            visual_path (str): путь до визуальной модели.
+            provider (str): устройство на котором запускать модели.
+        '''
         self.preprocessor = preprocessor
         self.textual = self.__load_model(textual_path, [provider])
         self.visual = self.__load_model(visual_path, [provider])
 
 
     def __load_model(self, path: str, providers: list[str] = ['CPUExecutionProvider']) -> ort.InferenceSession:
+        '''
+        Запустить ONNX модель.
+        
+        Args:
+            path (str): путь до ONNX файла модели.
+            providers (list[str]): устройства на которых нужно запустить.
+        
+        Returns:
+            onnxruntime.InferenceSession: сессия работы модели.
+        '''
         return ort.InferenceSession(path, providers=providers)
 
 
