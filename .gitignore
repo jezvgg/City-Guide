@@ -6,7 +6,8 @@
 # dotenv files
 .env
 
-volumes
+AIService/volumes/
+*.onnx
 
 # User-specific files
 *.rsuser
