@@ -14,7 +14,6 @@ services:
     - ./AIService/clip_visual.onnx:/app/clip_visual.onnx
     - ./AIService/my_clip_textual.onnx:/app/my_clip_textual.onnx
     - ./AIService/bpe.model:/app/bpe.model
-    - ./AIService/milvus.db:/app/milvus.db
     
     depends_on:
       - standalone
