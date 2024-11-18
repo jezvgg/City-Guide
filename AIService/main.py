@@ -40,6 +40,17 @@ def service_image(city: str):
     return main_service.create_reponse(result)
 
 
+@app.route('/get/<city>', methods=['POST'])
+def service_query(city: str):
+    image = request.files.get('image')
+    prompt = request.form.get('prompt')
+    if image: image = service.decode_IO(image.stream)
+
+    result = main_service.get_by_query(city, prompt, image)
+
+    return main_service.create_reponse(result)
+
+    
 if __name__ == "__main__":
     app.add_api('swagger.yml')
     app.run(host='0.0.0.0', port=8000)

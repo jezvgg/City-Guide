@@ -92,8 +92,9 @@ class service:
         return self.__get_by_latents(user_latents, collection_name, limit, output_fields)
 
 
-    def get_by_query(self, prompt: str, user_image: Image, \
-        collection_name: str, limit: int = 5, output_fields: list = '*'):
+    def get_by_query(self, collection_name: str, \
+        prompt: str = None, image: Image = None, \
+        limit: int = 5, output_fields: list = '*'):
         '''
         Ищет наиболее похожие места по изображению и текстовому запросу.
 
@@ -107,9 +108,16 @@ class service:
         Returns:
             list[list[dict[str:obj]]]: Результат поиска в базе данных.
         '''
-        image_latent = self.model.get_image_latents(user_image)
-        prompt_latent = self.model.get_text_latents(prompt)
-        user_latents = np.concatenate((image_latent, prompt_latent), axis=1)
+        latens = []
+        if image: latens.append(self.model.get_image_latents(image))
+        if prompt: latens.append(self.model.get_text_latents(prompt))
+
+        match len(latens):
+            case 1: latens += latens
+            case 0:
+                raise Exception("Query data for vector search wasn't found!")
+
+        user_latents = np.concatenate(latens, axis=1)
 
         return self.__get_by_latents(user_latents, collection_name, limit, output_fields)
 
@@ -168,7 +176,21 @@ class service:
         Returns:
             PIL.Image: Расшифрованное изображение.
         """
-        img = Image.open(BytesIO(bin))
+        return service.decode_IO(BytesIO(bin))
+
+
+    @staticmethod
+    def decode_IO(io_bin):
+        '''
+        Декодирует изображение из бинарного кода.
+
+        Args:
+            io_bin (BytesIO): Бинарный код изображения.
+
+        Returns:
+            PIL.Image: Расшифрованное изображение.
+        '''
+        img = Image.open(io_bin)
         return img
 
 
