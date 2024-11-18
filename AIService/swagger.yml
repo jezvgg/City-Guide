@@ -1,0 +1,104 @@
+swagger: '2.0'
+info:
+  description: Набор сервисов для City-Guide
+  version: "0.2.2"
+  title: RestAPI
+basePath: "/api"   
+
+paths:
+  /get_by_prompt/{city}:
+    post:
+      summary: Получить список мест по описанию
+      operationId: main.service_prompt
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/response'
+    parameters:
+    - name: city
+      in: path
+      description: Город
+      required: true
+      type: string
+    - name: prompt  
+      in: body
+      description: Запрос
+      required: true
+      schema:
+        type: object
+        example: {"prompt":"130 квартал"}
+
+  /get_by_image/{city}:
+    post:
+      summary: Получить список мест по картинке
+      operationId: main.service_image
+      produces:
+        - application/text
+      consumes:
+        - application/text
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/response'
+    parameters:
+    - name: city
+      in: path
+      description: Город
+      required: true
+      type: string
+    - name: image  
+      in: body
+      description: Бинарная картинка
+      required: true
+      schema:
+        $ref: "#/definitions/image"
+        
+
+definitions:
+  response:
+    type: object
+    example: [
+              {
+                "description": "-",
+                "id": "454d2750-78f5-44ca-b6fe-f928835a8a82",
+                "latitude": 52.274884,
+                "longitude": 104.288174,
+                "name": "130 квартал"
+              },
+              {
+                "description": "-",
+                "id": "aab469e1-993b-47bd-bd69-82f4984084c9",
+                "latitude": 52.274884,
+                "longitude": 104.288174,
+                "name": "130 квартал"
+              },
+              {
+                "description": "-",
+                "id": "bedf319f-8009-406d-8a90-5fdf4eb718e7",
+                "latitude": 52.274884,
+                "longitude": 104.288174,
+                "name": "130 квартал"
+              },
+              {
+                "description": "-",
+                "id": "4be57a23-9336-4434-a311-25021098e9db",
+                "latitude": 52.274884,
+                "longitude": 104.288174,
+                "name": "130 квартал"
+              },
+              {
+                "description": "-",
+                "id": "7c98b7c6-3af5-4592-9f3e-13da06d467c8",
+                "latitude": 52.274884,
+                "longitude": 104.288174,
+                "name": "130 квартал"
+              }
+            ]
+  image:
+    type: string
+    format: file
+    example: "Тут короче файл в бинарном виде"
