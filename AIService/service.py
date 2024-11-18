@@ -133,7 +133,14 @@ class service:
         '''
         Конвертировать результат поиска в базе данных в JSON-like объект для отправки.
         '''
-        return [{'id':index['id']} | index['entity'] for index in obj[0]]
+        indexes = set([])
+        response = []
+        for item in obj[0]: 
+            # 0 элемент берём, потому что не используем под группы в milvus
+            if item['entity']['name'] in indexes: continue
+            indexes.add(item['entity']['name'])
+            response.append({'id':item['id']} | item['entity'])
+        return response
 
 
     @staticmethod

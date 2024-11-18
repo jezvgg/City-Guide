@@ -1,4 +1,3 @@
 {
-    "uri":"http://standalone:19530",
-    "db_name":"Irkutsk"
+    "uri":"milvus.db"
 }

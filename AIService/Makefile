@@ -3,3 +3,6 @@ benchmarks:
 
 tests:
 	pytest --disable-warnings -vv  Tests
+
+main:
+	python3 main.py
