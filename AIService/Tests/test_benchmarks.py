@@ -6,8 +6,8 @@ import json
 
 import pandas as pd
 
-from Model import ONNX_CLIP, ruCLIP_proccesor
-from service import service
+from Src.Model import ONNX_CLIP, ruCLIP_proccesor
+from Src.Services.places_service import places_service
 from pymilvus import MilvusClient
 
 
@@ -34,7 +34,7 @@ class test_benchmarks(unittest.TestCase):
     database_client = MilvusClient(**database_config)
     proccesor = ruCLIP_proccesor(**processor_config)
     model = ONNX_CLIP(proccesor, **model_config)
-    main_service = service(database_client, model)
+    main_service = places_service(database_client, model)
 
 
     def test_getting_by_prompt(self):
@@ -76,7 +76,7 @@ class test_benchmarks(unittest.TestCase):
             correct = 0
             times = []
             for i, image, name in zip(test_data['guid'], test_data['img'], test_data['name']):
-                image = service.decode_image(image)
+                image = places_service.decode_image(image)
                 start = time()
                 indexes = self.main_service.get_by_image(image, benhmark['index'])
                 times.append(time()-start)

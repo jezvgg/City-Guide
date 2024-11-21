@@ -1,7 +1,7 @@
 import onnxruntime as ort
 import numpy as np
 
-from Model import clip, processor
+from Src.Model import clip, processor
 
 
 class ONNX_CLIP(clip):

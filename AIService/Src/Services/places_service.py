@@ -5,10 +5,10 @@ from PIL import Image
 import numpy as np
 from pymilvus import MilvusClient
 
-from Model import clip
+from Src.Model import clip
 
 
-class service:
+class places_service:
     """
     Сервис реализующий логику работы с базой данных и моделью ИИ.
 
@@ -162,7 +162,7 @@ class service:
         Returns:
             PIL.Image: Расшифрованное изображение.
         """
-        return service.decode_binary(base64.b64decode(bs4))
+        return places_service.decode_binary(base64.b64decode(bs4))
 
 
     @staticmethod
@@ -176,7 +176,7 @@ class service:
         Returns:
             PIL.Image: Расшифрованное изображение.
         """
-        return service.decode_IO(BytesIO(bin))
+        return places_service.decode_IO(BytesIO(bin))
 
 
     @staticmethod
@@ -205,5 +205,5 @@ class service:
         Returns:
             list: Список расшифрованных изображений.
         """
-        result = [service.decode_image(bs4url) for bs4url in images]
+        result = [places_service.decode_image(bs4url) for bs4url in images]
         return result

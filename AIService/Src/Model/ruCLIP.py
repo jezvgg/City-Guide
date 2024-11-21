@@ -2,7 +2,7 @@ import ruclip
 import torch
 import numpy as np
 
-from Model import clip
+from Src.Model import clip
 
 
 class ruCLIP(clip):

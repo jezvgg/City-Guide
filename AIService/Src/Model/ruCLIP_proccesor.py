@@ -2,7 +2,7 @@ import numpy as np
 import youtokentome as yttm
 from PIL import Image
 
-from Model import processor
+from Src.Model import processor
 
 
 class ruCLIP_proccesor(processor):
